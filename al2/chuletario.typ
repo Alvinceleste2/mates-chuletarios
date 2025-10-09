@@ -1,3 +1,5 @@
+#import "@local/chuletario:1.0.0": conf
+
 #import "@preview/theorion:0.4.0": *
 #import cosmos.rainbow: *
 #show: show-theorion
@@ -9,72 +11,15 @@
 #set-theorion-numbering("1.")
 
 // 2. Other options:
-// #set-result("noanswer") // Elimina las demostraciones
-#set-qed-symbol[#math.qed]
+// #set-result("noanswer") // Deletes the demos.
+// #set-qed-symbol[#math.qed] // Changes qed symbol for proofs.
 
-#set document(
+#show: conf.with(
   title: "Chuletario Álgebra II",
-  author: "Álvaro Grande",
-  description: "Álgebra II",
-  date: auto,
+  author: "Álvaro Grande Blázquez",
+  course: "2025 ~ 2026",
+  watermark: "AGB",
 )
-
-#set page(
-  paper: "a4",
-  margin: (x: 2.5cm, y: 3cm),
-)
-
-#set heading(
-  numbering: "1.",
-)
-
-#set par(
-  justify: true,
-  leading: 0.75em,
-  spacing: 1.8em,
-)
-
-#set text(
-  lang: "es",
-  size: 12pt,
-)
-
-#show heading: set block(below: 1.2em)
-
-#align(center)[
-  #text(size:20pt)[
-    *CHULETARIO ÁLGEBRA II*
-  ]
-
-  #text(size:13pt)[
-    *Álvaro Grande Blázquez*
-  ]
-
-  #v(-10pt)
-
-  #text(size:12pt)[
-    *2025 \~ 2026*
-  ]
-]
-
-#outline()
-
-
-#show heading.where(level: 1): it => [
-  #pagebreak()
-  #set align(center)
-  Tema #counter(heading).display() #it.body
-]
-
-#set page(
-  header: [
-    #align(center, "Chuletario Álgebra II")
-    #line(length: 100%)],
-    numbering: "1",
-    foreground: rotate(-55deg)[#text(100pt, fill: black.transparentize(60%))[AGB]],
-)
-
-#counter(page).update(1)
 
 = Repaso de teoría de cuerpos
 == Estructuras algebraicas
@@ -154,11 +99,3 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 = Extensiones de Galois
 == El cuerpo de descomposición de un polinomio
 == Clausura algebraica
-
-#theorem(title: "aaaa")[
-  afdjsakfjskl.
-]
-
-#proof()[
-  Este es el cuerpo de la demostración.
-]
