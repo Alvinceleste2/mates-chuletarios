@@ -1,23 +1,36 @@
-name: Compile, Upload and Release Typst Documents
+name: Compile Typst files
+
 on:
-  workflow_dispatch:
   push:
-permissions:
-  contents: write
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
-  build:
+  compile-typst:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-    - name: Compile Typst Files
-      uses: ammar-ahmed22/compile-typst-action@v1
-      with:
-        source_paths: 'src/al2/chuletario.typ src/tim/chuletario.typ'
-        output_paths: 'al2.pdf tim.pdf'
-        # fonts_path: 'path/to/fonts'
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: PDF
-        path: '**/*.pdf'
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Typst
+        run: |
+          curl -L https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz -o typst.tar.xz
+          tar -xJf typst.tar.xz
+          sudo mv typst /usr/local/bin/typst
+
+      - name: Compile all Typst files
+        run: |
+          mkdir -p build
+          find src -name "*.typ" | while read file; do
+            out="build/$(basename "${file%.typ}.pdf")"
+            echo "Compilando $file → $out"
+            typst compile "$file" "$out"
+          done
+
+      - name: Upload PDFs as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-pdfs
+          path: *.pdf
