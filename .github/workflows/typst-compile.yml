@@ -29,8 +29,8 @@ jobs:
           mkdir -p build
           # ⚙️ Define aquí tus pares input → output:
           declare -A files=(
-            ["src/al2/chuletario.typ"]="build/al2.pdf"
-            ["src/tim/chuletario.typ"]="build/tim.pdf"
+            ["al2/chuletario.typ"]="build/al2.pdf"
+            ["tim/chuletario.typ"]="build/tim.pdf"
           )
 
           for input in "${!files[@]}"; do
