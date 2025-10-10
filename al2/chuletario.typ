@@ -310,6 +310,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 = Extensiones de cuerpos
+
+esto es una prueba 
+
 == Extensiones algebraicas
 == Cuerpos finitos
 == Grado de una extensión de cuerpos
