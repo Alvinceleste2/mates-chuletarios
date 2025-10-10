@@ -40,8 +40,23 @@ jobs:
             typst compile "$input" "$output"
           done
 
-      - name: Upload PDFs as artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: compiled-pdfs
-          path: build/*.pdf
+      - name: Push PDFs to dedicated branch
+        run: |
+          # Configurar Git
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          # Crear rama pdfs o cambiar a ella
+          git checkout --orphan pdfs
+          git rm -rf .  # Limpiar todo excepto lo que vamos a añadir
+
+          # Copiar los PDFs
+          mkdir -p build
+          cp -r build/* .
+
+          # Commit y force push
+          git add *.pdf
+          git commit -m "Update compiled PDFs"
+          git push origin pdfs --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
