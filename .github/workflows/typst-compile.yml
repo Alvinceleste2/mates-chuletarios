@@ -2,8 +2,6 @@ name: Compile, Upload and Release Typst Documents
 on:
   workflow_dispatch:
   push:
-    tags:
-    - '**'
 permissions:
   contents: write
 jobs:
@@ -19,7 +17,7 @@ jobs:
         output_paths: 'al2.pdf tim.pdf'
         # fonts_path: 'path/to/fonts'
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: PDF
         path: '**/*.pdf'
