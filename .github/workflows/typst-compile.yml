@@ -24,13 +24,20 @@ jobs:
           mkdir -p ~/.local/share/typst/packages/local
           git clone https://github.com/alvinceleste2/chuletario-typst ~/.local/share/typst/packages/local/chuletario
 
-      - name: Compile all Typst files
+      - name: Compile specified Typst files
         run: |
           mkdir -p build
-          find src -name "*.typ" | while read file; do
-            out="build/$(basename "${file%.typ}.pdf")"
-            echo "Compilando $file → $out"
-            typst compile "$file" "$out"
+          # ⚙️ Define aquí tus pares input → output:
+          declare -A files=(
+            ["src/al2/chuletario.typ"]="build/al2.pdf"
+            ["src/tim/chuletario.typ"]="build/tim.pdf"
+          )
+
+          for input in "${!files[@]}"; do
+            output="${files[$input]}"
+            mkdir -p "$(dirname "$output")"
+            echo "Compilando $input → $output"
+            typst compile "$input" "$output"
           done
 
       - name: Upload PDFs as artifacts
