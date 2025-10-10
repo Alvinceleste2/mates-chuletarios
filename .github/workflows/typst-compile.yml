@@ -19,6 +19,11 @@ jobs:
         with:
           version: latest
 
+      - name: Install template package
+        run: |
+          mkdir -p ~/.local/share/typst/packages/local
+          git clone https://github.com/alvinceleste2/chuletario-typst ~/.local/share/typst/packages/local/chuletario
+
       - name: Compile all Typst files
         run: |
           mkdir -p build
