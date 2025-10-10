@@ -17,7 +17,7 @@ jobs:
       - name: Install Typst
         uses: typst-community/setup-typst@v2
         with:
-          typst-version: latest
+          version: latest
 
       - name: Compile all Typst files
         run: |
