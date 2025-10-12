@@ -156,3 +156,53 @@
 
   $ s(x) = sum_(j=1)^n c_j chi_(A_j) (x), quad "con" c_j in RR, thick A_j in cal(A), thick j = 1, 2, 3, ..., n $
 ]
+
+#definition(title: "Integración de funciones simples")[
+  Para una función simple $s(x) = sum_(j=1)^n c_j chi_(A_j) (x)$, se define su integral como:
+
+  $ integral_X s(x) d mu = sum_(j=1)^n c_j mu(A_j) $
+
+  siempre que o bien $mu(A_j) < oo$ para todo $j=1, 2, ..., n$, o bien los $c_j$ sean positivos, en cuyo caso no importa que los $A_j$ sean de medida finita o no.
+]
+
+#definition(title: "Integración de funciones medibles")[
+  Para una función medible $f$, con $f(x) >= 0 thick forall x$, se define su integral como sigue:
+
+  $ integral_X f(x) d mu = sup{integral_X s(x) d mu : 0 <= s(x) <= f(x), thick s(x) "simple"} $
+]
+
+#note-box()[
+  - El supremo en esta definición podría valer $oo$.
+  - f puede alcanzar valores infinitos siempre que el conjunto $f^(-1)(oo)$ sea medible.
+]
+
+#proposition[
+  - Sean $u, v$ funciones simples, entonces $u + v$ es simple y $integral(u+v) d mu = integral u d mu + integral v d mu$
+  - Sean $f, g$ funciones medibles tal que $0 <= g <= f$, entonces $integral g d mu <= integral f d mu$
+]
+
+#definition(title: "Función densidad")[
+  Si $(X, cal(A), mu)$ es un espacio de medida y $s(x) = sum_(j=1)^n c_j chi_(A_j) (x)$ es una función simple positiva, entonces la función $nu: cal(A) -> [0, oo]$ dada por:
+
+  $ nu(A) = integral_A s(x) d mu(x) = integral_X s(x) chi_A (x) d mu(x) $
+
+  define una medida sobre $cal(A)$. Escribiremos $d mu = s d mu$ y diremos que $s$ es la *función densidad (o función derivada)* de $nu$ con respecto a $mu$.
+]
+
+#theorem(title: "Teorema de la convergencia monótona")[
+  Si ${f_j}_(j=1)^oo$ es una sucesión monótona creciente de funciones medibles positivas $(0 <= f_1 <= ... <= f_n <= f_(n+1) <= ...)$ y sea $f(x) = lim_(n->oo) f_n (x)$. Entonces se tiene:
+
+  $ integral_X (lim_(n->oo) f_n (x)) d mu = integral_X f(x) d mu = lim_(n->oo) (integral_X f_n (x) d mu) $
+]
+
+#corollary(title: "Convergencia monótona para series")[
+  Sea ${g_n (x)}_(n=1)^oo$ una sucesión de funciones medibles y positivas. Entonces:
+
+  $ integral_X (sum_(n=1)^oo g_n (x)) d mu = sum_(n=1)^oo (integral_X g_n (x) d mu) $
+]
+
+#lemma[
+  Sea $f$ una función medible y positiva. Entonces existe una sucesión monótona creciente de funciones simples positivas $0 <= s_1 <= s_2 <= ... <= s_n <= s_(n+1) <= ...$ tal que:
+
+  $ lim_(n->oo) s_n (x) = f(x), quad forall x $
+]
