@@ -8,7 +8,7 @@
 #set-inherited-levels(1)
 #set-zero-fill(true)
 #set-leading-zero(true)
-#set-theorion-numbering("1.")
+#set-theorion-numbering("1.1")
 
 // 2. Other options:
 // #set-result("noanswer") // Deletes the demos.
@@ -115,7 +115,7 @@
   Diremos que la medida $mu$ sobre $cal(A)$ es *finita* si $mu(X) < oo$ y que es *$sigma$-finita* si podemos escribir $X = union.big_(n>=1) X_n$, con $X_n in cal(A)$, $n = 1, 2, 3, ...$ y $mu(X_n) < oo$.
 ]
 
-#proposition[
+#proposition(title: "Convergencia monótona de conjuntos")[
   Sea $mu$ una medida sobre la $sigma$-álgebra $cal(A)$, se tienen los siguientes resultados:
 
   - Si $A, B in cal(A)$, con $A subset B$, entonces $mu(A) <= mu(B)$. Además, si $mu(A) < oo$ se tiene que $mu(B without A) = mu(B) - mu(A)$.
@@ -173,12 +173,12 @@
 
 #note-box()[
   - El supremo en esta definición podría valer $oo$.
-  - f puede alcanzar valores infinitos siempre que el conjunto $f^(-1)(oo)$ sea medible.
+  - $f$ puede alcanzar valores infinitos siempre que el conjunto $f^(-1)(oo)$ sea medible.
 ]
 
 #proposition[
   - Sean $u, v$ funciones simples, entonces $u + v$ es simple y $integral(u+v) d mu = integral u d mu + integral v d mu$
-  - Sean $f, g$ funciones medibles tal que $0 <= g <= f$, entonces $integral g d mu <= integral f d mu$
+  - Sean $f, g$ funciones medibles tal que $0 <= g <= f$, entonces $integral g thick d mu <= integral f thick d mu$
 ]
 
 #definition(title: "Función densidad")[
@@ -206,3 +206,144 @@
 
   $ lim_(n->oo) s_n (x) = f(x), quad forall x $
 ]
+
+#proposition(title: "Desigualdad de Chebyshev")[
+  Si $f$ es medible y $a>0$, se tiene: 
+
+  $ mu ({x in X: abs(f(x)) >= a}) <= 1/a integral_X abs(f(y)) d mu(y) $
+]
+
+#proposition[
+  Si $f, g >=0$ son medibles, entonces:
+
+  $ integral_X (f+g) d mu = integral_X f thick d mu + integral_X g thick d mu $
+]
+
+#lemma(title: "Fatou")[
+  Dada una sucesión de funciones medibles y positivas ${f_n}$, se tiene:
+
+  $ integral_X (liminf_(n->oo) thick (f_n (x))) d mu <= liminf_(n->oo) thick (integral_X f_n (x) d mu) $
+]
+
+#definition[
+  Se dice que $f$ es *integrable* si $integral f^+ d mu < oo thick$ y $thick integral f^- d mu < oo$ y escribimos:
+
+  $ integral f thick d mu = integral f^+ thick d mu - integral f^- thick d mu $
+]
+
+#theorem(title: "Teorema de la Convergencia Dominada")[
+  En $(X, cal(A), mu)$ espacio de medida, si la sucesión de funciones medibles ${f_n (x)}_(n=1)^oo$ converge puntualmente a una función $f(x)$ y además $abs(f_n(x)) <= F(x) thick forall n, thick forall x$ con $F$ medible, positiva y tal que $integral_X F(x) thick d mu < oo$, entonces $f(x)$ es integrable y se tiene:
+
+  $ lim_(n->oo) integral_X abs(f_n (x) - f(x)) thick d mu = 0 $
+
+  En particular,
+
+  $ integral_X (lim_(n->oo) f_n (x)) thick d mu = integral_X f(x) thick d mu = lim_(n->oo) (integral_X f_n (x) thick d mu) $
+]
+
+#corollary[
+  Si ${f_k}_(k=1)^oo$ son medibles y $sum_(k=1)^oo (integral abs(f_k (x)) thick d mu) < oo$, entonces la serie $f(x) = sum_(k=1)^oo f_k (x)$ converge en _c.t.p._ y
+
+  $ integral_X (sum_(k=1)^oo f_k (x)) thick d mu = sum_(k=1)^oo (integral_X f_k (x) thick d mu) $
+]
+
+#lemma[
+  $ integral_X abs(f(x)) thick d mu(x) = integral_0^oo mu({x in X : abs(f(x)) > t}) thick d t $
+]
+
+#pagebreak(weak: true)
+
+= Espacios de medida
+
+#definition(title: "Espacio de medida")[
+  Un *espacio de medida* es una terna $(X, cal(A), mu)$ donde $X$ es un conjunto, $cal(A)$ es una $sigma$-álgebra y $mu$ es una medida.
+  Un espacio de medida $(X, cal(A), mu)$ se denomina *de Probabilidad* si se cumple $mu(X) = 1$.
+]
+
+#definition(title: "Medida completa")[
+  Una medida $mu$ sobre una $sigma$-álgebra $cal(A)$ se dice que es una *medida completa* si $cal(A)$ contiene a todos los subconjuntos de conjuntos (de $cal(A)$) con medida cero, es decir:
+
+  Si $A in cal(A)$ con $mu(A) = 0$, entonces $forall E subset A$ se tiene que $E in cal(A)$ y obviamente que $mu(E) = 0$.
+]
+
+#theorem[
+  Sea $(X, cal(A), mu)$ un espacio de medida, definimos:
+
+  - $overline(cal(A)) = {E subset X : forall A, B in cal(A) "con" A subset E subset B thick "y" thick mu(B without A) = 0}$
+  - Si $E in overline(cal(A))$ con $A subset E subset B$ y $mu(B without A) = 0, thick thick overline(mu)(E) = mu(A)$
+
+  Entonces:
+
+  - $overline(cal(A))$ es una $sigma$-álgebra (la más pequeña) que contiene a $cal(A)$.
+  - $overline(mu)$ es una medida completa que extiende a $mu$.
+]<thm:complete>
+
+#proposition[
+  Sea $(X, cal(A), mu)$ con $mu$ completa, entonces:
+
+  - Si $f = g$ en _c.t.p._ y $f$ es medible, entonces $g$ es medible.
+  - Si las $f_n$ son medibles $forall n$ y $ thick f_n -> f thick$ para _c.t.p._, entonces $f$ es medible.
+]
+
+#pagebreak(weak: true)
+
+#definition(title: "Medida exterior")[
+  Se dice que $mu^* : cal(P)(X) ->  [0, oo]$ es *medida exterior* si cumple:
+
+  - $mu^*(emptyset) = 0$
+  - Si $A subset B, quad mu^*(A) <= mu^*(B)$
+
+  - $mu^* (union.big_(i=1)^oo A_i) <= sum_(i=1)^oo mu^* (A_i)$
+]
+
+#definition(title: "Premedida")[
+  Dada una álgebra $cal(B)_0 subset cal(P)(X)$, se dice que $mu_0 : cal(B)_0 -> [0, oo]$ es una *pre-medida* si verifica:
+
+  - $mu_0(emptyset) = 0$
+  - Si $B_i in cal(B)_0$ son disjuntos y $ thick union.big.plus_(i=1)^oo B_i in cal(B)_0$, entonces $mu_0(union.big.plus_(i=1)^oo B_i) = sum_(i=1)^oo mu_0(B_i)$
+]
+
+#definition(title: "Conjuntos medibles para una medida exterior")[
+  Dada una medida exterior $mu^*$ sobre $X$, se dice que $A subset X$ es *$mu^*$-medible* (o medible con respecto a $mu^*$) si:
+
+  $ mu^*(E) = mu^*(E inter A) + mu^*(E inter A^c) quad forall E subset X $
+]
+
+#theorem(title: "Teorema de Carathéodory I")[
+  Si $mu^*$ es una medida exterior sobre $X$ y definimos $cal(A)^*$ como antes. Entonces $cal(A)^*$ es una \ $sigma$-álgebra y $mu^*|_(cal(A)^*)$ (restricción de $mu^*$ a $cal(A)^*$) es una medida completa.
+]
+
+#theorem(title: "Teorema de Carathéodory II")[
+  Sea $mu_0$ una pre-medida sobre $B_0$ y definamos una medida exterior $mu^*$ y la clase $cal(A)^*$ de los \ $mu$-medibles como antes. Entonces:
+
+  - $cal(A)^*$ es una $sigma$-álgebra que contiene a $B_0$
+  - $mu = mu^*|_(cal(A)^*)$ es una medida completa que extiende a $mu_0$ 
+]<thm:caratheodory2>
+
+#definition(title: "Medida de Lebesgue")[
+  Sea el álgebra $cal(B)_0$ generada por los intervalos de la forma $(a, b]$, con $(a < b : a, b in RR)$.
+  Es decir, $cal(B)_0$ está formada por las uniones finitas de esos intervalos y sus complementarios.
+
+  Definimos $mu_0((a, b]) = b - a$ y extendemos la definición de $cal(B)_0$ de manera obvia. Entonces:
+
+  - $mu^*$ es la medida exterior de Lebesgue
+  - $cal(A)^*$ es la $sigma$-álgebra de los conjuntos medibles de Lebesgue
+  - $mu = mu^*|_(cal(A)^*)$ es la medida de Lebesgue ($mu(I) = "long"(I), thick forall I$ intervalo)
+]
+
+#definition(title: "Medidas de Lebesgue-Stieltjes")[
+  Con más generalidad, si $F : RR -> RR$ es creciente y continua por la derecha podemos definir $mu_0 = mu_F$ sobre el álgebra $cal(B)_0$ anterior, $mu_F ((a, b]) = F(b) - F(a)$ y $mu_F$ es una pre-medida.
+]
+
+#note-box[
+  La medida dada por la extensión de Carathéodory se denota por $mu = d F$.
+  En particular, si $F(x) = x$ estamos en el caso de la medida de Lebesgue, que se denota por $d x$.
+]
+
+#important-box[
+  Si $(X, cal(A), mu)$ es un espacio de medida y $mu$ no es completa, entonces hay dos formas de completarla:
+
+  - Por el @thm:complete, se obtiene $(X, overline(cal(A)), overline(mu))$
+  - Por el @thm:caratheodory2 (Carathéodory), se obtiene $(X, cal(A)^*, mu^*|_(cal(A)^*))$, tomando a $mu^*$ la medida exterior inducida por $mu$ que, al ser medida, también es pre-medida.
+]
+
