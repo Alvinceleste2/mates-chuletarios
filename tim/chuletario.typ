@@ -177,7 +177,7 @@
 ]
 
 #proposition[
-  - Sean $u, v$ funciones simples, entonces $u + v$ es simple y $integral(u+v) d mu = integral u d mu + integral v d mu$
+  - Sean $u, v$ funciones simples, entonces $u + v$ es simple y $integral(u+v) thick d mu = integral u d mu + integral v d mu$
   - Sean $f, g$ funciones medibles tal que $0 <= g <= f$, entonces $integral g thick d mu <= integral f thick d mu$
 ]
 
@@ -232,7 +232,7 @@
 ]
 
 #theorem(title: "Teorema de la Convergencia Dominada")[
-  En $(X, cal(A), mu)$ espacio de medida, si la sucesión de funciones medibles ${f_n (x)}_(n=1)^oo$ converge puntualmente a una función $f(x)$ y además $abs(f_n(x)) <= F(x) thick forall n, thick forall x$ con $F$ medible, positiva y tal que $integral_X F(x) thick d mu < oo$, entonces $f(x)$ es integrable y se tiene:
+  En $(X, cal(A), mu)$ espacio de medida, si la sucesión de funciones medibles ${f_n (x)}_(n=1)^oo$ converge puntualmente a una función $f(x)$ y además $abs(f_n (x)) <= F(x) thick forall n, thick forall x$ con $F$ medible, positiva y tal que $integral_X F(x) thick d mu < oo$, entonces $f(x)$ es integrable y se tiene:
 
   $ lim_(n->oo) integral_X abs(f_n (x) - f(x)) thick d mu = 0 $
 
