@@ -311,9 +311,40 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
 = Extensiones de cuerpos
 
-esto es una prueba 
-
 == Extensiones algebraicas
+
+#definition(title: "Morfismo de cuerpos")[
+  Sean $K, L$ dos cuerpos. Un *morfismo de cuerpos* $phi.alt: K -> L$ es un morfismo de anillos.
+]
+
+#lemma[
+  Sea $K$ un cuerpo, $A$ un anillo (no nulo). Sea $phi.alt: K -> A$ un morfismo de anillos. Entonces $phi.alt$ es inyectivo. Es decir, todo morfismo de cuerpos es inyectivo.
+]
+
+#definition(title: "Extensión de cuerpos")[
+  Sean $K, L$ cuerpos. Decimos que $L$ es una *extensión* de $K$ si existe un morfismo (inyectivo) de cuerpos $phi.alt: K -> L$. Denotamos la extensión mediante $L\/K$.
+
+  En otras palabras, $L\/K$ es una extensión de cuerpo si $K$ es, salvo isomorfismo, un subcuerpo de $L$ ($K subset L$ y $+, dot$ coinciden en $K$ y $L$).
+]
+
+#definition(title: "Extensión simple")[
+  Una extensión $L\/K$ es *simple* si existe $alpha in L$ tal que $L = K(alpha)$. Decimos que $alpha$ es un *elemento primitivo* de la extensión.
+]
+
+#theorem[
+  Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio irreducible.
+  El cuerpo $L := K[Y]/(angle.l p(y) angle.r)$ es una extensión de $K$ y el polinomio $p(x) in L[X]$ tiene la raíz $overline(y) in L$.
+]
+
+#pagebreak(weak: true)
+
+#definition(title: "Característica de un cuerpo")[
+  Un cuerpo $K$ (o anillo) tiene *característica* $n$, $"char"(n)$, si $n$ es el menor número natural tal que:
+  $ underbrace(1_K + ... 1_K, n "veces") = 0 $
+
+  Si esta suma fuera siempre distinta de $0$, decimos que $"char"(K) = 0$.
+]
+
 == Cuerpos finitos
 == Grado de una extensión de cuerpos
 == Polinomio mínimo
