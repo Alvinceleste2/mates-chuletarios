@@ -112,7 +112,7 @@
 
 #definition(title: "Espacio de medida")[
   Llamaremos *espacio de medida* a toda terna $(X, cal(A), mu)$ compuesta por un conjunto $X$, una $sigma$-álgebra $cal(A)$ de $cal(P)(X)$, y una medida $mu$ definida sobre $cal(A)$.
-  Diremos que la medida $mu$ sobre $cal(A)$ es *finita* si $mu(X) < oo$ y que es *$sigma$-finita* si podemos escribir $X = union.big_(n>=1) X_n$, con $X_n in cal(A)$, $n = 1, 2, 3, ...$ y $mu(X_n) < oo$.
+  Diremos que la medida $mu$ sobre $cal(A)$ es *finita* si $mu(X) < oo$ y que es *$sigma$-finita* si podemos escribir $X = union.big_(n>=1) X_n$, con $X_n in cal(A)$ y $mu(X_n) < oo, thick thick n = 1, 2, 3, ...$.
 ]
 
 #proposition(title: "Convergencia monótona de conjuntos")[
@@ -347,3 +347,44 @@
   - Por el @thm:caratheodory2 (Carathéodory), se obtiene $(X, cal(A)^*, mu^*|_(cal(A)^*))$, tomando a $mu^*$ la medida exterior inducida por $mu$ que, al ser medida, también es pre-medida.
 ]
 
+#lemma[
+  Si $mu$ es $sigma$-finita entonces las dos extensiones coinciden, es decir, $ overline(cal(A)) = cal(A)^*$.
+]
+
+#pagebreak(weak: true)
+
+#definition(title: "Medida de Borel")[
+  Se dice que $mu$ es una *medida de Borel* en $RR$ si está definida sobre la $sigma$-álgebra de los conjuntos de Borel $cal(B)_RR$.
+]
+
+#lemma[
+  Toda pre-medida $mu_F$ definida como antes sobre $cal(B)_0$ se puede extender (de forma única) a una medida de Borel.
+]
+
+#lemma[
+  Si $m$ es medida de Lebesgue y denotamos por $cal(L)$ los conjuntos medibles de Lebesgue, entonces $cal(B)_(RR) subset.neq cal(L) subset.neq cal(P) (RR)$ (contenidos estrictos).
+]
+
+#proposition[
+  Si $mu$ es una medida de Borel finita sobre conjuntos acotados, entonces $mu$ proviene de cierta pre-medida $mu_F$ sobre $cal(B)_0$.
+]
+
+#definition(title: "Espacio de medida regular")[
+  Dado $(RR, cal(A), mu)$ espacio de medida, se dice que $mu$ es *regular* (en $RR$) si verifica:
+
+  - $cal(B)_RR subset cal(A)$
+  - Regularidad exterior, esto es: $mu(A) = inf thick {mu(U) : A subset U, thick U "abierto"}$
+  - Regularidad interior, esto es: $mu(A) = sup thick {mu(K) : K subset A, thick K "compacto"}$
+]
+
+#proposition[
+  - La medida de Lebesgue, $m$, es regular.
+  - Cualquier medida de Lebesgue-Stieltjes es regular.
+]
+
+#theorem(title: "Invarianza por traslaciones y dilataciones")[
+  Dado $E subset RR$, definimos para $x_0 in RR, thick r > 0; thick x_0 + E = {x_0 + y: y in E} thick "y" thick r dot E = {r dot y : y in E}$. Entonces si $E in cal(L)$ se tiene:
+  
+  - $x_0 + E in cal(A), thick thick r dot E in cal(A)$
+  - $m(x_0 + E) = m(E), thick thick m(r dot E) = r dot m(E)$
+]
