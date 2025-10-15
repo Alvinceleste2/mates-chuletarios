@@ -296,6 +296,8 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Si $overline(Q(x))$ es irreducible en $ZZ slash p ZZ [X]$, entonces $Q(x)$ es irreducible en $QQ[X]$.
 ]
 
+#pagebreak()
+
 #proposition(title: "Criterio de Eisenstein")[
   Sea $Q(x) = a_n x^n + ... + a_1 x + a_0 in ZZ[X]$. Supongamos que existe $p in ZZ$ primo tal que:
 
@@ -478,6 +480,42 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Si $p(x) in K[X]$ es un polinomio irreducible sobre $K$ y $alpha, beta$ son dos raíces de $p(x)$, entonces:
 
   $ K(alpha) tilde.equiv K[beta] $
+]
+
+#corollary[
+  Sean $K$ un cuerpo, $alpha$ un elemento algebraico sobre $K$. Entonces:
+
+  - $[K(alpha):K] = deg(m_(alpha, K)(x))$
+
+  - ${1, alpha, alpha^2, ... alpha^(deg(m_(alpha, K)(x)) - 1)}$ es una base de la extensión $K(alpha) \/ K$
+]
+
+#proposition[
+  Toda extensión finita es algebraica.
+]
+
+#corollary[
+  Sea $L\/K$ una extensión de cuerpos. Si $alpha in L$ es algebraico sobre $K$ entonces $K(alpha) \/ K$ es algebraica.
+]
+
+#proposition[
+  Una extensión $L\/K$ es finita si y solo si $L$ está generado por un número finito de elementos algebraicos sobre $K$.
+]
+
+#theorem[
+  Si las extensiones $F\/K$ y $L\/F$ son algebraicas, entonces $L\/K$ es algebraica.
+]
+
+#corollary[
+  Sea $L\/K$ una extensión de cuerpos. Sea $F = {alpha in L | alpha "es algebraico sobre" K}$.
+  Entonces $F$ es un cuerpo y $F\/K$ es una extensión algebraica.
+]
+
+#proposition[
+  Una extensión de cuerpos $L\/K$ es de grado infinito si y solo si se da una de las situaciones siguientes:
+
+  - $L\/K$ es una extensión trascendente.
+  - $L\/K$ es una extensión algebraica que no está finitamente generada.
 ]
 
 
