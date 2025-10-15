@@ -8,11 +8,19 @@
 #set-inherited-levels(1)
 #set-zero-fill(true)
 #set-leading-zero(true)
-#set-theorion-numbering("1.")
+#set-theorion-numbering("1.1")
 
 // 2. Other options:
 // #set-result("noanswer") // Deletes the demos.
 // #set-qed-symbol[#math.qed] // Changes qed symbol for proofs.
+
+// Makes corollary numbering same as the rest of objects.
+#let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
+  "corollary",
+  theorion-i18n-map.at("corollary"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: fuchsia.darken(10%)),
+)
 
 #show: conf.with(
   title: "Chuletario Álgebra II",
@@ -311,7 +319,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
 = Extensiones de cuerpos
 
-== Extensiones algebraicas
+== Extensiones de cuerpos y característica
 
 #definition(title: "Morfismo de cuerpos")[
   Sean $K, L$ dos cuerpos. Un *morfismo de cuerpos* $phi.alt: K -> L$ es un morfismo de anillos.
@@ -324,7 +332,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition(title: "Extensión de cuerpos")[
   Sean $K, L$ cuerpos. Decimos que $L$ es una *extensión* de $K$ si existe un morfismo (inyectivo) de cuerpos $phi.alt: K -> L$. Denotamos la extensión mediante $L\/K$.
 
-  En otras palabras, $L\/K$ es una extensión de cuerpo si $K$ es, salvo isomorfismo, un subcuerpo de $L$ ($K subset L$ y $+, dot$ coinciden en $K$ y $L$).
+  En otras palabras, $L\/K$ es una extensión de cuerpos si $K$ es, salvo isomorfismo, un subcuerpo de $L$ ($K subset_! L$ y $+, dot$ coinciden en $K$ y $L$).
 ]
 
 #definition(title: "Extensión simple")[
@@ -345,11 +353,100 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Si esta suma fuera siempre distinta de $0$, decimos que $"char"(K) = 0$.
 ]
 
-== Cuerpos finitos
-== Grado de una extensión de cuerpos
-== Polinomio mínimo
-== Aplicación a las construcciones con regla y compás
+#lemma[
+  Sea $K$ un cuerpo. Entonces $"char"(K) = 0$ o $"char"(K) = p$ un número primo.
+]
 
-= Extensiones de Galois
-== El cuerpo de descomposición de un polinomio
-== Clausura algebraica
+#lemma[
+  Si $phi.alt : K -> L$ es un morfismo de cuerpos, entonces $"char"(K) = "char"(L)$.
+]
+
+#corollary(numbering: none)[
+  Si $L\/K$ es una extensión de cuerpos entonces $"char"(L) = "char"(K)$.
+]
+
+#proposition[
+  Sea $K$ un cuerpo.
+
+  - Si char$(K) = 0$, existe un único morfismo de cuerpos $ thick QQ -> K$.
+  - Si char$(K) = p$, existe un único morfismo de cuerpos $ thick FF_p -> K$.
+]<subcuerpo-primo>
+
+#definition(title: "Cuerpo primo")[
+  Un cuerpo es *primo* si no contiene subcuerpos propios. Dado un cuerpo $L$, su *subcuerpo primo* es el menor (para la inclusión) cuerpo $K subset L$.
+]
+
+#note-box[
+  La @subcuerpo-primo implica que los únicos cuerpos primos son isomorfos a $QQ$ o $FF_p$, $ thick p$ primo.
+  Además, Aut$(QQ) = {id}$ y Aut$(FF_p) = {id}$
+]
+
+#corollary[
+  Sea $K$ un cuerpo.
+
+  - Si char$(K) = 0$ entonces $K\/QQ$ es una extensión.
+  - Si char$(K) = p$ entonces $K\/FF_p$ es una extensión.
+]
+
+== Grado de una extensión
+
+#proposition[
+  Sea $L\/K$ una extensión de cuerpos. Entonces $L$ es un espacio vectorial sobre $K$.
+]
+
+#definition[
+  Sea $L\/K$ una extensión de cuerpos.
+
+  - El *grado de la extensión*, $[L:K]$, es la dimensión de $L$ como $K$-espacio vectorial.
+  - La extensión $L\/K$ es *finita* si $[L:K]$ es finito.
+  - La extensión $L\/K$ es *infinita* si $[L:K]$ es infinito.
+]
+
+#theorem[
+  Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio irreducible de grado $n$. Sea $L = K[X]/(angle.l p(x) angle.r)$.
+  Entonces ${overline(1), overline(x), overline(x)^2, ..., overline(x)^(n-1)}$ es una base de $L$ como $K$-espacio vectorial, es decir,
+  $ L = {a_0 + a_1 x + ... + a_(n-1) x^(n-1) | a_i in K} $
+
+  En particular, $[L:K] = n$.
+]
+
+#corollary[
+  Sea $K$ un cuerpo finito. Entonces $abs(K) = p^n$ para $p, n in NN, thick p$ primo.
+]
+
+#theorem(title: "Ley de la torre")[
+  Sean $L\/K$ y $M\/L$ extensiones de cuerpos. Entonces:
+  $ [M:K] = [M:L][L:K] $
+
+  De hecho, si $L\/K$ y $M\L$ son finitas y ${x_1, x_2, ..., x_r}$, ${y_1, y_2, ..., y_s}$ son sus bases, entonces ${x_i y_i | 1 <= i <= r, thick 1 <= j <= s}$ es una base de $M\/K$.
+]
+
+== Extensiones algebraicas
+
+
+#definition[
+  Sea $L\/K$ una extensión de cuerpos.
+
+  - $alpha in L$ es *algebraico* sobre $K$ si existe un polinomio $p(x) in K[X]$ tal que $p(alpha) = 0$. 
+  - $alpha in L$ es *trascendente* sobre $K$ si no es algebraico sobre $K$. 
+]
+
+#proposition[
+  Sea $L\/K$ una extensión de cuerpos. Entonces son equivalentes:
+
+  - $alpha in L$ es trascendente sobre $K$
+  - $K[alpha] tilde.equiv K[X]$
+  - $K(alpha) tilde.equiv K(x)$
+
+  Como idea, si $alpha$ es trascendente, entonces se comporta como una indeterminada.
+]
+
+#pagebreak()
+
+#definition[
+  Se dice que una extensión $L\/K$ es:
+
+  - *algebraica*, si todo $alpha in L$ es algebraico sobre $K$.
+  - *trascendente*, si no es algebraica (existe $alpha in L$ trascendente sobre $K$)
+]
+
