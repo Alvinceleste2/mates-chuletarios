@@ -450,3 +450,33 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   - *trascendente*, si no es algebraica (existe $alpha in L$ trascendente sobre $K$)
 ]
 
+
+== Tres problemas clásicos
+
+#emph-box[
+  I) _Duplicación del cubo_ $arrow$ Dado un cubo, construir otro de volumen doble.
+
+  II) _Trisección de un ángulo_ $arrow$ Dado un ángulo $theta$, construir $theta/3$.
+
+  III) _Cuadratura del círculo_ $arrow$ Dado un círculo, construir un cuadrado de la misma área.
+]
+
+#definition(title: "Números constructibles")[
+  Un *número constructible* es una longitud que puede ser construida con regla y compás (a partir de la longitud 1).
+]
+
+#lemma[
+  Sea $K$ el conjunto de los números constructibles. Si $a, b$ son constructibles $(a, b in K)$, podemos contruir: $a + b$, $a - b, thick a b, thick a\/b, thick sqrt(a)$. Luego $K$ es un cuerpo.
+]
+
+#theorem[
+  Un número real $x$ es constructible si y solo si pertenece a un cuerpo $L subset RR$ tal que existe una cadena de subcuerpos $thick QQ = L_0 subset L_1 subset L_2 subset ... subset L_n = L$ donde todas las extensiones $L_(i+1) \/ L$ son de grado $2$.
+]
+
+#corollary[
+  Si $x in RR$ es constructible, entonces $[QQ(x):QQ] = 2^n$ para $n in NN$.
+]
+
+#theorem[
+  Ninguna de las construcciones (I), (II), (III) es posible.
+]
