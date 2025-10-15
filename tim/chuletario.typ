@@ -388,3 +388,9 @@
   - $x_0 + E in cal(A), thick thick r dot E in cal(A)$
   - $m(x_0 + E) = m(E), thick thick m(r dot E) = r dot m(E)$
 ]
+
+#theorem[
+  Sea $f: [a, b] -> RR$ acotada e integrable Riemann. Entonces $f$ es medible Lebesgue y por tanto integrable Lebesgue y además:
+
+  $ integral_a^b f(x) thick d x = integral_([a, b]) f(x) thick d m $
+]
