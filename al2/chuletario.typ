@@ -450,6 +450,36 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   - *trascendente*, si no es algebraica (existe $alpha in L$ trascendente sobre $K$)
 ]
 
+#definition(title: "Polinomio mínimo")[
+  Si $alpha$ es un elemento algebraico sobre un cuerpo $K$, se dice que $m_(alpha, K)(x) in K[X]$ es el *polinomio mínimo* de $alpha$ sobre $K$ si $m_(alpha, K)(x)$ es el polinomio mónico de menor grado en $K[X]$ tal que $m_(alpha, K)(alpha) = 0$.
+]
+
+#lemma[
+  Sea $L\/K$ una extensión, $alpha in L$ algebraico sobre $K$. Se tiene que:
+
+  - $m_(alpha, K)(x)$ es único
+  - $m_(alpha, K)(x)$ es irreducible
+  - Dado $p(x) in K[X]$, se tiene que $p(alpha) = 0 <=> m_(alpha, K)(x) divides p(x)$
+  - Sea $K\/F$ una extensión, entonces $alpha$ es algebraico sobre $F$ y $m_(alpha, F)(x) divides m_(alpha, K)(x)$
+  - Sea $p(x) in K[X]$ mónico con $p(alpha) = 0$. Entonces $p(x) = m_(alpha, K)(x) <=> p(x)$ es irreducible en $K[X]$.
+]
+
+#theorem[
+  Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio irreducible. Sea $alpha$ una raíz de $P(x)$ en alguna extensión $L$ de $K$. Entonces tenemos un isomorfismo:
+
+  $ K[Y]/(angle.l p(y) angle.r) -> K[alpha], thick "con" a in K -> a; thick overline(y) -> alpha $
+]
+
+#corollary[
+  Sean $K$ un cuerpo, $alpha$ un elemento algebraico sobre $K$. Entonces $K(alpha) = K[alpha]$.
+]
+
+#corollary[
+  Si $p(x) in K[X]$ es un polinomio irreducible sobre $K$ y $alpha, beta$ son dos raíces de $p(x)$, entonces:
+
+  $ K(alpha) tilde.equiv K[beta] $
+]
+
 
 == Tres problemas clásicos
 
