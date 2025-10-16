@@ -126,7 +126,7 @@ $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
 
 == Cotas de error
 
-#theorem[
+#theorem(title: "Error de interpolación de Lagrange")[
   Supongamos que $f$ es una función con $N>=1$ derivadas continuas en un intervalo [a, b] y tal que $f^((N+1))$ existe en $(a, b)$.
   Sean $x_0, x_1, ..., x_N, thick N+1$ nodos en $[a, b]$ distintos dos a dos y $p$ el polinomio interpolador de Lagrange.
   Entonces dado $x in [a, b]$ existe $xi in I, thick I = (min(x_0, x_1, ..., x_n, x), max(x_0, x_1, ..., x_n, x))$ para el cual:
@@ -184,7 +184,7 @@ Entonces cuando $N->oo, thick thick p_N(x)$ no converge al valor de $f(x)$ si $a
 
 #theorem[
   El problema de interpolación de Taylor tiene solución única.
-  AL polinomio solución se le llama polinomio de Taylor de grado $N$ de $f$ en $x_0$.
+  Al polinomio solución se le llama polinomio de Taylor de grado $N$ de $f$ en $x_0$.
 ]
 
 #lemma(title: "Fórmula del polinomio de Taylor")[
@@ -297,7 +297,7 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
 == Comparación con la interpolación polinómica de Lagrange
 
 #proposition[
-  Dada una partición $Delta$ y los valores de una función en los $N + 1$ nodos, podemos buscar el interpolante de Lagrange de grado $N$, $p$, o aproximarla por una función lineal a trozos, $s$.
+  Dada una partición $Delta$ y los valores de una función en los $N + 1$ nodos, podemos buscar el interpolante de Lagrange de grado $N$, $p$, o aproximarla por una funci
 
   - *Coste de evaluación*: si $N$ es grande, el coste de evaluar $p$ es grande, mientras que el coste de evaluar $s$ no crece con $N$.
   - *Convergencia a $f$*: no está garantizada la convergencia de $p$ a la función $f$ mediante el aumento de $N$. Sin embargo, al refinar $Delta$ logramos que $s$ converja cuadráticamente a $f$, siempre que $f$ tenga derivada segunda acotada.
@@ -327,3 +327,139 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
   Al igual que en el caso lineal a trozos, tenemos convergencia de los interpolantes al refinar la partición.
   Esta vez, la convergencia será *cúbica*.
 ]
+
+= Interpolación de Hermite
+
+== Interpolación de Hermite
+
+#definition(title: "Problema de interpolación de Hermite")[
+  Dados $x_0, ..., x_r$ nodos con $0<=r<=N$, el *problema de interpolación de Hermite* se basa en encontrar un polinomio que reproduce a $f$ y sus $m_i$ primeras derivadas de forma que $sum_(i=0)^r (1 + m_i) = N + 1$. Más concretamente, buscamos $p$ de grado menor o igual que $N$ satisfaciendo:
+
+#align(center)[
+#table(
+  columns: 4,
+  rows: 4,
+  inset: 10pt,
+  stroke: none,
+  align: horizon,
+  $ p(x_0) = f(x_0), $, $ p'(x_0) = f'(x_0), $, $ ... $, $ p^((m_0)) (x_0) = f^((m_0)) (x_0), $,
+  $ p(x_1) = f(x_1), $, $ p'(x_1) = f'(x_1), $, $ ... $, $ p^((m_1)) (x_1) = f^((m_1)) (x_1), $,
+  $ ... $, $ ... $, $ ... $, $ ... $,
+  $ p(x_r) = f(x_r), $, $ p'(x_r) = f'(x_r), $, $ ... $, $ p^((m_r)) (x_r) = f^((m_r)) (x_r) $,
+)
+]
+
+  Este problema es una generalización de la interpolación de Lagrange donde $r = N$ y $m_0 = m_1 = ... = m_r = 0$.
+  También es una generalización de la interpolación de Taylor, donde $r = 0$ y $m_0 = N$.
+]
+
+#lemma(title: "Construcción de polinomio interpolador de Hermite")[
+  Sea la siguiente base:
+
+  $
+  {1, (x-x_0), ..., (x-x_0)^(m_0), (x-x_0)^(m_0 + 1), (x-x_0)^(m_0 + 1) (x-x_1), ..., \
+  (x-x_0)^(m_0+1)(x-x_1)^(m_1), ..., (x-x_0)^(m_0 + 1) (x-x_1)^(m_1 + 1) ... (x-x_(r-1))^(m_(r-1) + 1), ..., \ 
+  (x-x_0)^(m_0+1)(x-x_1)^(m_1+1)...(x-x_(r-1))^(m_(r-1)+1)(x-x_r)^(m_r) }
+  $
+
+  El polinomio interpolador de Hermite se escribe:
+
+  $ p(x) = f(x_0) + f'(x_0)(x-x_0) + ... + (f^((m_0)) (x_0)) / (m_0 !)(x-x_0)^(m_0) + \
+  + thick c_(m_0+1)(x-x_0)^(m_0+1) + c_(m_0+2)(x-x_0)^((m_0+1))(x-x_1)... $
+]
+
+#theorem[
+  El problema de interpolación de Hermite tiene solución única.
+]
+
+#theorem(title: "Error de interpolación de Hermite")[
+  Sea $f$ de clase $cal(C)^N$ en un intervalo $[a, b]$ y de modo que existe $f^((N+1))$ en $(a, b)$.
+  Entonces para cada $x in [a, b]$ existe $xi in I, thick I = (min(x_0, x_1, ..., x_n, x), max(x_0, x_1, ..., x_n, x))$ para el cual:
+
+  $ f(x) - p(x) = ((x-x_0)^(m_0+1)...(x-x_r)^(m_r+1))/((N+1)!) f^((N+1)) (xi) $
+]
+
+#proposition(title: "Diferencias divididas en Hermite")[
+  Podemos extender la idea de las diferencias divididas al caso en el que tengamos argumentos repetidos. Para ello, imponemos las siguientes normas:
+
+  - Las diferencias divididas no dependen del orden en que se escriban sus argumentos.
+  - Cuando todos los argumentos son iguales, la diferencia dividida $i$-ésima se define como:
+
+  $ f[x_0, x_0, ..., x_0] = (f^(i) (x_0))/(i!) $
+
+  - Si entre los argumentos hay dos con valores distintos, que según la primera norma, podemos suponer que son el primero y el último, se aplica la fórmula:
+
+  $ f[x_0, ..., x_i] = (f[x_1, ..., x_i] - f[x_0, ..., x_(i-1)]) / (x_i - x_0) $
+]
+
+#lemma[
+  Dada una función de clase $cal(C)^i$, su diferencia dividida $i$-ésima es una función continua de sus $i+1$ variables. Por eso, se verifica por ejemplo que:
+
+  $ f[x_0, x_0] = lim_(x_1->x_0) f[x_0, x_1] = lim_(x_1 -> x_0) (f(x_1) - f(x_0))/ (x_1 - x_0) = f'(x_0) $
+]
+
+== Interpolantes cúbicos de Hermite a trozos
+
+#definition[
+  Dade un intervalo $[a, b]$ y una partición del mismo $Delta := a = x_0 < x_1 < ... < x_N = b$, denotaremos por *$M_1^3 (Delta)$* el espacio de las funciones reales de clase $cal(C)^1[a, b]$ que, restringidas a cada subintervalo de la partición $(x_(i-1), x_i), thick i = 1, ..., N$, son un polinomio de grado menor o igual que 3.
+]
+
+#lemma(title: "Construcción del interpolante cúbico de Hermite a trozos")[
+  Sea la siguiente base:
+
+  $
+  phi.alt_i (x_j) = delta_(i, j), quad phi.alt'_i (x_j) = 0, quad quad & 0 <= i <= N, \
+  theta_i (x_j) = 0, quad theta'_i (x_j) = delta_(i, j), quad quad & 0<= i <= N
+  $
+
+  El interpolante cúbico de Hermite a trozos se escribe:
+
+  $ h(x) = sum_(i=0)^N (h(x_i)phi.alt_i(x) + h'(x_i)theta_i (x)) $
+]
+
+== Splines cúbicos
+
+#definition(title: "Splines")[
+  Definimos *$M_2^3 (Delta)$*, llamados *splines*, como el espacio de funciones de clase $cal(C)^2[a, b]$ y cúbicas a trozos.
+]
+
+#theorem[
+  Dada $f$ continua en $[a, b]$ y derivable en $a$ y $b$, existe un único spline cúbico $h in M_2^3 (Delta)$ tal que $h(x_i) = f(x_i), thick i=0, ..., N, thick h'(a) = f'(a), thick h'(b) = f'(b)$.
+  
+  A este spline se le llama *interpolante completo de $f$*.
+  Para calcular $h$ se debe resolver primero el sistema siguiente (@sistema-hermite) para encontrar los valores $h'(x_i)$ en los nodos interiores y después construir el spline en cada intervalo usando los valores del mismo y su derivada en los extremos del intervalo.
+]
+
+#lemma(title: "Sistema de ecuaciones para obtención de valores del spline")[
+$
+  mat(
+  2/(x_1-x_0) + 2/(x_2-x_1), 1/(x_2-x_1), ..., ..., 0;
+  1/(x_2-x_1), 2/(x_2-x_1) + 2/(x_3-x_2), 1/(x_3-x_2) ,..., 0;
+  dots.v, dots.v, dots.v, dots.down, dots.v;
+  0, 0, 0, 1/(x_(N-1)-x_(N-2)), 2/(x_(N-1)-x_(N-2)) + 2/(x_N - x_(N-1));
+  ) 
+  mat(
+  h'(x_1);
+    h'(x_2);
+    dots.v;
+    h'(x_(N-1));
+  ) \ \ \
+
+  =
+  mat(
+    (3(h(x_2)-h(x_1)))/(x_2-x_1)^2 + (3(h(x_1)-h(x_0)))/(x_1-x_0)^2 - (h'(x_0))/(x_1-x_0);
+    (3(h(x_3) - h(x_2)))/(x_3-x_2)^2 + (3(h(x_2) - h(x_1)))/(x_2 - x_1)^2;
+    dots.v;
+    (3(h(x_N) - h(x_(N-1))))/(x_N - x_(N-1))^2 + (3(h(x_(N-1))- h(x_(N-2))))/(x_(N-1) - x_(N-2))^2 - (h'(x_N))/(x_N - x_(N-1));
+  )
+$
+]<sistema-hermite>
+
+#theorem[
+  Para el spline completo $h$ de $f$ tenemos:
+
+  $ abs(f(x) - h(x)) <= (5 h^4)/(384) K_4, quad x in [a, b] $
+
+  Donde $K_4$ es una cota de la derivada cuarta de $f$ en el intervalo $[a, b]$.
+]
+
