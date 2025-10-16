@@ -33,8 +33,8 @@
 
 == El problema de interpolación de Lagrange
 
-#definition(title: "Problema de interpolación")[
-  Dados un entero no negativo $N$, $N+1$ puntos reales $x_0, x_1, ..., x_N$ distintos dos a dos y valores $f(x_0), f(x_1), ..., f(x_N)$ de una función, el *problema de interpolación* se basa en encontrar un polinomio de grado $N$ tal que:
+#definition(title: "Problema de Lagrange")[
+  Dados un entero no negativo $N$, $N+1$ puntos reales $x_0, x_1, ..., x_N$ distintos dos a dos y valores $f(x_0), f(x_1), ..., f(x_N)$ de una función, el *problema de interpolación de Lagrange* se basa en encontrar un polinomio de grado $N$ tal que:
 
   $ p(x_0) = f(x_0), thick p(x_1) = f(x_1), thick ..., p(x_N) = f(x_N) $
 
@@ -108,7 +108,7 @@ $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
   Observamos que una vez calculada la tabla, los elementos diagonales nos dan los coeficientes del polinomio interpolador escrito en la forma de Newton.
 ]
 
-== Comparación entre las formas de coeficientes indeterminados, Lagrange y Newton
+== Comparación entre coeficientes indeterminados, Lagrange y Newton
 
 #proposition[
   Hemos visto tres formas de construir el polinomio interpolador de Lagrange. Vamos a compararlas:
@@ -172,4 +172,83 @@ $ f[x_0, x_1, ..., x_(N+1)] = (f^((N+1)) (xi))/((N+1) !) $
   En 1900, el matemático Runge demostró que si se interpola la función $1\/(1+x^2)$, que posee derivadas continuas en todos los órdenes, en $N + 1$ abcisas equiespaciadas en el intervalo $[-5, 5]$ y se denota por $p_N$ su polinomio interpolador. 
 
 Entonces cuando $N->oo, thick thick p_N(x)$ no converge al valor de $f(x)$ si $abs(x) > 3.6$.
+]
+
+= Interpolación de Taylor
+
+== El problema de interpolación de Taylor
+
+#definition(title: "Problema de interpolación de Taylor")[
+  Dados un entero no negativo $N$, un punto $x_0$ de la recta y los valores $f(x_0), f'(x_0), ..., f^((N)) (x_0)$ de una función y sus $N$ primeras derivadas en $x_0$. El *problema de interpolación de Taylor* se basa en encontrar un polinomio de grado menor o igual que $N$ tal que $p(x_0) = f(x_0), thick p'(x_0) = f'(x_0), thick p^((N)) (x_0) = f^((N))(x_0)$.
+]
+
+#theorem[
+  El problema de interpolación de Taylor tiene solución única.
+  AL polinomio solución se le llama polinomio de Taylor de grado $N$ de $f$ en $x_0$.
+]
+
+== Notaciones de Landau
+
+#definition[
+  - Escribimos *$f = o(g)$* cuando $x-> x_0$ si para $x$ próximo a $x_0 thick x != x_0$, $f$ y $g$ están definidas, $g$ no se anula y $lim_(x->x_0) (f(x))/(g(x)) = 0$.
+
+  - Escribimos *$f = O(g)$* cuando $x-> x_0$ si existe una constante $K > 0$ tal que para $x$ próximo a $x_0$, $f$ y $g$ están definidas y satisfacen $abs(f(x)) <= K abs(g(x))$.
+
+Las notaciones de Landau también se usan cuando $x_0 = plus.minus oo$. Si $f_1 - f_2 = o(g)$ cuando $x -> x_0$ también se escribe $f_1 = f_2 + o(g)$. 
+]
+
+#pagebreak()
+
+== Caracterización analítica del polinomio de Taylor
+
+#theorem[
+  Para $N>=1$, sea $f$ una función para la que se puede proponer el polinomio de Taylor, es decir, $N$ veces derivable en $x_0$. Entonces el polinomio de Taylor verifica:
+
+  $ f(x) - p(x) = o((x - x_0)^N), quad x->x_0 $
+
+  Además, $p$ es el único polinomio de grado $N$ que verifica esta propiedad.
+]
+
+== Cotas de error
+
+#theorem(title: "Error en el polinomio de Taylor. Forma de Lagrange")[
+  Sean $x, x_0$ dos números reales distintos y sea $f$ una función con $N$ derivadas continuas en el intervalo cerrado de extremos $x$ y $x_0$ al que llamaremos $overline(I)$.
+  Supongamos además que existe $f^((N+1))$ en el intervalo abierto con los mismos extremos al que llamaremos $I$.
+  Entonces, existe $xi in I$ tal que:
+
+  $ f(x) - p(x) = (f^((N+1)) (xi))/((N+1)!) (x - x_0)^(N+1) $
+]<error-lagrange>
+
+#corollary[
+  Si además de las hipótesis anteriores suponemos que $abs(f^((N+1)) (t)) <= K_(N+1), thick t in I$, entonces:
+
+  $ abs(f(x) - p(x)) <= (abs(x-x_0)^(N+1) K_(N+1))/((N+1)!) $
+]
+
+#pagebreak()
+
+#theorem(title: "Error en el polinomio de Taylor. Forma integral")[
+Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas continuas en el intervalo $overline(I)$ del @error-lagrange. Entonces:
+
+  $ f(x) - p(x) = 1/N! integral_(x_0)^x (x - s)^N f^((N+1)) (x) thick d s $
+]
+
+== Convergencia de la sucesión de los polinomios de Taylor
+
+#proposition[
+  Sean $p_0(x), p_1(x), ..., p_N (x)$ los polinomios de Taylor de grado $N$ de $f$ en $x_0$.
+  Nos preguntamos si:
+
+  $ f(x) = lim_(N->oo) p_N (x) = lim_(N->oo) sum_(n=0)^N (f^((n)) (x_0)) / (n!) (x-x_0)^n $
+  Es decir, si $f(x)$ es la suma correspondiente a la serie de Taylor:
+
+  $ f(x) = sum_(n=0)^oo (f^((n)) (x_0)) / (n!) (x - x_0)^n  $
+
+  Podemos hacer los siguientes comentarios al respecto:
+
+  - Se necesita una función $f$ con derivadas de todos los órdenes en $x_0$.
+
+  - Puede que existan las derivadas pero que la serie no converja excepto en el punto $x_0$.
+
+  - Aunque existan todas las derivadas y la serie converja puede ocurrir que la suma de la serie solo coincida con la función en el punto $x_0$.
 ]
