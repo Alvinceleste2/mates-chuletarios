@@ -472,12 +472,12 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   $ K[Y]/(angle.l p(y) angle.r) -> K[alpha], thick "con" a in K -> a; thick overline(y) -> alpha $
 ]
 
-#corollary[
-  Sean $K$ un cuerpo, $alpha$ un elemento algebraico sobre $K$. Entonces $K(alpha) = K[alpha]$.
-]
+#pagebreak()
 
 #corollary[
-  Si $p(x) in K[X]$ es un polinomio irreducible sobre $K$ y $alpha, beta$ son dos raíces de $p(x)$, entonces:
+  - Sean $K$ un cuerpo, $alpha$ un elemento algebraico sobre $K$. Entonces $K(alpha) = K[alpha]$.
+
+  - Si $p(x) in K[X]$ es un polinomio irreducible sobre $K$ y $alpha, beta$ son dos raíces de $p(x)$, entonces:
 
   $ K(alpha) tilde.equiv K[beta] $
 ]
@@ -542,9 +542,24 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 #corollary[
-  Si $x in RR$ es constructible, entonces $[QQ(x):QQ] = 2^n$ para $n in NN$.
+  Si $x in RR$ es constructible, entonces $[QQ(x):QQ] = 2^n$ para algún $n in NN$.
 ]
 
 #theorem[
   Ninguna de las construcciones (I), (II), (III) es posible.
+]
+
+= Extensiones de Galois
+
+== Cuerpo de descomposición y clausura algebraica
+
+#definition(title: "Cuerpo de descomposición")[
+  Sean $K$ un cuerpo, $p(x) in K[X]$ con $deg(p(x)) = n >= 1$.
+  Una extensión $L\/K$ es un *cuerpo de descomposición* de $p(x)$ (sobre $K$) si:
+
+  - $p(x)$ se descompone en factores lineales en $L[X]$ (decimos que $p(x)$ se descompone completamente en $L[X]$), es decir, se tiene que:
+
+  $ p(x) = u (x-alpha_1)(x-alpha_2)...(x-alpha_n) $
+
+  - $p(x)$ no se descompone completamente en ningún subcuerpo propio de $L$ que contenga a (la imagen de) $K$.
 ]
