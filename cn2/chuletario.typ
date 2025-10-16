@@ -138,7 +138,7 @@ $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
   Si además de la hipótesis anterior suponemos $abs(f^((N+1)) (t)) <= K_(N+1), thick forall t in (a, b)$, entonces:
 
   $ abs(f(x) - p(x)) <= (abs(x-x_0) abs(x-x_1) ... abs(x-x_n))/((N+1)!) K_(N+1) $
-]
+]<cota-lagrange>
 
 == Diferencias divididas y derivadas
 
@@ -257,4 +257,73 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
   - Puede que existan las derivadas pero que la serie no converja excepto en el punto $x_0$.
 
   - Aunque existan todas las derivadas y la serie converja puede ocurrir que la suma de la serie solo coincida con la función en el punto $x_0$.
+]
+
+= Interpolación polinómica a trozos
+
+== Interpolación lineal a trozos
+
+#definition[
+  Dado un intervalo $[a, b]$ y una partición del mismo $Delta := a = x_0 < x_1 < ... < x_N = b$, denotamos por *$M_0^1(Delta)$* el espacio formado por todas las funciones continuas en $[a, b]$ que restringidas en cada intervalo $[x_(i-1), x_i], thick i = 1, ..., N$, son un polinomio de grado menor o igual que 1.
+]
+
+#definition[
+  Si $s in M_0^1(Delta)$ decimos que $s$ es una *función lineal a trozos* (en la partición $Delta$).
+  En los $x_i in Delta$ las funciones $s in M_0^1 (Delta)$ presentan saltos en la derivada.
+]
+
+== Funciones lineales a trozos como interpolantes
+
+#definition(title: "Interpolante lineal a trozos")[
+  Es obvio que dada una partición $Delta$ y dados los valores de una función $f(x_0), ..., f(x_N)$ en los nodos de la misma, existe una única función lineal a trozos, $s in M_0^1(Delta)$, tal que:
+
+  $ s(x_0) = f(x_0), thick s(x_1) = f(x_1), thick ..., thick s(x_N) = f(x_N) $
+  Llamaremos a esta función $s$ *interpolante lineal a trozos* de $f$ en la partición $Delta$.
+]
+
+#theorem(title: "Error de interpolación lineal a trozos")[
+  Bajo las hipótesis anteriores y empleando el @cota-lagrange, podemos estimar el error de la interpolación lineal a trozos de la siguiente manera:
+
+  $ abs(f(x) - s(x)) <= 1/8 h^2 K_2, quad x in [a, b] $
+
+  Donde $h = max_i (x_i - x_(i-1))$ (es decir, $h = $ diámetro de la partición) y $K_2$ es una cota de la derivada segunda de $f$ en $[a, b]$.
+]
+
+#corollary(title: "Convergencia de la interpolación lineal a trozos")[
+  Siempre $f$ tenga derivada segunda acotada, si generamos una sucesión de particiones con diámetro $h$ tendiendo a 0 (para lo cual tendremos que incluir cada vez más puntos) tenemos garantizada la convergencia uniforme de la sucesión de interpolantes lineales a trozos.
+  Esta convergencia será además *cuadrática*.
+]
+
+== Comparación con la interpolación polinómica de Lagrange
+
+#proposition[
+  Dada una partición $Delta$ y los valores de una función en los $N + 1$ nodos, podemos buscar el interpolante de Lagrange de grado $N$, $p$, o aproximarla por una función lineal a trozos, $s$.
+
+  - *Coste de evaluación*: si $N$ es grande, el coste de evaluar $p$ es grande, mientras que el coste de evaluar $s$ no crece con $N$.
+  - *Convergencia a $f$*: no está garantizada la convergencia de $p$ a la función $f$ mediante el aumento de $N$. Sin embargo, al refinar $Delta$ logramos que $s$ converja cuadráticamente a $f$, siempre que $f$ tenga derivada segunda acotada.
+  - *Continuidad*: el polinomio $p$ es indefinidamente derivable mientras que $s$ es solo continuo, no derivable en los nodos de la partición.
+]
+
+== Funciones cuadráticas a trozos como interpolantes
+
+#definition[
+  Denotamos por *$M_0^2 (Delta)$* el conjunto de las funciones continuas en $[a, b]$ que restringidas a cada intervalo de la partición $[x_(i-1), x_i]$ coinciden con un polinomio de grado menor o igual que 2.
+]
+
+#definition[
+  Si $q in M_0^2 (Delta)$ decimos que $q$ es una *función cuadrática a trozos* en la partición $Delta$.
+  En los nodos $x_i in Delta$ las funciones $q in M_0^2 (Delta)$ presentan saltos en las derivadas primera y segunda.
+]
+
+#theorem(title: "Error de interpolación cuadrática a trozos")[
+  Bajo las hipótesis anteriores, podemos estimar el error de la interpolación cuadrática a trozos de la siguiente manera:
+
+  $ abs(f(x) - q(x)) <= sqrt(3)/216 h^3 K_3, quad x in [a, b] $
+
+  Donde $h$ es el diámetro de la partición y $K_3$ es una cota de la derivada tercera de $f$ en $[a, b]$.
+]
+
+#corollary(title: "Convergencia de la interpolación cuadrática a trozos")[
+  Al igual que en el caso lineal a trozos, tenemos convergencia de los interpolantes al refinar la partición.
+  Esta vez, la convergencia será *cúbica*.
 ]
