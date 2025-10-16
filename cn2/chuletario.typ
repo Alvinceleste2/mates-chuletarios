@@ -187,6 +187,12 @@ Entonces cuando $N->oo, thick thick p_N(x)$ no converge al valor de $f(x)$ si $a
   AL polinomio solución se le llama polinomio de Taylor de grado $N$ de $f$ en $x_0$.
 ]
 
+#lemma(title: "Fórmula del polinomio de Taylor")[
+  Construimos el polinomio de Taylor de grado $N$ de $f$ en $x_0$ de la siguiente manera:
+
+  $ p(x) = f(x_0) + f'(x_0) (x- x_0) + (f''(x_0)) / 2! (x-x_0)^2 + ... + (f^((N)) (x_0)) / N! (x - x_0)^N $
+]
+
 == Notaciones de Landau
 
 #definition[
