@@ -463,3 +463,59 @@ $
   Donde $K_4$ es una cota de la derivada cuarta de $f$ en el intervalo $[a, b]$.
 ]
 
+= Polinomios de Chebyshev
+
+== Polinomios de Chebyshev
+
+#definition(title: "Norma infinito")[
+  Dada una función $v(x)$ acotada definida en $[a, b]$ definimos su *norma infinito* como:
+
+  $ ||v||_oo = max_(a <= x <= b) abs(v(x)) $
+]
+
+#theorem[
+  Para cada entero $n >= 0$ existe un único polinomio $T_n$, llamado *enésimo polinomio de Chebyshev*, tal que para cada $theta$ real se cumple que:
+
+  $ T_n (cos(theta)) = cos(n theta) $
+
+  El polinomio $T_n$ tiene grado exactamente $n$. Si $n >= 1$, el coeficiente de $x^n$ es $2^(n-1)$. Además, para $n>=2$ se verifica:
+
+  $ T_n (x) = 2x T_(n-1) (x) - T_(n-2) (x) $
+]
+
+#theorem[
+  Los $n$ ceros de $T_n$ son los puntos $eta_k^n = cos((2k - 1) pi/(2n))$, para $k = 1, ..., n$. Se verifica que:
+
+  $ -1 <= T_n (x) <= 1, quad -1 <= x <= 1 $
+
+  Los valores extremos 1 y -1 se alcanzan en los puntos $xi_k^n = cos((2k)pi/(2n))$, para $k = 0, ..., n$ y en ellos $T_n (xi_k^n) = (-1)^k$.
+]
+
+#theorem[
+  El enésimo polinomio de Chebyshev $T_n (x)$ tiene norma infinito en $[-1, 1]$ no mayor que cualquier otro polinomio de grado $n$ con su mismo coeficiente director.
+]
+
+#theorem[
+  El polinomio $T_n (x) \/ 2^(n-1)$ tiene norma infinito en $[-1, 1]$ no mayor que cualquier otro polinomio de grado $n$ y coeficiente director 1.
+]
+
+#theorem[
+  La norma $||W||_oo$ con $W(x) = (x-x_0)(x-x_1)...(x-x_N)$ es mínima en $[-1, 1]$ si $x_0, ..., x_N$ se escogen como los $N+1$ ceros del polinomio de Chebyshev $T_(N+1)$.
+]
+
+== Acondicionamiento de las diversas representaciones de un polinomio
+
+#lemma[
+  Muchas veces se emplean los polinomios de Chebyshev como base para representar polinomios de grado $<= n$ como combinación lineal $a_0 T_0 + ... + a_n T_n$.
+]
+
+#definition(title: "Acondicionamiento de una base")[
+  Sea $cal(B)$ una base. Se dice que $cal(B)$ está *bien condicionada* cuando pequeños errores relativos en los coeficientes conducen a pequeños errores relativos en los valores. Por el contrarior, $cal(B)$ se dice *mal condicionada* cuando pequeños errores relativos en los coeficientes condicen a errores relativos mucho mayores en los valores del polinomio. cuando pequeños errores relativos en los coeficientes condicen a errores relativos mucho mayores en los valores del polinomio.
+]
+
+#proposition[
+  - La base de monomios es muy mal acondicionada si se trabaja en un intervalo $[a, b]$ cuya longitud sea pequeña comparada con la magnitud de $a$ o $b$. En esas situaciones es mejor trabajar con una base de potencias escaladas $[(x-a)/(b-a)]^k$.
+  - Para polinomios de grado alto, la base de anterior es también mal acondicionada.
+  - La base de polinomios de Chebyshev presenta buen acondicionamiento.
+  - La base de polinomios de Lagrange basados en los ceros del polinomio de Chebyshev es (casi) la mejor acondicionada posible. 
+]
