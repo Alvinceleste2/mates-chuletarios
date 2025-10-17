@@ -519,3 +519,117 @@ $
   - La base de polinomios de Chebyshev presenta buen acondicionamiento.
   - La base de polinomios de Lagrange basados en los ceros del polinomio de Chebyshev es (casi) la mejor acondicionada posible. 
 ]
+
+= Polinomios ortogonales
+
+== Aproximación en un espacio con un producto interno
+
+#definition(title: "Función peso")[
+  Dado un intervalo de la recta real $(a, b)$, acotado o no, una *función peso* $w$ en $(a, b)$ es una función real definida en $(a, b)$, continua, positiva excepto quizás en un conjunto finito de puntos (en los que es nula) y tal que para cada $n=0, 1, 2, ...$ las integrales:
+
+  $ integral_a^b x^n w(x) thick d x $
+
+  existen.
+]
+
+#definition(title: "Norma de una función peso")[
+  Sean $w$ una función peso, $f$ una función y $p$ su interpolante de grado menor o igual que $n$. Definimos $||f - p||_w$, la *norma $w$* como:
+
+  $ ||f - p||_w = (integral_a^b |f(x) - p(x)|^2 w(x) thick d x)^(1/2) $
+
+  En particular, buscamos que las desviaciones $f(x) - p(x)$ correspondientes a los $x$ en los que $w$ es mayor contribuyan más que las correspondientes a los $x$ en los que $w$ es pequeño.
+]
+
+#proposition[
+  Sea $X$ un espacio vectorial normado con norma $||dot||_X$, $S$ un subconjunto de $X$ no vacío y compacto y $f in X$. Entonces $f$ tiene al menos una mejor aproximación por elementos de $S$ en la norma $||dot||_X$.
+]
+
+#proposition[
+  Sea $X$ un espacio vectorial normado con norma $||dot||_X$ y $S$ un subespacio vectorial de dimensión finita y $f in X$, entonces $f$ tiene al menor una mejor aproximación por elementos de $S$ en la norma $||dot||_X$.
+]<prop-2>
+
+#theorem[
+  Sea $X$ un espacio vectorial normado con norma $||dot||_X$ cuya norma deriva de un producto interno $(dot, dot)_X$ y sea $S$ un subespacio vectorial de $X$.
+  Si existe $p^*$ aproximación óptima a $f$ por elementos de $X$, entonces es única y satisface:
+
+  $ (f - p^*, p)_X = 0, quad forall p in S wide (ast) $
+
+  Recíprocamente, si un elemento $p^* in S$ satisface $(ast)$, entonces es la mejor aproximación.
+]<theorem-1>
+
+#lemma[
+  Observamos que si el subespacio $S$ es de dimensión finita, la @prop-2 garantiza la existencia de la mejor aproximación y el @theorem-1 la unicidad y caracterización de la misma con la propiedad $(ast)$.
+  La mejor aproximación es en este caso la *proyección ortogonal* sobre el subespacio $S$.
+]
+
+== Polinomios ortogonales
+
+#definition(title: "Sucesión de polinomios ortogonales")[
+  Dada una función peso $w$ en $(a, b)$, en lo sucesivo consideramos el espacio vectorial \ $X = L_w^2(a, b)$ con norma $||dot||_X = ||dot||_w$. Una *sucesión de polinomios ortogonales* ${Q_n}_(n=0)^oo$ es una sucesión en la que $Q_n$ es un polinomio de grado exactamente $n$ y además $(Q_n, Q_m)_w = 0$ si $n!=m; thick n, thick m = 0, 1, ...$.
+]
+
+#lemma[
+  Notemos que, fijada $w$, si ${Q_n}_(n=0)^oo$ y ${R_n}_(n=0)^oo$ son dos sucesiones de polinomios ortogonales, entonces $Q_n = alpha_n R_n, thick n=0, 1, 2, ...$ donde $alpha_n$ es un número real no nulo.
+]
+
+#theorem[
+  Si ${Q_n}_(n=0)^oo$ es una sucesión de polinomios ortogonales, entonces existen constantes $c_n, thick a_n, thick b_n$ tales que:
+
+  $ Q_n(x) = (c_n x - a_n) Q_(n-1) (x) - b_n Q_(n-2) (x), quad n = 2, 3, 4,... $
+
+  Recíprocamente, definiendo:
+
+  $
+  Q_0 (x) = 1, \
+  Q_q(x) = x - a_1, \
+  a_n = ((x Q_(n-1), Q_(n-1))_w)/(Q_(n-1), Q_(n-1))_w, quad n = 1, 2, 3, ..., \
+  b_n = ((x Q_(n-1), Q_(n-2))_w)/(Q_(n-2), Q_(n-2))_w, quad n = 2, 3, ..., \
+  Q_n = (x - a_n) Q_(n-1) - b_n Q_(n-2), quad n = 2, 3, ...,
+  $
+
+  se genera la sucesión de polinomios ortogonales mónicos.
+]
+
+#theorem[
+  Si ${Q_n}$ es una sucesión de polinomios ortogonales y $f in L_w^2 (a, b) inter C(a, b)$ es ortogonal a $Q_0, ..., Q_(n-1)$, entonces $f$ es idénticamente nula o hay $n$ puntos $r_i$ en $(a, b)$ en los que $f$ cambia de signo (es decir, hay un entorno de $r_i$ en el que $f > 0$ para $x < r_i$ y $f < 0$ para $x > r_i$, o bien $f<0$ para $x<r_i$ y $f>0$ para $x > r_i$)
+]
+
+#corollary[
+  El polinomio $Q_n$ tiene $n$ raíces reales y simples en el intervalo $(a, b)$.
+]
+
+#pagebreak()
+
+== Algunos polinomios ortogonales de interés
+
+#lemma[
+  - *Polinomios de Chebyshev*.
+  Se definen por $T_n(cos(theta)) = cos(n theta)$. Son ortogonales en $(-1, 1)$ para la función peso:
+
+  $ w(x) = 1/sqrt(1-x^2) $
+
+  La mejor aproxumación a $f in L_w^2(a, b)$ por polinomios de grado menor o igual que $n$ se puede escribir como:
+
+  $ p^* (x) = sum_(j=0)^n a_n T_j(x) $
+
+  $ a_0 = 1/pi integral_(-1)^1 f (x) (d x)/sqrt(1-x^2), quad a_j = 2/pi integral_(-1)^1 f(x) T_j(x) (d x)/sqrt(1-x^2), quad n = 0, 1, 2, ... $
+
+  - *Polinomios de Legendre*.
+
+  Son ortogonales en $(-1, 1)$ para $w(x) = 1$ y se definen por:
+
+  $ P_n(x) = 1/(2^n n!) (d^n)/(d x^n) (x^2 - 1)^n, quad n=0, 1, 2,... $
+
+  - *Polinomios de Laguerre*.
+
+  Son ortogonales en $(0, oo)$ para el peso $e^(-x)$ y se definen por:
+
+  $ L_n(x) = e^x/n! d^n/(d x^n) (x^n e^(-x)), quad n = 0, 1, 2, ... $
+
+  - *Polinomios de Hermite*.
+
+  Son ortogonales en $(-oo, oo)$ para el peso $exp(-x^2)$ y se definen por:
+
+  $ H_n(x) = (-1)^n e^x^2 d^n / (d x^n) exp(-x^2), quad n = 0, 1, 2, ... $
+]
+
