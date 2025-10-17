@@ -414,7 +414,7 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
 
   El interpolante cúbico de Hermite a trozos se escribe:
 
-  $ h(x) = sum_(i=0)^N (h(x_i)phi.alt_i(x) + h'(x_i)theta_i (x)) $
+  $ h(x) = sum_(i=0)^N (h(x_i)phi.alt_i (x) + h'(x_i)theta_i (x)) $
 ]
 
 == Splines cúbicos
