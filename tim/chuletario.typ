@@ -307,6 +307,8 @@
   Dada una medida exterior $mu^*$ sobre $X$, se dice que $A subset X$ es *$mu^*$-medible* (o medible con respecto a $mu^*$) si:
 
   $ mu^*(E) = mu^*(E inter A) + mu^*(E inter A^c) quad forall E subset X $
+
+  Denotamos $cal(A)^* = {A subset X : A "es" mu^*"-medible"}$
 ]
 
 #theorem(title: "Teorema de Carathéodory I")[
