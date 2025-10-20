@@ -633,3 +633,19 @@ $
   $ H_n(x) = (-1)^n e^x^2 d^n / (d x^n) exp(-x^2), quad n = 0, 1, 2, ... $
 ]
 
+= Convergencia de las mejores aproximaciones
+
+== Convergencia de las mejores aproximaciones polinómicas en $cal(C)[a, b]$
+
+#theorem(title: "Teorema de Weierstrass")[
+  Si $f$ es una función real continua en un intervalo compacto $[a, b]$, dado $epsilon > 0$ existe un polinomio $P$ tal que $abs(f(x) - P(x)) <= epsilon $ para cada $x$ en $[a, b]$.
+]
+
+#definition(title: "Polinomio de Bernstein")[
+  Para $n = 1, 2, ...$ se define el $n$-ésimo polinomio de Bernstein $B_n$ (relativo a $f$) mediante la fórmula:
+
+  $ B_n(x) = sum_(k=0)^n binom(n, k) x^k (1-x)^(n-k) f(k slash n) $
+]
+
+== Convergencia de los desarrollos ortogonales
+
