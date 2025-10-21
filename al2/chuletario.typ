@@ -563,3 +563,18 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
   - $p(x)$ no se descompone completamente en ningún subcuerpo propio de $L$ que contenga a (la imagen de) $K$.
 ]
+
+#definition(title: "K-isomorfismo")[
+  Sean $K, A, B$ cuerpos con $K subset A$ y $phi.alt: A -> B$ un isomorfismo.
+  Decimos que $phi.alt$ es un \ *$K$-isomorfismo* si deja fijo a $K$.
+]
+
+#proposition[
+  Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio.
+  Existe un cuerpo de descomposición $L$ de $p(x)$ sobre $K$ que es único salvo $K$-isomorfismos (la imagen de $K$ en $L$ vía el morfismo de la extensión).
+]
+
+#corollary[
+  Sean $K$ un cuerpo, $p(x) in K[X]$, $L$ el cuerpo de descomposición de $p(x)$.
+  Entonces: $ [L:K] <= n!, quad n = deg(p(x)) $
+]
