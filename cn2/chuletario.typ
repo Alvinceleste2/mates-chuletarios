@@ -649,3 +649,86 @@ $
 
 == Convergencia de los desarrollos ortogonales
 
+= Cuadratura numérica
+
+== Introducción
+
+#definition(title: "Cuadratura")[
+  Sea $f$ una función integrable en un intervalo acotado $(a, b)$. El cálculo aproximado de su integral, $integral_a^b f(x) d x$, se denomina *cuadratura*.
+]
+
+== Reglas de cuadratura
+
+#definition(title: "Reglas de cuadratura")[
+  Las *reglas de cuadratura* suelen estar formadas por una combinación lineal de valores nodales de la función $f$:
+
+  $ integral_a^b f(x) d x approx I_(N+1) (f) = alpha_0 f(x_0) + alpha_1 f (x_1) + ... + alpha_N f(x_N) $
+
+  Fijados $N$ y los valores de $alpha_i$ y $x_i, thick i = 0, ..., N$ la expresión anterior nos da una aproximación al valor exacto de la integral.
+  Los $x_i$ se llaman abcisas o *nodos* de la regla de cuadratura, suponemos que son distintos dos a dos.
+  Los nodos suelen pertenecer al intervalo $[a, b]$ pero no es imprescindible.
+  Los $alpha_i$ se llaman *pesos* de la regla de cuadratura.
+]
+
+#lemma(title: "Algunas reglas de cuadratura sencillas")[
+  - Regla del rectángulo $arrow$ $ wide thick thick thick I^R (f) = (b-a) f(a)$
+
+  - Regla del punto medio $arrow$ $ wide I^(P M) (f) = (b-a) f(c), thick thick c=(a+b)/2$
+
+  - Regla de los trapecios $arrow$ $ wide thick I^T (f) = (b-a)/2 f(a) + (b-a)/2 f(b)$
+
+  - Regla de Simpson $arrow$ $ wide wide I^S (f) = (b-a)/6 f(a) + (4(b-a))/6 f(c) + (b-a)/6 f(b), thick thick c = (a+b)/2$
+]
+
+#pagebreak(weak: true)
+
+#definition(title: "Grado de exactitud de las reglas de cuadratura")[
+  Una regla de cuadratura tiene *grado de exactitud* $M >= 0$ si calcula exactamente la integral de cada polinomio de grado menor o igual que $M$ pero no calcula exactamente la integral de todos los polinomios de grado $M+1$.
+  Es decir, $I(f) = I_(N+1) (f)$, para todo $f$ polinomio de grado hasta $M$.
+]
+
+#lemma(title: "Grados de exactitud de algunas reglas de cuadratura")[
+  - Regla del rectángulo $arrow$ grado de exactitud = *0*
+  - Regla del punto medio $arrow$ grado de exactitud = *1*
+  - Regla del trapecio $arrow$ grado de exactitud = *1*
+  - Regla del Simpson $arrow$ grado de exactitud = *3*
+]
+
+== Obtención de reglas de cuadratura
+
+#proposition(title: "Método interpolatorio")[
+  Consiste en sustituir el integrando $f$ por el polinomio interpolador de Lagrange de grado $N$, $p$, que coincide con $f$ en los nodos $x_i, thick i = 0, ..., N$.
+
+  $ integral _a^b f(x) d x approx I_(N+1) (f) = integral_a^b p(x) d x = f(x_0) integral_a^b l_0(x) d x + ... + f(x_N) integral_a^b l_N (x) d x $
+
+  Luego:
+
+  $ I_N (f) = sum_(i=0)^N alpha_i f(x_i) "donde" alpha_i = integral_a^b l_i (x) d x $
+
+  La regla obtenida por este procedimiento se llama *regla interpolatoria*.
+]
+
+#theorem[
+  Dados $N >= 0$ y $N+1$ nodos $x_i$ distintos dos a dos, la correspondiente regla de cuadratura interpolatoria tiene grado de precisión al menos $N$.
+]
+
+#pagebreak(weak: true)
+
+#proposition(title: "Método de coeficientes indeterminados")[
+  Este método se basa en observar que la regla de cuadratura tiene grado de precisión $N$ si y solo si $I_(N+1) (f) = I(f)$ para $f(x) = 1, x, ..., x^N$. Imponiendo estas condiciones obtenemos el sistema:
+
+  $
+  alpha_0 + alpha-1 + ... alpha_N = (b-a), \
+  alpha_0 x_0 + alpha_1 x_1 + ... + alpha_N x_N = (b^2 - a^2)/2, \
+  dots.v \
+  alpha_0 x_0^N + alpha_1 x_1^N + ... alpha_N x_N^N = (b^(N+1) - a^(N+1))/(N+1)
+  $
+
+  Observemos que el anterior es un sistema de $N+1$ ecuaciones con $N+1$ incógnitas, los $alpha_i$, que tiene por matriz la matriz de Vandermonde, que sabemos tiene determinante distinto de cero si y solo si los nodos son distintos dos a dos.
+  Por tanto, existe una única solución que nos da la regla de cuadratura con grado de precisión al menos $N$.
+]
+
+#theorem[
+  Dados $N>=0$ y $N+1$ nodos distintos dos a dos existe una única regla de cuadratura de grado de precisión al menos $N$.
+  Los pesos de la regla se pueden calcular resolviendo el sistema anterior.
+]
