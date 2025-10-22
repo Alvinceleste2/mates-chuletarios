@@ -578,3 +578,24 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Sean $K$ un cuerpo, $p(x) in K[X]$, $L$ el cuerpo de descomposición de $p(x)$.
   Entonces: $ [L:K] <= n!, quad n = deg(p(x)) $
 ]
+
+#note-box[
+  Dado un cuerpo $K$, el cuerpo de descomposición es una extensión de $K$ que contiene todas las raíces de *un* polinomio sobre $K$.
+  Ahora queremos una extensión que contenga *todas* las raíces de *todos* los polinomios sobre $K$.
+]
+
+#definition(title: "Clausura algebraica")[
+  Sea $K$ un cuerpo.
+  Una extensión algebraica $overline(K) slash K$ es una *clausura algebraica* de $K$ si todo polinomio $p(x) in K[X]$ se descompone completamente sobre $overline(K)$.
+
+  Podemos decir que $overline(K)$ contiene todos los elementos algebraicos sobre $K$.
+]
+
+#proposition[
+  Sea $K$ un cuerpo.
+  Existe una clausura algebraica de $K$ que es única salvo $K$-isomorfismo.
+]
+
+#important-box[
+  Todos los "cálculos" que involucren elementos algebraicos sobre un cuerpo $K$ pueden verse como cálculos en un cuerpo "grande", $overline(K)$.
+]
