@@ -599,3 +599,40 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #important-box[
   Todos los "cálculos" que involucren elementos algebraicos sobre un cuerpo $K$ pueden verse como cálculos en un cuerpo "grande", $overline(K)$.
 ]
+
+#definition(title: "Cuerpo algebraicamente cerrado")[
+  Un cuerpo $K$ es *algebraicamente cerrado* si todo polinomio con coeficientes en $K$ tiene una raíz en $K$.
+  Esto implica que todas sus raíces están en $K$, pues descompone completamente:
+
+  $ p(x) = (x-alpha_1)p_1(x) = (x-alpha_1)(x-alpha_2)p_2(x) = ... = (x-alpha_1) ... (x-alpha_n) $
+
+  Equivalentemente, $K$ es *algebraicamente cerrado* si $K = overline(K)$.
+]
+
+#proposition[
+  Sean $K$ un cuerpo, $overline(K)$ su clausura algebraica.
+  Entonces $overline(K)$ es algebraicamente cerrado.
+]
+
+#theorem(title: "Teorema Fundamental del Álgebra")[
+  El cuerpo $CC$ es algebraicamente cerrado. En particular, $CC = overline(RR)$
+]
+
+#let a = [Clausura algebraica de $QQ$]
+
+#definition(title: a)[
+  La clausura de $QQ$ se define como:
+  $ {a in CC : a "es algebraico sobre" QQ} $
+
+  A este cuerpo también se le llama *cuerpo de números algebraicos* de $QQ$, y es una extensión algebraica infinita de $QQ$.
+]
+
+== Extensiones normales
+
+#definition(title: "Extensión normal")[
+  Una extensión algebraica es *normal* si todo polinomio irreducible $p(x) in K[X]$ que tiene una raíz en $L$ se descompone completamente en $L[X]$.
+]
+
+#proposition[
+  Una extensión $L slash K$ es normal y finita si y solo si $L$ es un cuerpo de descomposición de un polinomio de $K[X]$.
+]
