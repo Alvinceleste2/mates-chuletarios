@@ -732,3 +732,34 @@ $
   Dados $N>=0$ y $N+1$ nodos distintos dos a dos existe una única regla de cuadratura de grado de precisión al menos $N$.
   Los pesos de la regla se pueden calcular resolviendo el sistema anterior.
 ]
+
+#proposition(title: "Método del desarrollo de Taylor")[
+  En general, para aplicar el método del desarrollo de Taylor seguiremos los siguientes pasos:
+
+  + Escoger un punto para hacer el desarrollo de Taylor. Puede ser uno de los nodos o cualquier punto que conduzca a simplificar los cálculos, en ocasiones $(a+b)/2$.
+
+  + Desarrollar los valores $f(x_i)$ en desarrollos de Taylor en torno al punto del apartado anterior.
+
+  + Desarrollar el integrando $f$ en torno al mismo punto.
+
+  + Imponer que coincidan el mayor número de términos posibles en ambos desarrollos.
+]
+
+#proposition(title: "Error en las fórmulas de cuadratura")[
+  Se pueden probar las siguientes cotas de error para las fórmulas más conocidas:
+
+  - Regla del rectángulo $arrow$ Si $f in cal(C)^1 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  $ E^R (f) = (b-a)^2/2 f'(eta) $
+
+  - Regla del punto medio $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+
+  $ E^(P M) (f) = (b-a)^3/24 f'''(eta) $
+
+  - Regla de los trapecios $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+
+  $ E^(T) (f) = -(b-a)^3/12 f''(eta) $
+
+  - Regla de Simpson $arrow$ Si $f in cal(C)^4 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+
+  $ E^(S) (f) = -(b-a)^5/2880 f^((4))(eta) $
+]
