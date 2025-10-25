@@ -349,7 +349,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #pagebreak(weak: true)
 
 #definition(title: "Característica de un cuerpo")[
-  Un cuerpo $K$ (o anillo) tiene *característica* $n$, $"char"(n)$, si $n$ es el menor número natural tal que:
+  Un cuerpo $K$ (o anillo) tiene *característica* $n$, $"char"(K) = n$, si $n$ es el menor número natural tal que:
   $ underbrace(1_K + ... 1_K, n "veces") = 0 $
 
   Si esta suma fuera siempre distinta de $0$, decimos que $"char"(K) = 0$.
@@ -420,7 +420,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Sean $L\/K$ y $M\/L$ extensiones de cuerpos. Entonces:
   $ [M:K] = [M:L][L:K] $
 
-  De hecho, si $L\/K$ y $M\L$ son finitas y ${x_1, x_2, ..., x_r}$, ${y_1, y_2, ..., y_s}$ son sus bases, entonces ${x_i y_i | 1 <= i <= r, thick 1 <= j <= s}$ es una base de $M\/K$.
+  De hecho, si $L slash K$ y $M slash L$ son finitas y ${x_1, x_2, ..., x_r}$, ${y_1, y_2, ..., y_s}$ son sus bases, entonces ${x_i y_i | 1 <= i <= r, thick 1 <= j <= s}$ es una base de $M\/K$.
 ]
 
 == Extensiones algebraicas
