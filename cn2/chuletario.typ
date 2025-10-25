@@ -520,7 +520,7 @@ $
   - La base de polinomios de Lagrange basados en los ceros del polinomio de Chebyshev es (casi) la mejor acondicionada posible. 
 ]
 
-= Polinomios ortogonales
+= Polinomios ortogonales <orto-pol>
 
 == Aproximación en un espacio con un producto interno
 
@@ -641,13 +641,40 @@ $
   Si $f$ es una función real continua en un intervalo compacto $[a, b]$, dado $epsilon > 0$ existe un polinomio $P$ tal que $abs(f(x) - P(x)) <= epsilon $ para cada $x$ en $[a, b]$.
 ]
 
-#definition(title: "Polinomio de Bernstein")[
+#definition(title: "Polinomios de Bernstein")[
   Para $n = 1, 2, ...$ se define el $n$-ésimo polinomio de Bernstein $B_n$ (relativo a $f$) mediante la fórmula:
 
   $ B_n(x) = sum_(k=0)^n binom(n, k) x^k (1-x)^(n-k) f(k slash n) $
 ]
 
 == Convergencia de los desarrollos ortogonales
+
+#lemma[
+  Supongamos que $X$ es uno de los espacios $L_w^2(a, b)$ considerados en la @orto-pol y que $S_n$ = $PP^n$.
+  Si tomamos una sucesión de polinomios ortogonales ${Q_n}_(n=0)^oo$ en $L_w^2(a, b)$, la mejor aproximación $p_n$ a $f in L_w^2$ por polinomios de $PP^n$ se representa explícitamente como:
+
+  $ p_n = sum_(i=0)^n ((f_i, Q_i)_w/(Q_i, Q_i)_w Q_i) $
+
+  Por tanto, la cuestión de si $p_n -> f$ en $L_w^2(a, b)$ se reduce a examinar si:
+
+  $ f = sum_(i=0)^oo (((f_i, Q_i)_w) / (Q_i, Q_i)_w Q_i) $
+
+  donde la suma de la serie se entiende en el sentido de la norma de $L_w^2(a, b)$.
+]
+
+#definition[
+  Cuando lo anterior es cierto, se dice que se ha *desarrollado* $f$ en serie de polinomios ortogonales.
+]
+
+#theorem[
+  Si $f in cal(C)([-1, 1])$, entonces su desarrollo de Chebyshev converge a $f$ en la norma de $L_w^2$:
+
+  $ w(x) = 1/(sqrt(1-x^2)) $
+]
+
+#theorem[
+  Si $f in cal(C)^2([-1, 1])$, su desarrollo en serie de Chebyshev converge uniformemente hacia $f$.
+]
 
 = Cuadratura numérica
 
