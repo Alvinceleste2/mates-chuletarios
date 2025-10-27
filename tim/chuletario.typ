@@ -396,3 +396,46 @@
 
   $ integral_a^b f(x) thick d x = integral_([a, b]) f(x) thick d m $
 ]
+
+= Medidas producto y el teorema del cambio de variable
+
+#definition(title: "Rectángulo")[
+  Dados intervalos $J_1, J_2, ..., J_n$ de $RR$ (finitos o no), al producto cartesiano #linebreak(justify: true) $R = J_1 times J_2 times ... times J_n$ lo denominaremos *rectángulo* en $RR^n$.
+]
+
+#definition(title: "Volumen")[
+  Si $abs(J_1)_1, ..., abs(J_n)_1 != 0$, se define el *volumen* $n$-dimensional del rectángulo $R$ como:
+
+  $ abs(R_n) = abs(J_1)_1 dot abs(J_2)_1 dot ... dot abs(J_n)_1 $
+
+  donde $|dot|_1$ denota la longitud en $RR$.
+  Si se tuviera $abs(J_k)_1 = 0$ para algún $k$, entonces se define $abs(R)_n = 0$ incluso si alguna de las otras coordenadas fuera infinita.
+]
+
+#lemma[
+  - La intersección de dos rectángulos es un rectángulo.
+
+  - La unión finita de rectángulos se puede escribir como unión disjunta y finita de rectángulos.
+  - La clase $cal(B)_0 = {"Uniones finitas de rectángulos"}$ es una álgebra.
+]
+
+#definition(title: "Volumen de un elemento")[
+  Definimos el *volumen de un elemento* $B in cal(B)_0$ escribiendo $B$ como la unión disjunta de rectángulos, $B = union.big.plus_(j=1)^m R_j$ y poniendo $abs(B) = sum_(j=1)^m abs(R_j)$.
+]
+
+#lemma[
+  $|dot|$ es una premedida en $cal(B)_0$.
+]
+
+#let title = [Medida de Lebesgue en $RR^n$]
+
+#definition(title: title)[
+  La extensión de Carathéodory de la terna $(RR^n, cal(B)_0, |dot|_n)$ nos da un espacio de medida completa $(RR^n, cal(L)_n, m_n)$ con $m_n (R) = abs(R) thick thick forall R$ rectángulo.
+  Por ser $|dot|_n$ $sigma$-finita, esta extensión es única sobre la mínima $sigma$-álgebra que contiene a $cal(B)_0$ que, como veremos, coincide con la clase de los Borel en $RR^n$.
+  La clase $cal(L)_n$ es la $sigma$-álgebra de Lebesgue en $RR^n$ y $m_n = m = d x$ la medida de Lebesgue.
+]
+
+#lemma[
+  Todo abierto es unión numerable casi disjunta de cubos de $RR^n$, es decir, dado $U$ abierto, $exists {Q_j}$ cubos con interiores disjuntos tales que $U = union.big_i Q_i$.
+  Eligiendo cubos de la forma $Q = J_1 times J_2 times ... times J_n$ con $J_k = (a_k, a_k + h]$, la unión es, de hecho, disjunta.
+]
