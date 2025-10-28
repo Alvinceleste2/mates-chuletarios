@@ -636,3 +636,59 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #proposition[
   Una extensión $L slash K$ es normal y finita si y solo si $L$ es un cuerpo de descomposición de un polinomio de $K[X]$.
 ]
+
+== Extensiones separables
+
+#definition(title: "Raíces simples y múltiples")[
+  Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio.
+  Sobre un cuerpo de descomposición $L$ de $p(x)$ tenemos:
+
+  $ p(x) = (x - alpha_1)^(m_1) (x - alpha_2)^(m_2) ... (x - alpha_r)^(m_r); thick thick thick alpha_i in L, thick alpha_i != alpha_j, thick m_i >= 1 $
+
+  Entonces $alpha_i$ es una *raíz simple* si $m_i = 1$ y es *múltiple* si $m_i > 1$ (con multiplicidad $m_i$).
+]
+
+#definition(title: "Cosas separables")[
+  Sea $L slash K$ una extensión algebraica.
+
+  - Un polinomio $p(x) in K[X]$ es *separable* si no tiene raíces múltiples (en cualquier cuerpo de descomposición).
+
+  - Un elemento $alpha in L$ es *separable* sobre $K$ si $m_(alpha, K) (x)$ es separable.
+
+  - La extensión $L slash K$ es *separable* si todo $alpha in L$ es separable sobre $K$.
+
+  - Un polinomio, elemento o extensión que no es separable se dice que es *inseparable*.
+]
+
+#definition(title: "Derivada formal")[
+  Dado un polinomio $p(x) = a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0$ en $K[X]$, su *derivada formal* es:
+
+  $ p'(x) = n a_n x^(n-1) + (n-1) a_(n-1) x^(n-2) + ... + 2 a_2 x + a_1 in K[X] $
+]
+
+#proposition[
+  Sean $K$ un cuerpo, $p(x) in K[X]$, $L$ un cuerpo de descomposición de $p(x)$.
+  Entonces:
+
+  - $p(x)$ tiene una raíz múltiple $alpha in L$ si y solo si $alpha$ también es una raíz de $p'(x)$.
+  - $p(x)$ es separable si y solo si $"mcd"(p(x), p'(x)) = 1$ en $K[X]$.
+]
+
+#corollary[
+  Un polinomio irreducible $p(x) in K[X]$ es inseparable si y solo si $p'(x) equiv 0$.
+]
+
+#corollary[
+  Sea $K$ un cuerpo de característica $0$. Entonces:
+
+  - Todo polinomio irreducible en $K[X]$ es separable.
+  - Un polinomio en $K[X]$ es separable si y solo si es el producto de polinomios irreducibles distintos.
+]
+
+#note-box[
+  En característica $p>0$, sí hay anulaciones al derivar:
+
+  $ (x^(p m))' = p m x^(p m - 1) = 0 $
+
+  Y esto puede ocurrir también para polinomios irreducibles.
+]
