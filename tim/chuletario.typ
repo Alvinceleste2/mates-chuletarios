@@ -21,6 +21,8 @@
   watermark: "AGB",
 )
 
+#show sym.emptyset: set text(font: ())
+
 = Introducción
 
 #definition(title: "Integral de Riemann")[
@@ -435,7 +437,41 @@
   La clase $cal(L)_n$ es la $sigma$-álgebra de Lebesgue en $RR^n$ y $m_n = m = d x$ la medida de Lebesgue.
 ]
 
+#let title = [Propiedades de la $sigma$-álgebra y de la medida de Lebesgue en $RR^n$]
+#property(title: title)[
+  - $cal(L)_n$ contiene a los abiertos de $RR^n$ y por tanto a la $sigma$-álgebra de Borel, $cal(B)_n$. (Ver @lema-prop-med-lebesgue)
+
+  - $forall A in cal(L)_n, thick thick m(A) = inf{sum_(i=1)^oo abs(R_i): thick R_i "rectángulos", thick union.big_(i=1)^oo R_i supset A}$
+
+  - La medida de Lebesgue en $RR^n$ es regular, es decir:
+
+  $
+  m(A) = inf{m(U) : A subset U, thick U "abierto"} \
+  m(A) = sup{m(K) : K subset A, thick K "compacto"}
+  $
+
+  - La medida de Lebesgue en $RR^n$ es invariante por traslaciones.
+]
+
 #lemma[
   Todo abierto es unión numerable casi disjunta de cubos de $RR^n$, es decir, dado $U$ abierto, $exists {Q_j}$ cubos con interiores disjuntos tales que $U = union.big_i Q_i$.
   Eligiendo cubos de la forma $Q = J_1 times J_2 times ... times J_n$ con $J_k = (a_k, a_k + h]$, la unión es, de hecho, disjunta.
+] <lema-prop-med-lebesgue>
+
+#definition(title: "Cubos diádicos")[
+  Para cada $k in ZZ$, sea $Delta_k$ el conjunto de cubos de $RR^n$ de lado $2^(-k)$ y esquinas en el conjunto:
+
+  $ 2^(-k)ZZ^n = {2^(-k) (v_1, ..., v_n) : v_j in ZZ} $
+
+  Llamamos $Delta$ a la unión de todos los $Delta_k$.
+]
+
+#property(title: "Propiedades de los cubos diádicos")[
+  - Para cada entero $K$, $Delta_k$ forma una partición de $RR^n$.
+
+  - Todos los cubos de $Delta_k$ tienen el mismo lado, de longitud $2^(-k)$.
+
+  - Sean $R, Q$ dos cubos en $Delta$. Si $circle(Q) inter circle(R) = emptyset$, entonces o bien $Q subset R$ o bien $R subset Q$. 
+
+  - Cada $Q in Delta_k$ se puede escribir como unión de $2^n$ cubos de $Delta_(k+1)$ con interiores disjuntos.
 ]
