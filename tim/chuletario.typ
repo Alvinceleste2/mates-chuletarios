@@ -453,11 +453,6 @@
   - La medida de Lebesgue en $RR^n$ es invariante por traslaciones.
 ]
 
-#lemma[
-  Todo abierto es unión numerable casi disjunta de cubos de $RR^n$, es decir, dado $U$ abierto, $exists {Q_j}$ cubos con interiores disjuntos tales que $U = union.big_i Q_i$.
-  Eligiendo cubos de la forma $Q = J_1 times J_2 times ... times J_n$ con $J_k = (a_k, a_k + h]$, la unión es, de hecho, disjunta.
-] <lema-prop-med-lebesgue>
-
 #definition(title: "Cubos diádicos")[
   Para cada $k in ZZ$, sea $Delta_k$ el conjunto de cubos de $RR^n$ de lado $2^(-k)$ y esquinas en el conjunto:
 
@@ -474,4 +469,97 @@
   - Sean $R, Q$ dos cubos en $Delta$. Si $circle(Q) inter circle(R) = emptyset$, entonces o bien $Q subset R$ o bien $R subset Q$. 
 
   - Cada $Q in Delta_k$ se puede escribir como unión de $2^n$ cubos de $Delta_(k+1)$ con interiores disjuntos.
+]
+
+#lemma[
+  Todo abierto es unión numerable casi disjunta de cubos de $RR^n$, es decir, dado $U$ abierto, $exists {Q_j}$ cubos con interiores disjuntos tales que $U = union.big_i Q_i$.
+  Eligiendo cubos de la forma $Q = J_1 times J_2 times ... times J_n$ con $J_k = (a_k, a_k + h]$, la unión es, de hecho, disjunta.
+] <lema-prop-med-lebesgue>
+
+#theorem[
+  - Si $A in cal(L)_n, thick x_0 in RR^n$ entonces $x_0 + A in cal(L)_n$ y $m(x_0 + A) = m(A)$
+
+  - Sea $f$ medible $f: RR^n -> RR$, si $f>=0$ o $f in L^1(RR^n, d m)$ se tiene $forall x in RR^n$:
+
+  $ integral f(x_0 + x) d m = integral f(x) d m $
+]
+
+#theorem[
+  - Si $A in cal(L)_n, thick c in RR without {0}$ entonces $c dot A in cal(L)_n$ y $m(c dot A) = abs(c)^n dot m(A)$
+
+  - Sea $f: RR^n -> RR$ medible. Si $f>=0$ o $f in L^1(RR^n, d m)$ se tiene $forall c != 0$:
+
+  $ integral f(c dot x) d m(x) = 1/abs(c)^n integral f(x) d m(x) $
+]
+
+#theorem(title: "Fórmula del cambio de variable para aplicaciones lineales")[
+  Sea $T$ una aplicación $RR^n -> RR^n$ lineal y regular ($det(T) != 0$, i.e. la matriz que define a $T$ pertenece a $"GL"(n, RR)$).
+  Entonces:
+
+  - Si $A in cal(L)_n, thick T(A) in cal(L)_n, thick "y" thick thick m(T(A)) = abs(det(T))m(A)$
+
+  - Sea $f: RR^n -> RR$ medible. Si $f>=0$ o $f in L^1(RR^n, d m )$ se tiene:
+
+  $ integral f(x) d m = abs(det(T)) integral f(T(x)) d m $
+]<formula-cambio-variable>
+
+#corollary(title: "Invarianza por rotaciones")[
+  Si $T$ es una rotación (de forma que $abs(det(T)) = 1$) se tiene:
+
+  $ m(T(A)) = m(A), quad forall A in cal(L)_n $
+]
+
+#corollary[
+  Si $D$ es un conjunto medible y $f$, $T$ son como en el @formula-cambio-variable, entonces se tiene:
+
+  $ integral_(T(D)) f(y) d m = abs(det(T)) integral_D f(T(x)) d m $
+]
+
+#definition(title: "Aplicación medible")[
+  Dados dos espacios $X$ e $Y$ dotados de ciertas $sigma$-álgebras $cal(A)_X$ y $cal(A)_Y$ respectivamente, se dice que $phi: X -> Y$ es *medible* (con respecto a $cal(A)_X$ y $cal(A)_Y)$ si:
+
+  $ phi^(-1)(B) in cal(A)_X thick forall B in cal(A)_Y $
+]
+
+#definition(title: "Medida inducida")[
+  Si $mu$ es una medida sobre la $sigma$-álgebra $cal(A)_X$ entonces $phi$ *induce una medida* sobre $cal(A)_Y$ de la siguiente forma:
+
+  $ mu_phi (B) = mu(phi^(-1)(B)) $
+]<definición-medida-inducida>
+
+#theorem[
+  Sean $cal(A)_X, thick cal(A)_Y, thick mu, thick mu_phi$ como la @definición-medida-inducida. Si $f: Y -> RR$ es medible y $f>=0$ o #linebreak(justify: true) $f in L^1(d mu_phi)$ entonces:
+
+  $ integral_Y f(y) d mu_phi (y) = integral_X f(phi(x)) d mu(x) $
+]
+
+#definition(title: "Jacobiano")[
+  Sea $Omega$ un abierto de $RR^n$ y $phi: Omega subset RR^n -> RR^n$ un difeomorfismo regular, es decir #linebreak(justify: true) $phi in C^1(RR^n)$, es inyectivo y su inversa $phi^(-1) in C^1(RR^n)$.
+  Si $phi = (phi_1, ..., phi_n)$ son sus funciones coordenadas, entonces su diferencial en el punto $x, thick D_(phi)(x)$ es una aplicación lineal dada por la matriz jacobiana:
+
+  $
+  A_x = mat(
+    (partial phi_1)/(partial x_1)(x), (partial phi_1)/(partial x_2)(x), ... , (partial phi_1)/(partial x_n)(x);
+    (partial phi_2)/(partial x_1)(x), (partial phi_2)/(partial x_2)(x), ... , (partial phi_2)/(partial x_n)(x);
+    dots.v, dots.v, dots.down, dots.v;
+    (partial phi_n)/(partial x_1)(x), (partial phi_n)/(partial x_2)(x), ... , (partial phi_n)/(partial x_n)(x);
+  ) 
+  $
+
+  Se denomina *jacobiano* de $phi$ en $x$ al determinante de esta matriz:
+
+  $ J(x) = det(A_x) = det(D_phi (x)) $
+]
+
+#theorem(title: "Teorema del cambio de variable")[
+  Sea $phi: Omega subset RR^n -> RR^n$ un difeomorfismo regular $C^1$ sobre el abierto $Omega$ y sea $f: phi(Omega) -> RR$ medible (Lebesgue).
+  Si $f>=0$ o $f in L^1(d x)$. Entonces:
+
+  $ integral_(phi(Omega)) f(y) d y = integral_Omega (f compose phi(x)) dot abs(J(x)) thick d x $
+]
+
+#lemma[
+  Si $Q$ es un cubo de $Omega$ entonces:
+  
+  $ m(phi(Q)) <= integral_Q abs(J(x)) thick d x $
 ]
