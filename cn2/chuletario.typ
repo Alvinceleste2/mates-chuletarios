@@ -790,3 +790,66 @@ $
 
   $ E^(S) (f) = -(b-a)^5/2880 f^((4))(eta) $
 ]
+
+#lemma[
+  Sean $alpha$ y $g$ funciones reales en $[a, b]$ con $alpha >= 0$ y $g$ continua.
+  Supongamos que #linebreak(justify: true) $A = integral_a^b alpha(x) d x != 0$ y que existe $integral_a^b g(x) alpha(x) d x$ entonces existe $eta in [a, b]$ tal que:
+
+  $ integral_a^b g(x) alpha(x) d x = g(eta) integral_a^b alpha(x) d x $
+]
+
+#pagebreak(weak: true)
+
+== Reglas de cuadratura compuestas
+
+#definition(title: "Reglas de cuadratura compuestas")[
+  Sea $Delta := a = x_0 < x_1 < ... < x_N = b$, podemos escribir:
+  $ integral_a^b f(x) d x = integral_(x_0)^(x_1) f(x) d x + ... + integral_(x_(N-1))^(x_N) f(x) d x $
+]
+
+#lemma(title: "Algunas reglas de cuadratura compuestas")[
+  - Regla del rectángulo:
+  $ I^(R C) (f) = (x_1 - x_0) f(x_0) +(x_2 - x_1) f(x_1) + ... + (x_N - x_(N-1)) f(x_(N-1)) $
+
+  - Regla del punto medio:
+  $ I^(P M C) (f) = (x_1 - x_0) f(x_(1 slash 2)) + (x_2 - x_1) f(x_(3 slash 2)) + ... + (x_N - x_(N-1)) f(x_(N-1 slash 2)) $
+
+  - Regla del trapecio:
+  $
+  I^(T C) (f) = (x_1 - x_0)/2 f(x_0) + (x_1 - x_0)/2 f(x_1) + (x_2 - x_1)/2 f(x_1) + (x_2 - x_1)/2 f(x_2) + ...\
+   ... + (x_N - x_(N-1))/2 f(x_(N-1)) + (x_N - x_(N-1))/2 f(x_N) = \
+  = sum_(i=1)^N (x_i-x_(i-1))/2 [f(x_(i-1)) + f(x_i))]
+  $
+
+  - Regla de Simpson 
+  $ I^(S C) (f) = (x_1 - x_0)/6 f(x_0) + (4(x_1 - x_0))/6 f(x_(1 slash 2)) + (x_1 - x_0)/6 f(x_1) + ... \
+  ... +(x_N - x_(N-1))/6 f(x_(N-1)) + (4 (x_N - x_(N-1)))/6 f(x_(N-1 slash 2)) + (x_N - x_(N-1))/6 f(x_N) = \
+  = sum_(i=1)^N (x_i - x_(i-1))/6 [f(x_(i-1)) + 4 f((x_(i-1) + x_i)/2) + f(x_i)] $
+]
+
+#lemma[
+  Sea $g$ una función continua en $[a, b]$, $alpha_i >= 0, thick i = 1, ..., N$, no todos nulos, y $eta_i in [a, b], thick i = 1, ..., N$.
+  Entonces existe $eta in [a, b]$ tal que:
+
+  $ alpha_1 g(eta_1) + alpha_2 g(eta_2) + ... + alpha_N(eta_N) = (alpha_1 + ... + alpha_N)g(eta) $
+]<lema-error-comp>
+
+#proposition(title: "Error en las fórmulas de cuadratura compuestas")[
+  Empleando el @lema-error-comp obtenemos las siguientes cotas de error para las reglas compuestas. 
+  Sean $h = max_(1<=i<=N)(x_i - x_(i-1))$ y $K_i$ una cota para $f^((i))$ en $[a, b]$:
+
+  - Regla del rectángulo compuesta $arrow$ Si $f in cal(C)^1 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  $ abs(E^(R C) (f)) = abs(1/2[(x_1 - x_0)^2 + ... + (x_N - x_(N-1)^2)] f'(eta)) <= 1/2 h (b-a) K_1 $
+
+  - Regla del punto medio compuesta $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+
+  $ abs(E^(P M C) (f)) = abs(1/24 [(x_1 - x_0)^3 + ... + (x_N - x_(N-1))^3] f''(eta)) <= 1/24 h^2(b-a) K_2 $
+
+  - Regla de los trapecios compuesta $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+
+  $ abs(E^(T C) (f)) = abs(-1/12 [(x_1 - x_0)^3 + ... (x_N - x_(N-1))^3] f''(eta)) <= 1/12 h^2 (b-a) K_2 $
+
+  - Regla de Simpson compuesta $arrow$ Si $f in cal(C)^4 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+
+  $ abs(E^(S C)) <= 1/2880 h^4 (b-a) K_4 $
+]
