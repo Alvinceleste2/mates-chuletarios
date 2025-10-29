@@ -692,3 +692,27 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
   Y esto puede ocurrir también para polinomios irreducibles.
 ]
+
+#proposition(title: "Endomorfismo de Frobenius")[
+  Sea $K$ un cuerpo con $"char"(K) = p > 0$.
+  La aplicación $phi: K -> K$ con $a -> a^p$ es un morfismo de cuerpos, llamado el *endomorfismo de Frobenius*.
+
+  El endomorfismo de Frobenius es inyectivo (es un morfismo de cuerpos).
+  Es interesante la situación en la que también es sobreyectivo (luego automorfismo).
+]
+
+#definition(title: "Cuerpo perfecto")[
+  Un cuerpo $K$ es *perfecto* si $"char"(K) = 0$ o bien $"char"(K) = p$ y $K=K^p$, es decir, que todo elemento de $K$ es una potencia $p$-ésima (o admite una raíz $p$-ésima).
+]
+
+#lemma[
+  Todo cuerpo finito es perfecto.
+]
+
+#theorem[
+  Sea $K$ un cuerpo perfecto.
+
+  - Todo polinomio irreducible en $K[X]$ es separable.
+
+  - Un polinomio en $K[X]$ es separable si y solo si es el producto de polinomios irreducibles distintos.
+]
