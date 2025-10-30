@@ -563,3 +563,8 @@
   
   $ m(phi(Q)) <= integral_Q abs(J(x)) thick d x $
 ]
+
+
+#heading[Demostraciones relevantes]<unnumbered>
+
+a
