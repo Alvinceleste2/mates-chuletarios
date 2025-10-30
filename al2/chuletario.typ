@@ -716,3 +716,11 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
   - Un polinomio en $K[X]$ es separable si y solo si es el producto de polinomios irreducibles distintos.
 ]
+
+#theorem(title: "Existencia y unicidad de cuerpos finitos")[
+  Para $n in NN, thick n>=1$ y $p$ primo, existe un cuerpo con $p^n$ elementos que es único salvo #linebreak(justify: true) $FF_p$-isomorfismo.
+]
+
+#theorem(title: "Teorema del elemento primitivo")[
+  Si $L slash K$ es una extensión separable finita, entonces es simple (es decir, $exists alpha in L : L = K(alpha)$).
+]
