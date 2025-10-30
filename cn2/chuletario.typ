@@ -853,3 +853,46 @@ $
 
   $ abs(E^(S C)) <= 1/2880 h^4 (b-a) K_4 $
 ]
+
+#note-box(title: "Relación con la interpolación polinómica a trozos")[
+  - La regla de los trapecios compuesta se obtiene sustituyendo $f$ por su interpolante lineal a trozos en los nodos $x_0, x_1, ..., x_N$.
+
+  - La regla de Simpson compuesta se obtiene sustituyendo $f$ por su interpolante cuadrático a trozos en los nodos $x_0, x_1, ..., x_N$ y los puntos medios.
+]
+
+#pagebreak(weak: true)
+
+== Cuadratura Gaussiana
+
+#definition(title: "Producto interno de dos funciones")[
+  - Dado un intervalo $(a, b)$ y una función (que llamamos función peso) $w(x)$ definida en $(a, b)$ con $w(x)$ positiva excepto tal vez en un número finito de puntos donde es nula.
+    Definimos el producto interno de dos funciones de cuadrado integrable respecto al peso $w(x)$ como:
+
+    $ (f, g)_w = integral_a^b f(x) g(x) w(x) d x $
+
+  - Al espacio de funciones de cuadrado integrable respecto al peso $w(x)$ lo denotaremos por $L_w^2(a, b)$.
+    Las funciones peso en $(a, b)$ se definen de modo que exista $integral_a^b x^n w(x) d x, thick thick forall n$.
+
+  - Dada una función peso en $(a, b)$ existe una familia de polinomios ortogonales en $(a, b)$ respecto a esa función peso:
+
+    $ {q_0, q_1, ..., q_n, ...} $
+
+    que verifican:
+
+    - El polinomio $q_n$ tiene grado exactamente $n$.
+    - $(q_n, q_m)_w = 0$ si $n!=m$.
+    - Los polinomios ortogonales son únicos (salvo una constante) y se pueden generar por recurrencia.
+]
+
+#lemma[
+  La regla gaussiana se obtiene tomando $x_0, x_1, ..., x_N$ los ceros del polinomio de Legendre de grado $N+1$ en el intervalo $(a, b)$, que sabemos tiene $N+1$ raíces reales y distintas.
+]
+
+#theorem[
+  Una regla de cuadratura gaussiana puede tener a lo sumo grado de precisión $2N+1$.
+  Este grado se alcanza cuando los nodos $x_i$ son las raíces del polinomio de grado $N+1$ ortogonal a los de grado $N$ en $[a, b]$ respecto al peso $1$.
+]
+
+#theorem[
+  Los coeficientes $alpha_j, thick j = 0, ..., N$ de la regla gaussiana de $N+1$ nodos son todos positivos.
+]
