@@ -105,7 +105,7 @@
 ]
 
 #definition(title: "Medida")[
-  Dada una $sigma$-álgebra $cal(A)$ en X. Se dice que $mu: cal(A) -> [0, oo]$ es una *medida* sobre $(cal(A))$ si:
+  Dada una $sigma$-álgebra $cal(A)$ en X. Se dice que $mu: cal(A) -> [0, oo]$ es una *medida* (sobre $cal(A)$) si:
 
   - $mu(emptyset) = 0$
   - Para toda familia numerable ${A_j}_(j>=1)$ de $cal(A)$ cuyos elementos son disjuntos dos a dos:
