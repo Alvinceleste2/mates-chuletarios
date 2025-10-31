@@ -253,6 +253,12 @@
   $ integral_X abs(f(x)) thick d mu(x) = integral_0^oo mu({x in X : abs(f(x)) > t}) thick d t $
 ]
 
+#definition[
+  Dado un espacio de medida $(X, cal(A), mu)$ se define la clase de funciones "integrables" como:
+
+  $ L^1(d mu) = {f : X -> CC "tal que" f "es medible y" integral_X abs(f) d mu < oo} $
+]
+
 #pagebreak(weak: true)
 
 = Espacios de medida
@@ -564,7 +570,54 @@
   $ m(phi(Q)) <= integral_Q abs(J(x)) thick d x $
 ]
 
+= Demostraciones relevantes <unnumbered>
 
-#heading[Demostraciones relevantes]<unnumbered>
+#theorem(title: "Teorema de Borel-Cantelli")[
+  Sean ${A_n}$ conjuntos medibles en un espacio de medida $(X, cal(A), mu)$ tales que #linebreak(justify: true) $sum_(n=1)^oo mu(A_n) < oo$. Entonces cada elemento de $x$ pertenece a un número finito de $A_n$ para $c. t. x.$.
+  Dicho de otra manera, el conjunto de puntos $x$ que pertenecen a infinitos $A_n$, es decir, $limsup A_n$, mide 0.
+]
 
-a
+#proof[
+  Por la definición de límite superior tenemos:
+
+  $
+  mu(limsup A_n) = mu lr(size: #3em, (lim_(n->oo) lr(size: #2em, (inter.big_(n)^oo underbrace(union.big_(j=n)^oo A_j, arrow.br thick G_n \ G_1 supset G_2 supset ...))))) underbrace(= , T.C.M. \ (mu(G_n) < oo)) lim_(n->oo) (mu(union.big_(j=n)^oo A_j)) \ 
+  <= lim_(n->oo) (sum_(j=n)^oo mu(A_j)) = 0 quad ("Criterio de Cauchy") 
+  $
+]
+
+#theorem(title: "Teorema de la convergencia monótona")[
+  Si ${f_j}_(j=1)^oo$ es una sucesión monótona creciente de funciones medibles positivas $(0 <= f_1 <= ... <= f_n <= f_(n+1) <= ...)$ y sea $f(x) = lim_(n->oo) f_n (x)$. Entonces se tiene:
+
+  $ integral_X (lim_(n->oo) f_n (x)) d mu = integral_X f(x) d mu = lim_(n->oo) (integral_X f_n (x) d mu) $
+]
+
+#proof[
+  Observemos primero que $integral f_1 <= integral f_2 <= ... <= integral f_n$, así que el límite de las integrales siempre existe (aunque podría valer $oo$).
+  Además, si $f_n <= f$, entonces $integral f_n <= integral f$ por lo que se tiene:
+
+  $ lim_(n->oo) integral_X f_n d mu <= integral_X f d mu $
+
+  Veamos la otra desigualdad, para ello seleccionamos una función simple arbitraria entre las que cumplen $0 <= s(x) <= f(x)$. Dado $alpha in RR$ con $0< alpha < 1$ definimos para cada $n$:
+
+  $ A_n = {x in X : f_n (x) >= alpha s(x)} $
+
+  Es fácil ver que:
+  - $A_n$ es medible porque $A_n = (f_n - alpha s)^(-1) ([0, oo))$
+  - ${A_n}$ es creciente $(A_1 subset A_2 subset ...)$
+  - $union.big_(n=1)^oo A_n = X$
+
+  Además: $ integral_(A_n) s(x) d mu <= 1/alpha (integral_X f_n (x) d mu) <= 1/alpha (lim_(j->oo) integral_X f_j (x) d mu) $
+
+  Usando el resultado de monotonía para conjuntos con respecto a la medida $nu = s(x) d mu$:
+
+  $ integral_X s(x) d mu = lim_(n->oo) integral_(A_n) s(x) d mu <= 1/alpha (lim_(j->oo) integral_X f_j (x) d mu) $
+
+  Tomando el supremo sobre las funciones simples $s(x)$ con $0<=s(x)<=f(x)$ queda:
+
+  $ integral_X f(x) d mu <= 1/alpha (lim_(j->oo) integral_X f_j (x) d mu $
+  
+  Como además $alpha$ es arbitrario (y próximo a 1) se deduce:
+
+  $ integral_X f(x) d mu <= lim_(j->oo) integral_X f_j (x) d mu $
+]
