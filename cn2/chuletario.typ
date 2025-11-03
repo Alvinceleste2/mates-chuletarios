@@ -404,6 +404,14 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
   Dade un intervalo $[a, b]$ y una partición del mismo $Delta := a = x_0 < x_1 < ... < x_N = b$, denotaremos por *$M_1^3 (Delta)$* el espacio de las funciones reales de clase $cal(C)^1[a, b]$ que, restringidas a cada subintervalo de la partición $(x_(i-1), x_i), thick i = 1, ..., N$, son un polinomio de grado menor o igual que 3.
 ]
 
+#theorem[
+  Para el interpolante cúbico de hermite a trozos $h$ de $f$ tenemos:
+
+  $ abs(f(x) - h(x)) <= 1/(384) h^4 K_4, quad x in [a, b] $
+
+  Donde $h$ es el diámetro de la partición y $K_4$ es una cota de la derivada cuarta de $f$ en el intervalo $[a, b]$.
+]
+
 #lemma(title: "Construcción del interpolante cúbico de Hermite a trozos")[
   Sea la siguiente base:
 
@@ -460,7 +468,7 @@ $
 
   $ abs(f(x) - h(x)) <= 5/(384) h^4 K_4, quad x in [a, b] $
 
-  Donde $K_4$ es una cota de la derivada cuarta de $f$ en el intervalo $[a, b]$.
+  Donde $h$ es el diámetro de la partición y $K_4$ es una cota de la derivada cuarta de $f$ en el intervalo $[a, b]$.
 ]
 
 = Polinomios de Chebyshev
@@ -474,7 +482,7 @@ $
 ]
 
 #theorem[
-  Para cada entero $n >= 0$ existe un único polinomio $T_n$, llamado *enésimo polinomio de Chebyshev*, tal que para cada $theta$ real se cumple que:
+  Para cada entero $n >= 0$ existe un único polinomio $T_n$, llamado *$n$-ésimo polinomio de Chebyshev*, tal que para cada $theta$ real se cumple que:
 
   $ T_n (cos(theta)) = cos(n theta) $
 
@@ -492,7 +500,7 @@ $
 ]
 
 #theorem[
-  El enésimo polinomio de Chebyshev $T_n (x)$ tiene norma infinito en $[-1, 1]$ no mayor que cualquier otro polinomio de grado $n$ con su mismo coeficiente director.
+  El $n$-ésimo polinomio de Chebyshev $T_n (x)$ tiene norma infinito en $[-1, 1]$ no mayor que cualquier otro polinomio de grado $n$ con su mismo coeficiente director.
 ]
 
 #theorem[
@@ -510,7 +518,8 @@ $
 ]
 
 #definition(title: "Acondicionamiento de una base")[
-  Sea $cal(B)$ una base. Se dice que $cal(B)$ está *bien condicionada* cuando pequeños errores relativos en los coeficientes conducen a pequeños errores relativos en los valores. Por el contrarior, $cal(B)$ se dice *mal condicionada* cuando pequeños errores relativos en los coeficientes condicen a errores relativos mucho mayores en los valores del polinomio. cuando pequeños errores relativos en los coeficientes condicen a errores relativos mucho mayores en los valores del polinomio.
+  Sea $cal(B)$ una base. Se dice que $cal(B)$ está *bien condicionada* cuando pequeños errores relativos en los coeficientes conducen a pequeños errores relativos en los valores.
+  Por el contrarior, $cal(B)$ se dice *mal condicionada* cuando pequeños errores relativos en los coeficientes conducen a errores relativos mucho mayores en los valores del polinomio.
 ]
 
 #proposition[
@@ -545,14 +554,14 @@ $
 ]
 
 #proposition[
-  Sea $X$ un espacio vectorial normado con norma $||dot||_X$ y $S$ un subespacio vectorial de dimensión finita y $f in X$, entonces $f$ tiene al menor una mejor aproximación por elementos de $S$ en la norma $||dot||_X$.
+  Sea $X$ un espacio vectorial normado con norma $||dot||_X$, $S$ un subespacio vectorial de dimensión finita y $f in X$. Entonces $f$ tiene al menor una mejor aproximación por elementos de $S$ en la norma $||dot||_X$.
 ]<prop-2>
 
 #theorem[
   Sea $X$ un espacio vectorial normado con norma $||dot||_X$ cuya norma deriva de un producto interno $(dot, dot)_X$ y sea $S$ un subespacio vectorial de $X$.
   Si existe $p^*$ aproximación óptima a $f$ por elementos de $X$, entonces es única y satisface:
 
-  $ (f - p^*, p)_X = 0, quad forall p in S wide (ast) $
+  $ wide (f - p^*, p)_X = 0, quad forall p in S wide (ast) $
 
   Recíprocamente, si un elemento $p^* in S$ satisface $(ast)$, entonces es la mejor aproximación.
 ]<theorem-1>
@@ -572,12 +581,12 @@ $
   Notemos que, fijada $w$, si ${Q_n}_(n=0)^oo$ y ${R_n}_(n=0)^oo$ son dos sucesiones de polinomios ortogonales, entonces $Q_n = alpha_n R_n, thick n=0, 1, 2, ...$ donde $alpha_n$ es un número real no nulo.
 ]
 
-#theorem[
-  Si ${Q_n}_(n=0)^oo$ es una sucesión de polinomios ortogonales, entonces existen constantes $c_n, thick a_n, thick b_n$ tales que:
+#theorem(title: "Construcción de sucesiones de polinomios ortogonales")[
+  Si ${Q_n}_(n=0)^oo$ es una sucesión de polinomios ortogonales, entonces existen constantes $c_n, thick a_n, thick b_n$ tales que se cumple la *relación de recurrencia de tres términos*:
 
   $ Q_n(x) = (c_n x - a_n) Q_(n-1) (x) - b_n Q_(n-2) (x), quad n = 2, 3, 4,... $
 
-  Recíprocamente, definiendo:
+  Recíprocamente, definiendo lo siguiente, se genera la sucesión de polinomios ortogonales mónicos:
 
   $
   Q_0 (x) = 1, \
@@ -586,8 +595,12 @@ $
   b_n = ((x Q_(n-1), Q_(n-2))_w)/(Q_(n-2), Q_(n-2))_w, quad n = 2, 3, ..., \
   Q_n = (x - a_n) Q_(n-1) - b_n Q_(n-2), quad n = 2, 3, ...,
   $
+]<construccion-pol-orto>
 
-  se genera la sucesión de polinomios ortogonales mónicos.
+#corollary[
+  Empleando el teorema anterior (@construccion-pol-orto) y el @theorem-1 no es complicado llegar a que la mejor aproximación $p^* in PP^n$ a $f in L_w^2(a, b)$ se puede escribir como:
+
+  $ p^* = sum_(i=0)^n ((f, Q_i)_w)/((Q_i, Q_i)_w) Q_i $
 ]
 
 #theorem[
