@@ -379,7 +379,7 @@
   Si $mu$ es una medida de Borel finita sobre conjuntos acotados, entonces $mu$ proviene de cierta pre-medida $mu_F$ sobre $cal(B)_0$.
 ]
 
-#definition(title: "Espacio de medida regular")[
+#definition(title: "Medida regular")[
   Dado $(RR, cal(A), mu)$ espacio de medida, se dice que $mu$ es *regular* (en $RR$) si verifica:
 
   - $cal(B)_RR subset cal(A)$
