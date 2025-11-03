@@ -586,38 +586,70 @@
   $
 ]
 
-#theorem(title: "Teorema de la convergencia monótona")[
-  Si ${f_j}_(j=1)^oo$ es una sucesión monótona creciente de funciones medibles positivas $(0 <= f_1 <= ... <= f_n <= f_(n+1) <= ...)$ y sea $f(x) = lim_(n->oo) f_n (x)$. Entonces se tiene:
+#theorem(title: "Teorema de la convergencia monótona para conjuntos")[
+  1. Si $A_n in cal(A)$ y $A_n subset A_(n+1) thick forall n$, entonces:
 
-  $ integral_X (lim_(n->oo) f_n (x)) d mu = integral_X f(x) d mu = lim_(n->oo) (integral_X f_n (x) d mu) $
+  $ mu(union.big_(j=1)^oo A_j) = lim_(j->oo) mu(A_j) $
+
+  2. Si $A_n in cal(A)$, $A_n supset A_(n+1) thick forall n$ y $mu(A_N) < oo$ para algún $N$, entonces:
+
+  $ mu(inter.big_(j=1)^oo A_j) = lim_(j->oo) mu (A_j) $
 ]
 
 #proof[
-  Observemos primero que $integral f_1 <= integral f_2 <= ... <= integral f_n$, así que el límite de las integrales siempre existe (aunque podría valer $oo$).
-  Además, si $f_n <= f$, entonces $integral f_n <= integral f$ por lo que se tiene:
+  1. 
 
-  $ lim_(n->oo) integral_X f_n d mu <= integral_X f d mu $
+  2. 
+]
 
-  Veamos la otra desigualdad, para ello seleccionamos una función simple arbitraria entre las que cumplen $0 <= s(x) <= f(x)$. Dado $alpha in RR$ con $0< alpha < 1$ definimos para cada $n$:
+#lemma(title: "Lema de Fatou")[
+  Dada una sucesión de funciones medibles y positivas, ${f_n}$, se tiene:
 
-  $ A_n = {x in X : f_n (x) >= alpha s(x)} $
+  $ integral_X (liminf_(n->oo) (f_n (x))) d mu <= liminf_(n->oo) (integral_X f_n (x) d mu) $
+]
 
-  Es fácil ver que:
-  - $A_n$ es medible porque $A_n = (f_n - alpha s)^(-1) ([0, oo))$
-  - ${A_n}$ es creciente $(A_1 subset A_2 subset ...)$
-  - $union.big_(n=1)^oo A_n = X$
+#proof[
+  Es una consecuencia del _Teorema de la Convergencia Monótona_.
+  Sea #linebreak(justify: true) $g_n (x) = inf{f_n, f_(n+1), f_(n+2), ...}$.
+  Entonces $0 <= g_1 <= g_2 <= ... <= g_n <= g_(n+1) <= ...$ y $lim_(n->oo) g_n = liminf_(k->oo) f_k$ por definición del límite inferior.
+  Además $g_n <= f_n forall n$.
+  Por tanto:
 
-  Además: $ integral_(A_n) s(x) d mu <= 1/alpha (integral_X f_n (x) d mu) <= 1/alpha (lim_(j->oo) integral_X f_j (x) d mu) $
+  $ integral_X (liminf_(n->oo) (f_n (x))) d mu = integral_X lim_(n->oo) g_n (x) d mu underbrace(=, T.C.M.) lim_(n->oo) integral_X g_n (x) d mu <= liminf_(n->oo) (integral_X f_n (x) d mu) $
+]
 
-  Usando el resultado de monotonía para conjuntos con respecto a la medida $nu = s(x) d mu$:
+#theorem(title: "Teorema de la Convergencia Dominada")[
+  En $(X, cal(A), mu)$ espacio de medida, si la sucesión de funciones medibles ${f_n (x)}_(n=1)^oo$ converge puntualmente a una función $f(x)$ y además $abs(f_n (x)) <= F(x) thick forall n, thick forall x$ con $F$ medible, positiva y tal que $integral_X F(x) thick d mu < oo$, entonces $f(x)$ es integrable y se tiene:
 
-  $ integral_X s(x) d mu = lim_(n->oo) integral_(A_n) s(x) d mu <= 1/alpha (lim_(j->oo) integral_X f_j (x) d mu) $
+  $ quad quad lim_(n->oo) integral_X abs(f_n (x) - f(x)) thick d mu = 0 quad quad (1) $
 
-  Tomando el supremo sobre las funciones simples $s(x)$ con $0<=s(x)<=f(x)$ queda:
+  En particular,
 
-  $ integral_X f(x) d mu <= 1/alpha (lim_(j->oo) integral_X f_j (x) d mu $
-  
-  Como además $alpha$ es arbitrario (y próximo a 1) se deduce:
+  $ quad quad integral_X (lim_(n->oo) f_n (x)) thick d mu = integral_X f(x) thick d mu = lim_(n->oo) (integral_X f_n (x) thick d mu) quad quad (2) $
+]
 
-  $ integral_X f(x) d mu <= lim_(j->oo) integral_X f_j (x) d mu $
+#proof[
+  El que $f$ sea integrable es inmediato porque $lim_(n->oo) f_n (x) = f(x)$ implica $abs(f(x)) <= F(x), thick forall x$ también y $F$ es integrable (finita).
+  Veamos también que $(1) => (2)$:
+
+  $ abs(integral_X f_n (x) d mu - integral_X f(x) d mu) = abs(integral_X (f_n (x) - f(x) d mu)) <= integral_X abs(f_n (x) - f(x)) d mu ->_(n arrow oo) 0 => (2) $
+
+  Luego solo necesitamos probar $(1)$.
+  Veamos que es una consecuencia del lema de Fatou:
+  Sean $h_n = 2F(x) - abs(f_n (x) - f(x)), thick n=1, 2, 3, ...$.
+  Entonces $h_n >= 0$ y #linebreak(justify: true) $liminf_(n->oo) h_n = lim_(n->oo) h_n = 2 F(x)$.
+  Por Fatou deducimos:
+
+  $
+  integral_X 2F(x) d mu <= liminf_(n->oo) integral_X h_n d mu = liminf_(n->oo)(integral_X 2 F(x) d mu - integral_X abs(f_n (x) - f(x)) d mu) = \
+  = integral_X 2 F(x) d mu - limsup_(n->oo) integral_X abs(f_n (x) - f(x)) d mu
+  $
+
+  Despejando queda: 
+
+  $ limsup_(n->oo) integral_X abs(f_n (x) - f(x)) d mu <= 0 $
+
+  y, por tanto, lo anterior debe ser igual a 0. Es decir,
+
+  $ lim_(n->oo) integral_X abs(f_n (x) - f(x)) d mu = 0 $
 ]
