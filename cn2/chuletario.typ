@@ -129,7 +129,7 @@ $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
 #theorem(title: "Error de interpolación de Lagrange")[
   Supongamos que $f$ es una función con $N>=1$ derivadas continuas en un intervalo [a, b] y tal que $f^((N+1))$ existe en $(a, b)$.
   Sean $x_0, x_1, ..., x_N, thick N+1$ nodos en $[a, b]$ distintos dos a dos y $p$ el polinomio interpolador de Lagrange.
-  Entonces dado $x in [a, b]$ existe $xi in I, thick I = (min(x_0, x_1, ..., x_n, x), max(x_0, x_1, ..., x_n, x))$ para el cual:
+  Entonces dado $x in [a, b]$ existe $xi in I$, #linebreak(justify: true) $I = (min(x_0, x_1, ..., x_n, x), max(x_0, x_1, ..., x_n, x))$ para el cual:
 
   $ f(x) - p(x) = ((x-x_0)(x-x_1)...(x-x_N))/((N+1)!) f^((N+1))(xi) $
 ]
@@ -169,9 +169,9 @@ $ f[x_0, x_1, ..., x_(N+1)] = (f^((N+1)) (xi))/((N+1) !) $
 #emph-box[
   *Fenómeno de Runge*
 
-  En 1900, el matemático Runge demostró que si se interpola la función $1\/(1+x^2)$, que posee derivadas continuas en todos los órdenes, en $N + 1$ abcisas equiespaciadas en el intervalo $[-5, 5]$ y se denota por $p_N$ su polinomio interpolador. 
+  En 1900, el matemático Runge demostró que si se interpola la función $1\/(1+x^2)$, que posee derivadas continuas en todos los órdenes, en $N + 1$ abcisas equiespaciadas en el intervalo $[-5, 5]$ y se denota por $p_N (x)$ su polinomio interpolador. 
 
-Entonces cuando $N->oo, thick thick p_N(x)$ no converge al valor de $f(x)$ si $abs(x) > 3.6$.
+Entonces cuando $N->oo, thick thick p_N (x)$ no converge al valor de $f(x)$ si $abs(x) > 3.6$.
 ]
 
 = Interpolación de Taylor
@@ -290,14 +290,14 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
 ]
 
 #corollary(title: "Convergencia de la interpolación lineal a trozos")[
-  Siempre $f$ tenga derivada segunda acotada, si generamos una sucesión de particiones con diámetro $h$ tendiendo a 0 (para lo cual tendremos que incluir cada vez más puntos) tenemos garantizada la convergencia uniforme de la sucesión de interpolantes lineales a trozos.
+  Siempre que $f$ tenga derivada segunda acotada, si generamos una sucesión de particiones con diámetro $h$ tendiendo a 0 (para lo cual tendremos que incluir cada vez más puntos) tenemos garantizada la convergencia uniforme de la sucesión de interpolantes lineales a trozos.
   Esta convergencia será además *cuadrática*.
 ]
 
 == Comparación con la interpolación polinómica de Lagrange
 
 #proposition[
-  Dada una partición $Delta$ y los valores de una función en los $N + 1$ nodos, podemos buscar el interpolante de Lagrange de grado $N$, $p$, o aproximarla por una funci
+  Dada una partición $Delta$ y los valores de una función en los $N + 1$ nodos, podemos buscar el interpolante de Lagrange de grado $N$, $p$, o aproximarla por una función lineal a trozos $s$. Entonces tenemos lo siguiente:
 
   - *Coste de evaluación*: si $N$ es grande, el coste de evaluar $p$ es grande, mientras que el coste de evaluar $s$ no crece con $N$.
   - *Convergencia a $f$*: no está garantizada la convergencia de $p$ a la función $f$ mediante el aumento de $N$. Sin embargo, al refinar $Delta$ logramos que $s$ converja cuadráticamente a $f$, siempre que $f$ tenga derivada segunda acotada.
@@ -458,7 +458,7 @@ $
 #theorem[
   Para el spline completo $h$ de $f$ tenemos:
 
-  $ abs(f(x) - h(x)) <= (5 h^4)/(384) K_4, quad x in [a, b] $
+  $ abs(f(x) - h(x)) <= 5/(384) h^4 K_4, quad x in [a, b] $
 
   Donde $K_4$ es una cota de la derivada cuarta de $f$ en el intervalo $[a, b]$.
 ]
