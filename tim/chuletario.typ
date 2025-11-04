@@ -586,22 +586,6 @@
   $
 ]
 
-#theorem(title: "Teorema de la convergencia monótona para conjuntos")[
-  1. Si $A_n in cal(A)$ y $A_n subset A_(n+1) thick forall n$, entonces:
-
-  $ mu(union.big_(j=1)^oo A_j) = lim_(j->oo) mu(A_j) $
-
-  2. Si $A_n in cal(A)$, $A_n supset A_(n+1) thick forall n$ y $mu(A_N) < oo$ para algún $N$, entonces:
-
-  $ mu(inter.big_(j=1)^oo A_j) = lim_(j->oo) mu (A_j) $
-]
-
-#proof[
-  1. 
-
-  2. 
-]
-
 #lemma(title: "Lema de Fatou")[
   Dada una sucesión de funciones medibles y positivas, ${f_n}$, se tiene:
 
@@ -616,6 +600,57 @@
   Por tanto:
 
   $ integral_X (liminf_(n->oo) (f_n (x))) d mu = integral_X lim_(n->oo) g_n (x) d mu underbrace(=, T.C.M.) lim_(n->oo) integral_X g_n (x) d mu <= liminf_(n->oo) (integral_X f_n (x) d mu) $
+]
+
+#theorem(title: "Teorema de la convergencia monótona para conjuntos")[
+  1. Si $A_n in cal(A)$ y $A_n subset A_(n+1) thick forall n$, entonces:
+
+  $ mu(union.big_(j=1)^oo A_j) = lim_(j->oo) mu(A_j) $
+
+  2. Si $A_n in cal(A)$, $A_n supset A_(n+1) thick forall n$ y $mu(A_N) < oo$ para algún $N$, entonces:
+
+  $ mu(inter.big_(j=1)^oo A_j) = lim_(j->oo) mu (A_j) $
+]
+
+#proof[
+  1. Definimos $B_1 := A_1$ y $thick B_n := A_n without A_(n-1)$ para $n>=2$.
+    Por construcción, los $B_n$ son disjuntos y además:
+
+    $ union.big_(j=1)^oo A_j = union.big.plus_(j=1)^oo B_j $
+
+    Por la aditividad de la medida sobre una unión disjunta numerable:
+
+    $ mu(union.big_(j=1)^oo A_j) = sum_(j=1)^oo mu(B_j) $
+
+    Ahora, para cada $n$ la unión finita de los primeros $B_j$ es:
+
+    $ union.big_(j=1)^n B_j = A_n quad => quad mu(A_n) = sum_(j=1)^oo mu(B_j) $
+  
+    Al tomar $n->oo$ las sumas parciales convergen a $sum_(j=1)^oo mu(B_j)$. Por tanto:
+
+    $ lim_(j->oo) mu(A_j) = sum_(j=1)^oo mu(B_j) = mu(union.big_(j=1)^oo A_j) $
+
+  #pagebreak(weak: true)
+
+  2. Trabajaremos en la cola a partir de $N$.
+    Para $k>=0$ definimos $C_k := A_N without A_(N+k)$.
+    Como $A_(N+k) subset A_(N+k-1)$ los conjuntos $C_k$ satisfacen $C_k subset C_(k+1)$ y además:
+
+    $ union.big_(k=0)^oo C_k = A_N without inter.big_(j=N)^oo A_j $
+
+    Aplicando la parte $(1)$ a la sucesión creciente $C_k$ obtenemos:
+
+    $ mu (union.big_(k=0)^oo C_k) = lim_(k->oo) mu(C_k) $
+
+    Pero para cada $k$ tenemos que: $mu(C_k) = mu (A_N) - mu(A_(N+k))$, porque $C_k$ y $A_(N+k)$ son disjuntos y su unión es $A_N$, y $mu(A_N) < oo$ garantiza que restas como esta son válidas.
+    Entonces:
+
+    $ mu(A_N without inter.big_(j=N)^oo A_j) = lim_(k->oo) (mu(A_N) - mu(A_(N+k))) = mu(A_N) - lim_(k->oo) mu(A_(N+k)) $
+
+    Reordenando obtenemos: $ mu(inter.big_(j=N)^oo A_j) = lim_(k->oo) mu(A_(N+k))$. Como los $A_n$ son decrecientes, $lim_(n->oo) mu(A_n)$ existe y coincide con el límite de la subsucesión $mu(A_(N+k))$.
+    Finalmente:
+
+    $ inter.big_(j=1)^oo A_j = inter.big_(j=N)^oo A_j wide => wide mu(inter.big_(j=1)^oo A_j) = lim_(j->oo) mu(A_j) $
 ]
 
 #theorem(title: "Teorema de la Convergencia Dominada")[
