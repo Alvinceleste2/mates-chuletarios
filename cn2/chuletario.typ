@@ -663,7 +663,7 @@ $
 == Convergencia de los desarrollos ortogonales
 
 #lemma[
-  Supongamos que $X$ es uno de los espacios $L_w^2(a, b)$ considerados en la @orto-pol y que $S_n$ = $PP^n$.
+  Supongamos que $X$ es uno de los espacios $L_w^2(a, b)$ considerados en la @orto-pol y que #linebreak(justify: true) $S_n$ = $PP^n$.
   Si tomamos una sucesión de polinomios ortogonales ${Q_n}_(n=0)^oo$ en $L_w^2(a, b)$, la mejor aproximación $p_n$ a $f in L_w^2$ por polinomios de $PP^n$ se representa explícitamente como:
 
   $ p_n = sum_(i=0)^n ((f_i, Q_i)_w/(Q_i, Q_i)_w Q_i) $
