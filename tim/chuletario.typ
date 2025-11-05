@@ -624,7 +624,7 @@
 
     Ahora, para cada $n$ la unión finita de los primeros $B_j$ es:
 
-    $ union.big_(j=1)^n B_j = A_n quad => quad mu(A_n) = sum_(j=1)^oo mu(B_j) $
+    $ union.big_(j=1)^n B_j = A_n quad => quad mu(A_n) = sum_(j=1)^n mu(B_j) $
   
     Al tomar $n->oo$ las sumas parciales convergen a $sum_(j=1)^oo mu(B_j)$. Por tanto:
 
@@ -653,6 +653,8 @@
     $ inter.big_(j=1)^oo A_j = inter.big_(j=N)^oo A_j wide => wide mu(inter.big_(j=1)^oo A_j) = lim_(j->oo) mu(A_j) $
 ]
 
+#v(-2pt)
+
 #theorem(title: "Teorema de la Convergencia Dominada")[
   En $(X, cal(A), mu)$ espacio de medida, si la sucesión de funciones medibles ${f_n (x)}_(n=1)^oo$ converge puntualmente a una función $f(x)$ y además $abs(f_n (x)) <= F(x) thick forall n, thick forall x$ con $F$ medible, positiva y tal que $integral_X F(x) thick d mu < oo$, entonces $f(x)$ es integrable y se tiene:
 
@@ -667,7 +669,7 @@
   El que $f$ sea integrable es inmediato porque $lim_(n->oo) f_n (x) = f(x)$ implica $abs(f(x)) <= F(x), thick forall x$ también y $F$ es integrable (finita).
   Veamos también que $(1) => (2)$:
 
-  $ abs(integral_X f_n (x) d mu - integral_X f(x) d mu) = abs(integral_X (f_n (x) - f(x) d mu)) <= integral_X abs(f_n (x) - f(x)) d mu ->_(n arrow oo) 0 => (2) $
+  $ abs(integral_X f_n (x) d mu - integral_X f(x) d mu) = abs(integral_X (f_n (x) - f(x)) d mu) <= integral_X abs(f_n (x) - f(x)) d mu ->_(n arrow oo) 0 => (2) $
 
   Luego solo necesitamos probar $(1)$.
   Veamos que es una consecuencia del lema de Fatou:
