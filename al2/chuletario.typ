@@ -467,7 +467,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 #theorem[
-  Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio irreducible. Sea $alpha$ una raíz de $P(x)$ en alguna extensión $L$ de $K$. Entonces tenemos un isomorfismo:
+  Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio irreducible. Sea $alpha$ una raíz de $p(x)$ en alguna extensión $L$ de $K$. Entonces tenemos un isomorfismo:
 
   $ K[Y]/(angle.l p(y) angle.r) -> K[alpha], thick "con" a in K -> a; thick overline(y) -> alpha $
 ]
@@ -479,7 +479,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
   - Si $p(x) in K[X]$ es un polinomio irreducible sobre $K$ y $alpha, beta$ son dos raíces de $p(x)$, entonces:
 
-  $ K(alpha) tilde.equiv K[beta] $
+  $ K(alpha) tilde.equiv K(beta) $
 ]
 
 #corollary[
@@ -538,7 +538,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 #theorem[
-  Un número real $x$ es constructible si y solo si pertenece a un cuerpo $L subset RR$ tal que existe una cadena de subcuerpos $thick QQ = L_0 subset L_1 subset L_2 subset ... subset L_n = L$ donde todas las extensiones $L_(i+1) \/ L$ son de grado $2$.
+  Un número real $x$ es constructible si y solo si pertenece a un cuerpo $L subset RR$ tal que existe una cadena de subcuerpos $thick QQ = L_0 subset L_1 subset L_2 subset ... subset L_n = L$ donde todas las extensiones $L_(i+1) \/ L_i$ son de grado $2$.
 ]
 
 #corollary[
@@ -575,7 +575,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 #corollary[
-  Sean $K$ un cuerpo, $p(x) in K[X]$, $L$ el cuerpo de descomposición de $p(x)$.
+  Sean $K$ un cuerpo, $p(x) in K[X]$ y $L$ el cuerpo de descomposición de $p(x)$.
   Entonces: $ [L:K] <= n!, quad n = deg(p(x)) $
 ]
 
