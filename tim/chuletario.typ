@@ -570,6 +570,73 @@
   $ m(phi(Q)) <= integral_Q abs(J(x)) thick d x $
 ]
 
+= Teorema de Fubini
+
+#definition(title: "Rectángulo medible")[
+  Dados $A in cal(A)$ y $B in cal(B)$, definimos el *rectángulo medible*:
+
+  $ A times B = {(x, y) : x in A, thick y in B} $
+]
+
+#lemma[
+  - La intersección de rectángulos es un rectángulo.
+  - La unión de un número finito de rectángulos medibles se puede escribir como la unión disjunta y finita de rectángulos medibles.
+
+  - La familia $display(Pi_0 = {union.big_(j=1)^N (A_j times B_j) : A_j in cal(A), thick B_j in cal(B)})$ es una álgebra.
+]
+
+#definition[
+  Definimos, para un rectángulo medible $R = A times B; thick A in cal(A), thick B in cal(B)$:
+
+  $ pi_0(R) = pi_0(A times B) = mu(A) nu(B) $
+
+  si tanto $mu(A)$ como $nu(B)$ no son $0$ y $pi_0(R) = 0$ en caso contrario.
+  Dado un elemento $U in Pi_0$, lo escribimos como unión disjunta de rectángulos $U = union.big.plus_(j=1)^N (A_j times B_j)$, con #linebreak(justify: true) $A_j in cal(A), thick B_j in cal(B)$ y definimos:
+
+  $ pi_0(U) = sum_(j=1)^N pi_0(A_j times B_j) = sum_(j=1)^N mu(A_j) nu(B_j) $
+]
+
+#lemma[
+  $pi_0$ está bien definida y es una premedida en $Pi_0$.
+]
+
+#definition[
+  La mínima $sigma$-álgebra que contiene $Pi_0$ se denota por $cal(A) times.circle cal(B)$.
+]
+
+#definition(title: "Espacio de medida producto")[
+  El Teorema de Carathéodory (@thm:caratheodory2) nos permite extender $(X times Y, Pi_0, pi_0)$ a un espacio de medida completo $(X times Y, Pi_0^*, pi_0^* |_(Pi_0^*))$.
+]
+
+#note-box[
+  Algunos libros escriben $cal(A) times cal(B)$ para denotar la $sigma$-álgebra producto, pero esto es solo por convenio.
+  También se suele escribir $d mu times d nu$ en vez de $d mu times.circle d nu$, o también $d (mu times nu)$.
+]
+
+#definition[
+  - Dado $E subset X times Y$ y fijado $x in X$ se define la *$x$-sección de $E$* como:
+
+  $ E_x = {y in Y : (x, y) in E} $
+
+  - De la misma forma, fijado $y in Y$ se define la *y-sección de $E$* como:
+
+  $ E^y = {x in X : (x, y) in E} $
+
+  - Para una función $f: X times Y -> RR$ se define la *x-sección de $f$*, fijado $x in X$, como:
+
+  $ 
+  f_x: &Y -> RR \
+  &y -> f_x (y) = f(x, y)
+  $
+
+  - Análogamente, se define la *y-sección de $f$*, fijado $y in Y$, como:
+
+  $ 
+  f^y: &X -> RR \
+  &x -> f^y (x) = f(x, y)
+  $
+]
+
 = Demostraciones relevantes <unnumbered>
 
 #theorem(title: "Teorema de Borel-Cantelli")[
