@@ -724,3 +724,36 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #theorem(title: "Teorema del elemento primitivo")[
   Si $L slash K$ es una extensión separable finita, entonces es simple (es decir, $exists alpha in L : L = K(alpha)$).
 ]
+
+= El Teorema Fundamental de la Teoría de Galois
+
+== Automorfismos de cuerpos
+
+#definition(title: "Morfismo de cuerpos")[
+  Sean $K$ un cuerpo, $F slash K$ y $L slash K$ dos extensiones.
+  Un *morfismo de cuerpos* $phi: F -> L$ es un $K$-morfismo (o morfismo de extensiones) si $phi|_K = id_K$ ($phi(a) = a "para" a in K$).
+
+  #align(center,
+    diagram(cell-size: 15mm, $
+	  F edge(phi, ->) edge("d", <-) & L \
+	  K edge("r", phi|_K = id_K,->) & K edge("u", ->)
+  $)
+  )
+]
+
+#proposition[
+  Sean $F, L$ cuerpos, $phi: F -> L$ un morfismo de cuerpos, $K subset F$ el subcuerpo primo de $F$. Entonces:
+
+  - $K$ es también el subcuerpo primo de $L$ (salvo isomorfismo).
+  - $phi$ es un $K$-morfismo.
+]
+
+#lemma[
+  Sean $K$ un cuerpo, $F slash K$ y $L slash K$ extensiones, $sigma : F -> L$ un $K$-morfismo.
+  Sea $alpha in F$ algebraico sobre $K$ y $p(x) in K[X]$ un polinomio del que $alpha$ es raíz.
+  Entonces $sigma(alpha) in L$ es raíz de $p(x)$.
+
+  $
+  p(x) in K[X] arrow cases(p(x) in F[X] &arrow p(alpha) &= 0 &"en" F, p(x) in L[X] &arrow p(sigma(alpha)) &= 0 &"en" L)
+  $
+]
