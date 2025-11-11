@@ -909,3 +909,34 @@ $
 #theorem[
   Los coeficientes $alpha_j, thick j = 0, ..., N$ de la regla gaussiana de $N+1$ nodos son todos positivos.
 ]
+
+== Error en la regla de cuadratura gaussiana
+
+#theorem(title: "Error en la regla de cuadratura gaussiana")[
+  Si $f in cal(C)^(2N + 2) [a, b]$, entonces el error en la regla de cuadratura gaussiana de grado $2N + 1$ verifica:
+
+  $ E_(N+1) (f) = (f^((2N + 2)(eta)))/(2N + 2)! integral_a^b (x-x_0)^2 ... (x - x_N)^2 d x, quad eta in [a, b] $
+]
+
+#definition(title: "Cuadratura de Lobatto")[
+  Se define la *regla de cuadratura de Lobatto* como:
+
+  $ integral_a^b f(x) d x approx alpha_0 f(a) + alpha_1 f(x_1) + ... + alpha_(N-1) f(x_(N-1)) + alpha_N f(b) $
+
+  en la que, a diferencia de la regla anterior, hemos fijado los nodos $a$ y $b$ y dejamos libres los nodos $x_1, ..., x_(N-1)$ y los pesos $alpha_i, i = 0, ..., N$.
+  Como tenemos $2N$ parámetros libres esperamos tener una regla de cuadratura de grado $2N - 1$.
+
+  Con esto, comprobamos que los nodos $x_1, ..., x_(N-1)$ son los $N-1$ ceros de la derivada del polinomio de grado $N$, $p_N$, ortogonal en $[a, b]$ respecto al peso $1$ (y por tanto el trasladado a $[a, b]$ del polinomio de Legendre $L_N$).
+]
+
+#theorem[
+  Sean $x_1, ..., x_(N-1)$ los ceros del polinomio ortogonal $q_(N-1)$ de grado $N-1$ respecto al peso $w(x) = (x-a)(b-x)$, entonces $x_1, ..., x_(N-1)$ son los ceros de $p'_N$ donde $p_N$ es el polinomio ortogonal de grado $N$ respecto al peso $1$.
+]
+
+#definition(title: "Cuadratura de Radau")[
+  De forma análoga a la cuadratura de Lobatto se puede probar que existe una única regla de cuadratura, la *regla de cuadratura de Radau*, con grado de precisión $2N$ de la forma:
+
+  $ alpha_0 f(a) + alpha_1 f(x_1) + ... + a_N f(x_N) $
+
+  En este caso, a diferencia de la cuadratura de Lobatto, fijamos solo el nodo $a$ y nos quedan libres los nodos $x_1, ..., x_N$ y los $N+1$ pesos, lo que nos da $2N + 1$ parámetros libres que nos permiten determinar una única regla con grado de exactitud $2N$.
+]
