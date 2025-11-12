@@ -757,3 +757,19 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   p(x) in K[X] arrow cases(p(x) in F[X] &arrow p(alpha) &= 0 &"en" F, p(x) in L[X] &arrow p(sigma(alpha)) &= 0 &"en" L)
   $
 ]
+
+#lemma[
+  Sean $K$ un cuerpo, $F slash K$ y $L slash K$ extensiones, $cal(B)$ una base de $F$ como $K$-espacio vectorial.
+  Sea $sigma: F -> K$ un morfismo de $K$-esepacios vectoriales.
+  Entonces $sigma$ es un $K$-morfismo de cuerpos si y solo si $sigma(alpha alpha') = sigma(alpha) sigma(alpha')$ para todos $alpha, alpha' in cal(B)$.
+]
+
+#important-box[
+  Los $K$-morfismos de cuerpos están determinados por las imágenes de los elementos de una base si estas son compatibles con el producto.
+]
+
+#proposition[
+  - Si $[K(alpha): K] = n$, $L$ contiene a un cuerpo de descomposición de $m_(alpha, K) (x)$ sobre $K$ y $m_(alpha, K) (x)$ es separable, entonces hay $n = "deg"(m_(alpha, K) (x))$ $K$-morfismos $K(alpha) -> L$ distintos.
+  - Buscando morfismos de la forma $K(alpha_1, alpha_2, ..., alpha_r) -> L$. Si $m_(alpha_i, K(alpha_1, alpha_2, ..., alpha_(i-1))) (x)$ tiene la misma expresión que $m_(alpha_i, K) (x)$ para $2 <= i <= r$, entonces todas las combinaciones de raíces de $m_(alpha_j, K) (x)$ son imágenes válidas de $alpha_j$ en un $K$-morfismo de cuerpos.
+    Es decir, hemos encontrado una *condición suficiente*.
+]
