@@ -1,6 +1,6 @@
 #import "@local/chuletario:1.0.0": conf
 
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
 #show: show-theorion
 
@@ -21,7 +21,7 @@
   watermark: "AGB",
 )
 
-#show sym.emptyset: set text(font: ())
+// #show sym.emptyset: set text(font: ())
 
 = Introducción
 
@@ -635,6 +635,54 @@
   f^y: &X -> RR \
   &x -> f^y (x) = f(x, y)
   $
+]
+
+#pagebreak(weak: true)
+
+#theorem(title: "Teorema de Fubini")[
+  Sea $(X, cal(A), mu)$ e $(Y, cal(B), nu)$ dos espacios de medida $sigma$-finitos.
+
+  - Si $f: X times Y -> RR$ es medible y positiva, entonces las funciones
+
+  $ x -> g(x) = integral_Y f_x d mu, quad quad y-> h(y) = integral_X f^y d mu $
+
+  son medibles y además se tiene:
+
+  $ integral_(X times Y) f(x, y) d(mu times nu) = integral_X (integral_Y f(x, y) d nu(y)) d mu(x) = integral_Y (integral_X f(x, y) d mu(x)) d nu(y) $
+
+  - Si $f: X times Y -> RR$ es integrable, es decir, $f in L^1(d(mu times nu))$, entonces:
+
+    - $f_x in L^1(d nu)$ c.t.p. $x in X$
+    - $f^y in L^1(d mu)$ c.t.p. $y in Y$
+    - las funciones $g(x)$ y $h(y)$ se pueden definir en c.t.p. $x in X$, c.t.p. $y in Y$
+    - $g(x)$ y $h(x)$ son integrables, es decir, $g(x) in L^1(d mu)$ y $h(x) in L^1(d nu)$
+
+    Además se cumple:
+
+    $ integral_(X times Y) f(x,y) d(mu times nu) = integral_X (integral_Y f(x, y) d nu(y)) d mu(x) = integral_Y (integral_X f(x, y) d mu(x)) d nu(y) $
+]
+
+#proposition[
+  Sean $X, cal(A), mu)$ y $(Y, cal(B), nu)$ dos espacios de medida $sigma$-finitos y si $E in cal(A) times.circle cal(B)$, entonces las funciones:
+
+  $ x -> nu(E_x) wide wide y -> mu(E^y) $
+
+  son medibles en $X$ e $Y$ respectivamente y además se tiene:
+
+  $ mu times.circle nu(E) = integral_X nu(E_x) d mu(x) = integral_Y mu(E^y) d nu(y) $
+]
+
+#definition(title: "Clase monótona")[
+  Se dice que $cal(C) subset cal(P) (X times Y)$ es una *clase monótona* si es cerrada por uniones crecientes y por intersecciones decrecientes, esto es:
+
+  $
+  E_1 subset E_2 subset ... subset E_m subset ... in cal(C) => union.big_(m>=1) E_m in cal(C) \
+  E_1 supset E_2 supset ... supset E_m supset ... in cal(C) => inter.big_(m>=1) E_m in cal(C)
+  $
+]
+
+#lemma[
+  Si $Pi_0$ es una álgebra y $cal(C)$ es una clase monótona con $Pi_0 subset cal(C)$, entonces la mínima $sigma$-álgebra que contiene a $Pi_0$, $sigma(Pi_0)$, está contenida en $cal(C)$.
 ]
 
 = Demostraciones relevantes <unnumbered>
