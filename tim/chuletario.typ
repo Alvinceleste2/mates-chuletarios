@@ -685,7 +685,11 @@
   Si $Pi_0$ es una álgebra y $cal(C)$ es una clase monótona con $Pi_0 subset cal(C)$, entonces la mínima $sigma$-álgebra que contiene a $Pi_0$, $sigma(Pi_0)$, está contenida en $cal(C)$.
 ]
 
-= Demostraciones relevantes <unnumbered>
+#counter(heading).update(0)
+#set heading(numbering: "A.1.")
+#set-theorion-numbering("A.1.")
+
+= Demostraciones relevantes <anexo>
 
 #theorem(title: "Teorema de Borel-Cantelli")[
   Sean ${A_n}$ conjuntos medibles en un espacio de medida $(X, cal(A), mu)$ tales que #linebreak(justify: true) $sum_(n=1)^oo mu(A_n) < oo$. Entonces cada elemento de $x$ pertenece a un número finito de $A_n$ para $c. t. x.$.
