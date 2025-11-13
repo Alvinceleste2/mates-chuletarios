@@ -773,3 +773,31 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   - Buscando morfismos de la forma $K(alpha_1, alpha_2, ..., alpha_r) -> L$. Si $m_(alpha_i, K(alpha_1, alpha_2, ..., alpha_(i-1))) (x)$ tiene la misma expresión que $m_(alpha_i, K) (x)$ para $2 <= i <= r$, entonces todas las combinaciones de raíces de $m_(alpha_j, K) (x)$ son imágenes válidas de $alpha_j$ en un $K$-morfismo de cuerpos.
     Es decir, hemos encontrado una *condición suficiente*.
 ]
+
+#definition(title: "Grupo de automorfismos")[
+  Sea $K$ un cuerpo. Entonces:
+
+  - Un isomorfismo $sigma: K -> K$ se llama un *automorfismo* de $K$.
+
+  - El conjunto de automorfismos de $K$ se denota *$"Aut"(K)$*.
+  
+  - Si $L slash K$ es una extensión, el conjunto de $K$-automorfismos de $L$ se denota *$"Aut"(L slash K)$*.
+]
+
+#lemma[
+  Sea $L slash K$ una extensión algebraica.
+  Entonces todo $K$-endomorfismo de $L$ es un $K$-automorfismo.
+]
+
+#lemma[
+  Sean $K$ un cuerpo, $L slash K$ una extensión.
+  Entonces $("Aut"(L), compose, id_L)$ es un grupo y $("Aut"(L slash K), compose, id_L)$ es un subgrupo.
+]
+
+#definition(title: "Cuerpo fijo")[
+  Sean $K$, $L slash K$ una extensión, $H$ un subgrupo de $"Aut"(L slash K)$.
+  El conjunto
+  $ L^H = {a in L : forall h in H thick thick h(a) = a} $
+
+  es un subcuerpo de $L$, llamado el *cuerpo fijo* de $H$.
+]
