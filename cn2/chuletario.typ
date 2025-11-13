@@ -1,6 +1,6 @@
 #import "@local/chuletario:1.0.0": conf
 
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
 #show: show-theorion
 
@@ -940,3 +940,15 @@ $
 
   En este caso, a diferencia de la cuadratura de Lobatto, fijamos solo el nodo $a$ y nos quedan libres los nodos $x_1, ..., x_N$ y los $N+1$ pesos, lo que nos da $2N + 1$ parámetros libres que nos permiten determinar una única regla con grado de exactitud $2N$.
 ]
+
+= Problemas de valores iniciales para ecuaciones diferenciales ordinarias
+
+== Resolución de ecuaciones no lineales
+
+#proposition(title: "Método de la bisección")[]
+
+#proposition(title: "Método de la secante")[]
+
+#proposition(title: "Iteración de punto fijo")[]
+
+#proposition(title: "Método de Newton")[]
