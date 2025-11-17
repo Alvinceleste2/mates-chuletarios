@@ -801,3 +801,26 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
   es un subcuerpo de $L$, llamado el *cuerpo fijo* de $H$.
 ]
+
+#important-box[
+  Tenemos dos correspondencias:
+
+  - Subcuerpos de $L arrow$ Subgrupos de $"Aut"(L) wide arrow wide K -> "Aut"(L slash K)$.
+
+  - Subgrupos de $"Aut"(L) arrow$ Subcuerpos de $L wide arrow wide H arrow L^H$.
+
+  La siguiente proposición nos dice que revierten las inclusiones.
+]
+
+#proposition[
+  Sean $K$ un cuerpo, $L slash K$ una extensión.
+
+  - Si $K_1 subset.eq K_2 subset.eq L$ son dos subcuerpos de $L$, entonces $"Aut"(L slash K_2) <= "Aut"(L slash K_1)$.
+
+  - Si $H_1 <= H_2 <= "Aut"(L slash K)$ son dos subgrupos de $"Aut"(L slash K)$, entonces $K subset.eq L^(H_2) subset.eq L^(H_1)$.
+]
+
+#note-box[
+  Nos gustaría que la correspondencia entre subgrupos de $"Aut"(L slash K)$ y subcuerpos de $L$ que contienen a $K$ fuese perfecta.
+  Necesitamos $"Aut"(L slash K)$ sea lo más grande posible. Para ello buscamos que $L slash K$ sea *normal* y *separable*.
+]
