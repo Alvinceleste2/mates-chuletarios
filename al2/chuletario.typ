@@ -824,3 +824,31 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Nos gustaría que la correspondencia entre subgrupos de $"Aut"(L slash K)$ y subcuerpos de $L$ que contienen a $K$ fuese perfecta.
   Necesitamos $"Aut"(L slash K)$ sea lo más grande posible. Para ello buscamos que $L slash K$ sea *normal* y *separable*.
 ]
+
+#lemma[
+  Sea $L slash K$ una extensión. Sean $sigma_1, sigma_2, sigma_r in "Aut"(L slash K)$ automorfismos distintos.
+  Entonces son linealmente independientes sobre $L$.
+  Es decir, si $lambda_1, ..., lambda_r in L$ no son todos nulos, entonces:
+
+  $
+  lambda_1 sigma_1 + lambda_2 sigma_2 + ... + lambda_r sigma_r: L &-> L \
+  a &-> lambda_1 sigma_1(a) + lambda_r sigma_r (a)
+  $
+
+  no es el morfismo de grupos nulo $L -> L; thick a -> 0$.
+]
+
+#proposition[
+  Sean $L slash K$ una extensión y $H$ un subgrupo finito de $"Aut"(L slash K)$.
+  Entonces:
+
+  $ [L : L^H] = |H| wide "y" wide [L^H : K] = ([L:K])/(|H|) $
+]
+
+#corollary[
+  Sea $L slash K$ una extensión finita.
+  Entonces 
+  $ |"Aut"(L slash K)| <= [L : K] $
+
+  y $|"Aut"(L slash K)| = [L : K]$ si y solo si $K = L^("Aut"(L slash K))$.
+]
