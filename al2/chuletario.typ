@@ -852,3 +852,14 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
   y $|"Aut"(L slash K)| = [L : K]$ si y solo si $K = L^("Aut"(L slash K))$.
 ]
+
+#important-box[
+  - Ya hemos visto que, si $L slash K$ es una extensión y $p(x) in K[X]$ es irreducible, todo $K$-automorfismo de $L$ debe permutar las raíces de $p(x)$ en $L$.
+
+  - No es cierto que para toda permutación haya un $K$-automorfismo que la efectúe, pero sí que, fijadas dos raíces de $p(x)$ en $L$, hay un $K$-automorfismo que lleva una en la otra.
+]
+
+#proposition[
+  Sean $L slash K$ una extensión normal y finita, $M_1 slash K$ y $M_2 slash K$ dos subextensiones.
+  Si $psi: M_1 -> M_2$ es un $K$-isomorfismo, entonces existe $sigma in "Aut"(L slash K)$ tal que $sigma|_(M_1) = psi$.
+]
