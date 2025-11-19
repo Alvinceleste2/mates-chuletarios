@@ -834,7 +834,7 @@ $
   = sum_(i=1)^N (x_i-x_(i-1))/2 [f(x_(i-1)) + f(x_i))]
   $
 
-  - Regla de Simpson 
+  - Regla de Simpson:
   $ I^(S C) (f) = (x_1 - x_0)/6 f(x_0) + (4(x_1 - x_0))/6 f(x_(1 slash 2)) + (x_1 - x_0)/6 f(x_1) + ... \
   ... +(x_N - x_(N-1))/6 f(x_(N-1)) + (4 (x_N - x_(N-1)))/6 f(x_(N-1 slash 2)) + (x_N - x_(N-1))/6 f(x_N) = \
   = sum_(i=1)^N (x_i - x_(i-1))/6 [f(x_(i-1)) + 4 f((x_(i-1) + x_i)/2) + f(x_i)] $
@@ -945,6 +945,8 @@ $
 
 == Resolución de ecuaciones no lineales
 
+// TODO: completar apartado
+
 #proposition(title: "Método de la bisección")[]
 
 #proposition(title: "Método de la secante")[]
@@ -952,3 +954,66 @@ $
 #proposition(title: "Iteración de punto fijo")[]
 
 #proposition(title: "Método de Newton")[]
+
+== Introducción
+
+// TODO: completar introducción
+
+== Métodos de un paso
+
+#definition(title: "Método de un paso")[
+  Dado que $y(x_0) = y_0$, supongamos que hemos calculado $y_n$ hasta un cierto valor de $n$, #linebreak(justify: true) $0 <= n <= N - 1, thick N >= 1$.
+  Entonces, en general, un *método de un paso* puede escribirse de la forma:
+
+  $ y_(n+1) = y_n + h Phi(x_n, y_n\; h), wide n = 0, 1, ..., N - 1, wide y_0 = y(x_0) $
+
+  donde $Phi( dot, dot, dot)$ es una función continua respecto de sus variables.
+]
+
+#lemma(title: "Algunos ejemplos de métodos de un paso")[
+
+  - Método de Euler: En cada subintervalo $[x_n, x_(n+1)]$, sustituimos la curva solución por su recta tangente.
+
+  $ y_(n+1) = y_n + h f(x_n, y_n) $
+
+  - Regla del punto medio:
+
+  $ y_(n+1) = y_n + h f((x_n + x_(n+1))/2, (y_n + y_(n+1))/2) $
+
+  - Regla del trapecio:
+
+  $ y_(n+1) = y_n + h/2 (f(x_n, y_n) + f(x_(n+1), y_(n+1))) $
+
+]
+
+#important-box[
+  En líneas generales, la idea detrás del método de Euler es, en cada subintervalo $[x_n, x_(n+1)]$, sustituir la curva solución por su recta tangente.
+]
+
+#definition(title: "Error global y error de truncación")[
+  Para determinar la precisión de un método de un paso:
+
+  - Definimos el *error global* $e_n$ como:
+
+  $ e_n = y(x_n) - y_n $
+
+  - Definimos el *error de truncación* $T_n$ como:
+
+  $ T_n = (y(x_(n+1)) - y(x_n))/(h) - Phi(x_n, y(x_n) \; h) $
+]
+
+#theorem[
+  Dado el método de un paso, supongamos que además de continua respecto de sus argumentos, la función $Phi$ satisface una condición de Lipschitz respecto de su segundo argumento en $D = [x_0, X] times RR^d$, es decir, existe $L_Phi$ tal que, para $0 <= h <= h_0$ y para $(x, u)$  $(x, v)$ en $D$ se tiene que:
+
+  $ norm(Phi(x, u\; h) - Phi(x, v\; h)) <= L_Phi norm(u-v) $
+
+  Entonces el error se puede acotar por:
+
+  $ norm(e_n) <= T/L_Phi (e^(L_Phi(x_n - x_0)) - 1); wide n = 0, 1, ..., N, quad quad T = max_(0<=n<=N-1) norm(T_n) $
+]<thm-error-lips>
+
+#corollary(title: "Cota de error del método de Euler")[
+  Sea $M_2 = max_(xi in [x_0, X_M]) norm(y''(xi))$. Teniendo en cuenta que en el método de Euler $Phi(x_n, y_n\; h) equiv f(x_n, y_n)$ y por tanto $L_Phi = L$ con $L$ la constante de Lipschitz de $f$, entonces usando el @thm-error-lips tenemos que:
+
+  $ norm(e_n) <= 1/2 M_2 [e^(L(x_n - x_0)) - 1] h wide n = 0, 1, ..., N $
+]
