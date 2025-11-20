@@ -945,11 +945,46 @@ $
 
 == Resolución de ecuaciones no lineales
 
+#lemma[
+  En este apartado vamos a tratar de encontrar numéricamente las soluciones (raíces) de ecuaciones
+
+  $ f(x) = 0 $
+
+  donde $f$ es una función dada, real de variable real.
+  A estas soluciones se les llama también ceros de $f$. Si $f$ es un polinomio lineal o cuadrático la solución es muy sencilla.
+]
+
 // TODO: completar apartado
 
-#proposition(title: "Método de la bisección")[]
+#proposition(title: "Método de la bisección")[
+  Supongamos que $f$ es continua en un intervalo $[a, b]$ y $f$ toma valores de sino contrario en $a$ y $b, thick (f(a) > 0 " ó " f(a) < 0 " y " f(b) > 0)$. En estas condiciones el teorema de Bolzano garantiza que $f$ se anula en algún punto del intervalo.
+  Llamemos $I_0 = [a, b]$ y $c = (a + b)/2$ el punto medio del intervalo.
+  Si $f(c) = 0$ ta hemos terminado.
+  En caso contrario, en uno de los dos intervalos $[a, c]$ ó $[c, b]$ $f$ tiene signo contrario en los extremos.
+  Definimos $I_1$ el intervalo donde $f$ cambia de signo en los extremos.
+  Ahora estamos en la situación del comienzo con la diferencia de que la longitud del intervalo $I_1$ es la mitad de la longitud del intervalo $I_0$.
+  Podemos iterar el procedimiento de forma que, o bien encontramos un $0$ de la función $f$, o bien garantizamos que el $0$ está en un intervalo $I_n$ de longitud $(b-a)/2^n$.
 
-#proposition(title: "Método de la secante")[]
+]
+
+#lemma(title: "Características del método de la bisección")[
+  - Funciona siempre.
+
+  - Da cotas superior e inferior para la raíz buscada.
+
+  - Es más lento que otros métodos, que por otra parte, son más inseguros.
+]
+
+#proposition(title: "Método de la secante")[
+  Sean $x_0$ y $x_1$ dos aproximaciones a la raíz $alpha$ que buscamos.
+  Sea $p_1(x)$ la recta que interpola a $f$ en $x_0$ y $x_1$.
+  En lugar de resolver $f(x) = 0$ vamos a resolver $p_1(x) = 0$.
+  Si llamamos $x_2$ a la raíz de $p_1$ (que verifica $p_1(x_2) = 0$) esperamos que sea una mejor aproximación a $alpha$ que $x_0$ y $x_1$.
+  Ahora iteramos el procedimiento partiendo de $x_1$ y $x_2$ y llamando $x_3$ al cero de la recta que interpola a $f$ en $x_1$ y $x_2$.
+  En general, interpolando en $x_n$ y $x_(n+1)$ obtenemos la recta
+
+  $ y = f(x_n) + f[x_n, x_(n+1)] (x - x_n) $
+]
 
 #proposition(title: "Iteración de punto fijo")[]
 
@@ -968,7 +1003,7 @@ $
   $ y_(n+1) = y_n + h Phi(x_n, y_n\; h), wide n = 0, 1, ..., N - 1, wide y_0 = y(x_0) $
 
   donde $Phi( dot, dot, dot)$ es una función continua respecto de sus variables.
-]
+]<def-metodo-un-paso>
 
 #lemma(title: "Algunos ejemplos de métodos de un paso")[
 
@@ -1000,7 +1035,7 @@ $
   - Definimos el *error de truncación* $T_n$ como:
 
   $ T_n = (y(x_(n+1)) - y(x_n))/(h) - Phi(x_n, y(x_n) \; h) $
-]
+]<def-error-trunc>
 
 #theorem[
   Dado el método de un paso, supongamos que además de continua respecto de sus argumentos, la función $Phi$ satisface una condición de Lipschitz respecto de su segundo argumento en $D = [x_0, X] times RR^d$, es decir, existe $L_Phi$ tal que, para $0 <= h <= h_0$ y para $(x, u)$  $(x, v)$ en $D$ se tiene que:
@@ -1016,4 +1051,43 @@ $
   Sea $M_2 = max_(xi in [x_0, X_M]) norm(y''(xi))$. Teniendo en cuenta que en el método de Euler $Phi(x_n, y_n\; h) equiv f(x_n, y_n)$ y por tanto $L_Phi = L$ con $L$ la constante de Lipschitz de $f$, entonces usando el @thm-error-lips tenemos que:
 
   $ norm(e_n) <= 1/2 M_2 [e^(L(x_n - x_0)) - 1] h wide n = 0, 1, ..., N $
+]
+
+#definition(title: "Consistencia")[
+  Un método numérico se dice que es *consistente* si el error de truncación $T_n$ tiende a cero cuando $h -> 0$.
+  Con la @def-error-trunc es fácil ver que un método de un paso es consistente si
+
+  $ Phi(x, y\; 0) equiv f(x, y) $
+
+  Esta condición se toma a veces como la definición de consistencia.
+  En lo que sigue asumiremos que se verifica siempre.
+]
+
+#theorem[
+  Supongamos que la función $Phi(dot, dot\; dot)$ es continua en $D times [0, h_0], thick (D = [x_0, X] times RR^d$ y satisface la condición de consistencia y la condición de Lipschitz
+
+  $ norm(Phi(x, u\; h) - Phi(x, v\; h)) <= L_(Phi) norm(u - v) wide "en" D times [0, h_0] $
+
+  Entonces las aproximaciones ${y_n}$ obtenidas de la @def-metodo-un-paso usando los puntos #linebreak(justify: true) $x_n = x_0 + n h, thick n = 1, 2, ..., N$ con valores decrecientes de $h$ convergen a la solución del problema de valores iniciales // TODO: pvi de la introducción
+  , es decir
+
+  $ lim_(n->oo) y_n = y(x) " si " x_n -> x in [x_0, X_M] " cuando " h->0 " y " n->oo $
+]
+
+#definition(title: "Orden de consistencia")[
+  Se dice que un método de un paso tiene *orden de consistencia* $p$ si $p$ es el mayor entero positivo para el que se cumple que para cualquier solución $(x, y(x))$ en $D$ del problema de valores iniciales, existen constantes $K$ y $h_0$ tal que
+
+  $ norm(T_n) <= K h^p, wide "para" 0 < h <= h_0 $
+]
+
+== Análisis de error de un método implícito de un paso
+
+#definition(title: "Métodos implícitos")[
+  Un método de un paso es un *método implícito* si, en cada paso, determinar el nuevo valor $y_(n+1)$ requiere la solución de un sistema, en general no lineal.
+]
+
+#important-box[
+  La diferencia principal entre el método de Euler y la regla del trapecio es que el segundo es implícito, el valor de $y_(n+1)$ aparece a la izquierda y a la derecha en la definición del método.
+  Calcular $y_(n+1)$ a partir de $y_n$ requiere la solución de un sistema que será en general no lineal.
+  Esta complicación adicional se traduce en un aumento del coste computacional.
 ]
