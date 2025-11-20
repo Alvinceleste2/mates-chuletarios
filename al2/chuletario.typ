@@ -863,3 +863,39 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Sean $L slash K$ una extensión normal y finita, $M_1 slash K$ y $M_2 slash K$ dos subextensiones.
   Si $psi: M_1 -> M_2$ es un $K$-isomorfismo, entonces existe $sigma in "Aut"(L slash K)$ tal que $sigma|_(M_1) = psi$.
 ]
+
+#corollary[
+  Sea $K slash L$ una extensión normal y finita.
+  Si $p(x) in K[X]$ es un polinomio irreducible y $alpha, beta in L$ son raíces de $p(x)$, entonces existe $sigma in "Aut"(L slash K)$ con $sigma(alpha) = beta$.
+]
+
+#corollary[
+  Sea $L slash K$ una extensión normal, finita y separable. Entonces
+  $ |"Aut"(L slash K)| = [L : K] $
+]
+
+#definition(title: "Extensiones y grupos de Galois")[
+  - Se dice que una extensión $L slash K$ es *de Galois* si es normal, finita y separable.
+
+  - Si $L slash K$ es una extensión de Galois, llamamos a $"Aut"(L slash K)$ el *grupo de Galois* de $L slash K$ y lo denotamos $"Gal"(L slash K)$.
+]
+
+#definition(title: "Polinomios ciclotómicos")[
+  Sea $p$ primo. Definimos el *polinomio ciclotómico* de orden $p$ como:
+
+  $ phi.alt_p (x) = (x^p - 1)/(x - 1) = x^(p-1) + x^(p-2) + ... + x + 1 in QQ[X] $
+
+  Además, $phi.alt_p (x)$ es irreducible.
+]
+
+#pagebreak(weak: true)
+
+#definition(title: "Extensión ciclotómica")[
+  La *extensión ciclotómica $p$-ésima* es el cuerpo de descomposición de $phi.alt_p (x)$, es decir, sean las raíces de $phi.alt_p (x) := e^((2 pi i) / p) = zeta^i_p, thick thick i = 1, .., p-1$, entonces podemos poner
+
+  $ QQ(zeta_p, zeta^2_p, ..., zeta^(p-1)_p) = QQ(zeta_p) $
+]
+
+#lemma[
+  La extensión $QQ(zeta_p) slash QQ$ es de Galois.
+]
