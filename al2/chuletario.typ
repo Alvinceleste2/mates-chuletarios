@@ -29,7 +29,7 @@
   watermark: "AGB",
 )
 
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+#import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
 
 = Repaso de teoría de cuerpos
 == Estructuras algebraicas
@@ -37,19 +37,22 @@
 #definition(title: "Operación binaria")[
   Sea $C$ un conjunto. Una *operación binaria* en $C$ es una aplicación:
 
-  $ ast: & C times C & -> & thick med C \ & thick (a, b) &|-> & a*b $
+  $
+    ast: & C times C    &  -> & thick med C \
+         & thick (a, b) & |-> & a*b
+  $
 
   Además, se impone que al operar dos elementos de $C$, el resultado debe estar en $C$.
 ]
 
 #definition(title: "Grupo")[
   Un *grupo* $(G, ast)$ es un conjunto con una operación binaria $ast$ tal que:
-  
+
   - $ast$ es asociativa: $forall a, b, c in G, thick (a ast b) ast c = a ast (b ast c)$
   - Existe elemento neutro: $exists e in G | forall a in G, thick e ast a = a ast e = a$
   - Existe elemento inverso: $forall a in G thick exists a^(-1) in G | a ast a^(-1) = a^(-1) ast a = e$
 
-El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast a$.
+  El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast a$.
 ]
 
 #definition(title: "Anillo")[
@@ -71,7 +74,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
 #definition(title: "Cuerpo")[
   Un *cuerpo* $(K, ast, circle.stroked.tiny)$ es un conjunto $K$ con al menos dos elementos y dos operaciones binarias $ast, circle.stroked.tiny$ tales que:
-  
+
   - $(K, ast, circle.stroked.tiny)$ es un anillo conmutativo con unidad.
   - Todo elemento $a in K$, $a != e$, tiene un inverso para $circle.stroked.tiny$.
 ]
@@ -143,7 +146,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition(title: "Morfismo de evaluación")[
   Sean $A subset B$ anillos. Dado $b in B$, la aplicación:
 
-  $ phi.alt_b: A[X] ->B "tal que" (a_n x^n + ... + a_1 x + a_0) |-> (a_n b^n + ... + a_1 b + a_0) $
+  $
+    phi.alt_b: A[X] ->B "tal que" (a_n x^n + ... + a_1 x + a_0) |-> (a_n b^n + ... + a_1 b + a_0)
+  $
 
   es un morfismo de anillos, llamado el *morfismo de evaluación* en $b$.
 ]
@@ -163,7 +168,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition[
   Sean $A$ un anillo; $a_1, ..., a_n in A$. El ideal generado por $a_1, ..., a_n$ es el menor ideal que contiene a $a_1, ..., a_n$. Es decir:
 
-  $ angle.l a_1, ..., a_n angle.r = {lambda_1 a_1 + ... + lambda_n a_n | lambda_j in A} $
+  $
+    angle.l a_1, ..., a_n angle.r = {lambda_1 a_1 + ... + lambda_n a_n | lambda_j in A}
+  $
 
   Los elementos $a_1, ..., a_n$ se llaman *generadores* del ideal.
 ]
@@ -171,10 +178,10 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition[
   Sea $A$ un anillo. Un ideal $I subset A$ es:
 
-  - *Principal* si existe $a in A$ tal que $I = angle.l a angle.r $.
+  - *Principal* si existe $a in A$ tal que $I = angle.l a angle.r$.
   - *Maximal* si $I != A$ y no existe ningún ideal $J subset.not.eq A$ tal que $I subset.not.eq J subset.not.eq A$.
   - *Primo* si $I != A$ y, para todos $x, y in I$, si $x y in I$ entonces o bien $x in I$ o $y in I$.
-] 
+]
 
 #proposition[
   Sean $a, b in ZZ$. Supongamos que $a!=0$ o $b!=0$. Entonces:
@@ -190,14 +197,18 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition(title: "Anillo cociente")[
   Sean $A$ un anillo, $I$ un ideal de $A$. Este induce una relación de equivalencia sobre $A$ dada por:
 
-  $ a ~ b <=> a - b in I, thick thick "donde" ~ "es reflexiva, simétrica y transitiva." $
+  $
+    a ~ b <=> a - b in I, thick thick "donde" ~ "es reflexiva, simétrica y transitiva."
+  $
 
   Esto permite definit el *conjunto cociente* $A slash I$ (el conjunto de clases de equivalencia).
 ]
 
 #proposition[
   Sean $A$ un anillo, $I subset A$ un ideal. El conjunto cociente $A slash I$ tiene estructura de anillo con las propiedades inducidas por las de $A$:
-  $ forall a, b in A, quad overline(a) + overline(b) = overline(a + b) quad y quad overline(a) · overline(b) = overline(a b) $
+  $
+    forall a, b in A, quad overline(a) + overline(b) = overline(a + b) quad y quad overline(a) · overline(b) = overline(a b)
+  $
 ]
 
 #proposition[
@@ -217,12 +228,13 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   - $ker(phi.alt)$ es un ideal de $A$.
   - Existe un isomorfismo $overline(phi.alt): A slash ker(phi.alt) -> "Im"(phi.alt)$ tal que el siguiente diagrama conmuta:
 
-  #align(center,
-    diagram(cell-size: 15mm, $
-	  A edge(phi.alt, ->) edge("d", pi, ->>) & "Im"(phi.alt) \
-	  A slash ker(phi.alt) edge("ur", overline(phi.alt), "hook-->")
-  $)
-  )
+  #align(center, diagram(
+    cell-size: 15mm,
+    $
+                             A edge(phi.alt, ->) edge("d", pi, ->>) & "Im"(phi.alt) \
+      A slash ker(phi.alt) edge("ur", overline(phi.alt), "hook-->")
+    $,
+  ))
 
   Decimos que $phi.alt$ factoriza a través de $pi$.
 ]
@@ -248,7 +260,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 #definition(title: "Dominio euclídeo")[
-  Sea $A$ un dominio de integridad. 
+  Sea $A$ un dominio de integridad.
   $A$ es un *dominio euclídeo* si existe una aplicación \
   $N: A without {0} -> NN$ tal que, dados $a, b in A, thick b != 0;$ existen $q, r in A$ tales que:
 
@@ -308,7 +320,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 #tip-box(title: "Consejo: Hacer actuar automorfismo")[
-  Sea $A$ un dominio de integridad. 
+  Sea $A$ un dominio de integridad.
   Sea $phi.alt: A -> A$ un automorfismo de anillos.
   Un elemento $a in A$ es irreducible si y solo si $phi.alt(a)$ es irreducible.
 ]
@@ -370,8 +382,8 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #proposition[
   Sea $K$ un cuerpo.
 
-  - Si char$(K) = 0$, existe un único morfismo de cuerpos $ thick QQ -> K$.
-  - Si char$(K) = p$, existe un único morfismo de cuerpos $ thick FF_p -> K$.
+  - Si char$(K) = 0$, existe un único morfismo de cuerpos $thick QQ -> K$.
+  - Si char$(K) = p$, existe un único morfismo de cuerpos $thick FF_p -> K$.
 ]<subcuerpo-primo>
 
 #definition(title: "Cuerpo primo")[
@@ -379,7 +391,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 ]
 
 #note-box[
-  La @subcuerpo-primo implica que los únicos cuerpos primos son isomorfos a $QQ$ o $FF_p$, $ thick p$ primo.
+  La @subcuerpo-primo implica que los únicos cuerpos primos son isomorfos a $QQ$ o $FF_p$, $thick p$ primo.
   Además, Aut$(QQ) = {id}$ y Aut$(FF_p) = {id}$
 ]
 
@@ -429,8 +441,8 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition[
   Sea $L\/K$ una extensión de cuerpos.
 
-  - $alpha in L$ es *algebraico* sobre $K$ si existe un polinomio $p(x) in K[X]$ tal que $p(alpha) = 0$. 
-  - $alpha in L$ es *trascendente* sobre $K$ si no es algebraico sobre $K$. 
+  - $alpha in L$ es *algebraico* sobre $K$ si existe un polinomio $p(x) in K[X]$ tal que $p(alpha) = 0$.
+  - $alpha in L$ es *trascendente* sobre $K$ si no es algebraico sobre $K$.
 ]
 
 #proposition[
@@ -469,7 +481,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #theorem[
   Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio irreducible. Sea $alpha$ una raíz de $p(x)$ en alguna extensión $L$ de $K$. Entonces tenemos un isomorfismo:
 
-  $ K[Y]/(angle.l p(y) angle.r) -> K[alpha], thick "con" a in K -> a; thick overline(y) -> alpha $
+  $
+    K[Y]/(angle.l p(y) angle.r) -> K[alpha], thick "con" a in K -> a; thick overline(y) -> alpha
+  $
 ]
 
 #pagebreak()
@@ -604,7 +618,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Un cuerpo $K$ es *algebraicamente cerrado* si todo polinomio con coeficientes en $K$ tiene una raíz en $K$.
   Esto implica que todas sus raíces están en $K$, pues descompone completamente:
 
-  $ p(x) = (x-alpha_1)p_1(x) = (x-alpha_1)(x-alpha_2)p_2(x) = ... = (x-alpha_1) ... (x-alpha_n) $
+  $
+    p(x) = (x-alpha_1)p_1(x) = (x-alpha_1)(x-alpha_2)p_2(x) = ... = (x-alpha_1) ... (x-alpha_n)
+  $
 
   Equivalentemente, $K$ es *algebraicamente cerrado* si $K = overline(K)$.
 ]
@@ -643,7 +659,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Sean $K$ un cuerpo, $p(x) in K[X]$ un polinomio.
   Sobre un cuerpo de descomposición $L$ de $p(x)$ tenemos:
 
-  $ p(x) = (x - alpha_1)^(m_1) (x - alpha_2)^(m_2) ... (x - alpha_r)^(m_r); thick thick thick alpha_i in L, thick alpha_i != alpha_j, thick m_i >= 1 $
+  $
+    p(x) = (x - alpha_1)^(m_1) (x - alpha_2)^(m_2) ... (x - alpha_r)^(m_r); thick thick thick alpha_i in L, thick alpha_i != alpha_j, thick m_i >= 1
+  $
 
   Entonces $alpha_i$ es una *raíz simple* si $m_i = 1$ y es *múltiple* si $m_i > 1$ (con multiplicidad $m_i$).
 ]
@@ -663,7 +681,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition(title: "Derivada formal")[
   Dado un polinomio $p(x) = a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0$ en $K[X]$, su *derivada formal* es:
 
-  $ p'(x) = n a_n x^(n-1) + (n-1) a_(n-1) x^(n-2) + ... + 2 a_2 x + a_1 in K[X] $
+  $
+    p'(x) = n a_n x^(n-1) + (n-1) a_(n-1) x^(n-2) + ... + 2 a_2 x + a_1 in K[X]
+  $
 ]
 
 #proposition[
@@ -733,12 +753,13 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Sean $K$ un cuerpo, $F slash K$ y $L slash K$ dos extensiones.
   Un *morfismo de cuerpos* $phi: F -> L$ es un $K$-morfismo (o morfismo de extensiones) si $phi|_K = id_K$ ($phi(a) = a "para" a in K$).
 
-  #align(center,
-    diagram(cell-size: 15mm, $
-	  F edge(phi, ->) edge("d", <-) & L \
-	  K edge("r", phi|_K = id_K,->) & K edge("u", ->)
-  $)
-  )
+  #align(center, diagram(
+    cell-size: 15mm,
+    $
+       F edge(phi, ->) edge("d", <-) & L \
+      K edge("r", phi|_K = id_K, ->) & K edge("u", ->)
+    $,
+  ))
 ]
 
 #proposition[
@@ -754,7 +775,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Entonces $sigma(alpha) in L$ es raíz de $p(x)$.
 
   $
-  p(x) in K[X] arrow cases(p(x) in F[X] &arrow p(alpha) &= 0 &"en" F, p(x) in L[X] &arrow p(sigma(alpha)) &= 0 &"en" L)
+    p(x) in K[X] arrow cases(p(x) in F[X] &arrow p(alpha) &= 0 &"en" F, p(x) in L[X] &arrow p(sigma(alpha)) &= 0 &"en" L)
   $
 ]
 
@@ -780,7 +801,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   - Un isomorfismo $sigma: K -> K$ se llama un *automorfismo* de $K$.
 
   - El conjunto de automorfismos de $K$ se denota *$"Aut"(K)$*.
-  
+
   - Si $L slash K$ es una extensión, el conjunto de $K$-automorfismos de $L$ se denota *$"Aut"(L slash K)$*.
 ]
 
@@ -831,8 +852,8 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
   Es decir, si $lambda_1, ..., lambda_r in L$ no son todos nulos, entonces:
 
   $
-  lambda_1 sigma_1 + lambda_2 sigma_2 + ... + lambda_r sigma_r: L &-> L \
-  a &-> lambda_1 sigma_1(a) + lambda_r sigma_r (a)
+    lambda_1 sigma_1 + lambda_2 sigma_2 + ... + lambda_r sigma_r: L &-> L \
+    a &-> lambda_1 sigma_1(a) + lambda_r sigma_r (a)
   $
 
   no es el morfismo de grupos nulo $L -> L; thick a -> 0$.
@@ -847,7 +868,7 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
 #corollary[
   Sea $L slash K$ una extensión finita.
-  Entonces 
+  Entonces
   $ |"Aut"(L slash K)| <= [L : K] $
 
   y $|"Aut"(L slash K)| = [L : K]$ si y solo si $K = L^("Aut"(L slash K))$.
@@ -883,7 +904,9 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 #definition(title: "Polinomios ciclotómicos")[
   Sea $p$ primo. Definimos el *polinomio ciclotómico* de orden $p$ como:
 
-  $ phi.alt_p (x) = (x^p - 1)/(x - 1) = x^(p-1) + x^(p-2) + ... + x + 1 in QQ[X] $
+  $
+    phi.alt_p (x) = (x^p - 1)/(x - 1) = x^(p-1) + x^(p-2) + ... + x + 1 in QQ[X]
+  $
 
   Además, $phi.alt_p (x)$ es irreducible.
 ]
@@ -898,4 +921,13 @@ El grupo es *conmutativo (abeliano)* si $forall a, b in G, thick a ast b = b ast
 
 #lemma[
   La extensión $QQ(zeta_p) slash QQ$ es de Galois.
+]
+
+#note-box[
+  Si $L$ es el cuerpo de descomposición de un polinomio $p(x) in K[X]$ (irreducible o no) de grado $n$, entonces (salvo isomorfismo) $"Aut"(L slash K) <= S_n$, con $S_n$ el grupo de permutaciones de $n$ elementos
+
+  Si $alpha_1, ..., alpha_n in L$ son las raíces de $p(x)$ en $L$, entonces un elemento de $"Aut"(L slash K)$ las permuta.
+  Esta asociación *no* es sobreyectiva en general.
+
+  Si $p(x) = f(x) g(x)$ en $K[X]$, entonces $"Aut"(L slash K) <= S_m times S_r$.
 ]
