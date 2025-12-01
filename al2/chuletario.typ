@@ -931,3 +931,56 @@
 
   Si $p(x) = f(x) g(x)$ en $K[X]$, entonces $"Aut"(L slash K) <= S_m times S_r$.
 ]
+
+== El Teorema Fundamental de la Teoría de Galois
+
+#theorem(title: "Caracterizaciones de extensiones de Galois")[
+  Sea $L slash K$ una extensión finita de cuerpos.
+  Entonces son equivalentes:
+
+  - $L slash K$ es una extensión de Galois (finita, normal y separable)
+
+  - $[L : K] = |"Aut"(L slash K)|$
+
+  - $K = L^("Aut"(L slash K))$
+]
+
+#proposition[
+  Sean $K$ un cuerpo, $G <= "Aut"(K)$ un subgrupo finito de automorfismos.
+  Etonces $"Aut"(K slash K^G) = G$ y se deduce que $K slash K^G$ es una extensión de Galois, con grupo de Galois $G$.
+  Es decir, no hay ningún automorfismo de $K$ que fije $K^G$ y no esté en $G$.
+]
+
+#corollary[
+  Sea $K$ un cuerpo, $G_1 != G_2$ dos subgrupos finitos de $"Aut"(K)$.
+  Entonces $K^(G_1) != K^(G_2)$.
+]
+
+#theorem(title: "Teorema Fundamental de la Teoría de Galois")[
+  Sea $L slash K$ una extensión de Galois.
+  Hay una biyección:
+
+  $
+    {"subcuerpos" F "de" L "que contienen a" K} &arrow {"subgrupos de" H "de" "Aut"(L slash K)} \
+    F &arrow "Aut"(L slash F) \
+    L^H &arrow H
+  $
+
+  Bajo esta correspondencia:
+
+  - Se revierten las inclusiones: $L^(H_1) subset.eq L^(H_2) <=> H_2 <= H_1$
+
+  - $[L : L^H] = |H| " y " [L^H : K] = |"Aut"(L slash K) : H|$
+
+  - $L slash F$ es siempre una extensión de Galois, con grupo de Galois $"Aut"(L slash F)$
+
+  - $F slash K$ es una extensión de Galois si y solo si $"Aut"(L slash F)$ es un subgrupo normal de $"Aut"(L slash K)$.
+    En ese caso,
+
+    $ "Aut"(F slash K) tilde.equiv ("Aut"(L slash K))/("Aut"(L slash F)) $
+
+  - Sean cuerpos $K subset.eq F_1, thick F_2 subset.eq L, thick H_1 = "Aut"(L slash F_1), thick H_2 = "Aut"(L slash F_2)$.
+    Entonces $F_1 inter F_2$ corresponde a $angle.l H_1, H_2 angle.r$ (grupo generado por $H_1$ y $H_2$) y $F_1 F_2$ (menor cuerpo que contiene a $F_1$ y $F_2$) corresponde a $H_1 inter H_2$.
+
+  Es decir, los retículos de subcuerpos de $L$ que contienen a $K$ y de subgrupos de $G$ son duales (el diagrama de uno es el otro "dado la vuelta").
+]
