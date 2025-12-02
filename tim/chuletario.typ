@@ -55,6 +55,19 @@
   Lo mismo es cierto si $f$ es acotada y tiene solo un número finito de discontinuidades.
 ]
 
+#theorem(title: "de Lebesgue")[
+  Sea $f: [a, b] -> RR$ acotada. Las dos afirmaciones siguientes son equivalentes:
+
+  - $f$ es integrable en el sentido de _Riemann_.
+  - El conjunto de discontinuidades de $f$, es decir,
+  $ cal(D)_f = {x in [a, b]: f "no es continua en x"} $
+  verifica la propiedad de que $forall epsilon > 0$ podemos encontrar un cubrimiento numerable de $cal(D)_f$ por intervalos abiertos:
+
+  $ {(a_j, b_j)_(j>=1)} quad "tal que" quad sum_(j=1)^oo (b_j - a_j) < epsilon $
+
+  Los conjuntos con esta propiedad se denominan de *medida cero*.
+]
+
 #theorem(title: "Teorema Fundamental del Cálculo")[
   Sea $f$ continua y $F(x) = integral_0^x f(x) d y$. Entonces $F$ es derivable y $F'(x) = f(x) thick forall x$.
 ]
@@ -104,20 +117,6 @@
 
 #definition[
   $A subset [0, 1]$ es *medible* si $m^*(A) + m^*(cal(C)A) = 1$, con $cal(C)A = [0, 1] without A$.
-]
-
-
-#theorem(title: "de Lebesgue")[
-  Sea $f: [a, b] -> RR$ acotada. Las dos afirmaciones siguientes son equivalentes:
-
-  - $f$ es integrable en el sentido de _Riemann_.
-  - El conjunto de discontinuidades de $f$, es decir,
-  $ cal(D)_f = {x in [a, b]: f "no es continua en x"} $
-  verifica la propiedad de que $forall epsilon > 0$ podemos encontrar un cubrimiento numerable de $cal(D)_f$ por intervalos abiertos:
-
-  $ {(a_j, b_j)_(j>=1)} quad "tal que" quad sum_(j=1)^oo (b_j - a_j) < epsilon $
-
-  Los conjuntos con esta propiedad se denominan de *medida cero*.
 ]
 
 = Teoría general de la medida y los teoremas de convergencia
@@ -173,22 +172,20 @@
   $ f^(-1)((a, oo)) = {x in X: f(x) > a} in cal(A) $
 ]
 
-#pagebreak(weak: true)
-
 #lemma[
-  Dada $f: X -> RR$ $cal(A)$-medible, la familia:
-  $ cal(A)_f = {B subset RR: f^(-1)(B) in cal(A)} $
+  Dada $f: X -> RR$ $cal(A)$-medible, la familia $cal(A)_f = {B subset RR: f^(-1)(B) in cal(A)}$
   es una $sigma$-álgebra en $RR$. En consecuencia, contiene a $cal(B)_RR$ porque $(a, oo) in cal(A)_f thick forall a$.
 ]
 
 #proposition[
-
   - Si $f, g: X -> RR$ son medibles, entonces $max(f, g)$ y $min(f, g)$ son medibles.
   - El supremo y el ínfimo de una familia numerable de funciones medibles son medibles.
   - El límite superior, el límite inferior y el límite de funciones medibles son todos medibles.
   - Si $f, g: X -> RR$ son medibles, entonces su suma $f + g$ es también medible.
   - Si $f: X -> RR$ es $cal(A)$ medible y $g: RR -> RR$ es continua, la composición $g compose f$ es $cal(A)$-medible.
 ]
+
+== Integración de funciones medibles positivas
 
 #definition(title: "Función característica")[
   Dado un conjunto $A$, se define la *función característica (o indicatriz)* de $A$ como:
@@ -322,9 +319,10 @@
   $
 ]
 
-#pagebreak(weak: true)
 
 = Espacios de medida
+
+== Medidas completas
 
 #definition(title: "Espacio de medida")[
   Un *espacio de medida* es una terna $(X, cal(A), mu)$ donde $X$ es un conjunto, $cal(A)$ es una $sigma$-álgebra y $mu$ es una medida.
@@ -358,6 +356,8 @@
 
 #pagebreak(weak: true)
 
+== Medidas exteriores
+
 #definition(title: "Medida exterior")[
   Se dice que $mu^* : cal(P)(X) -> [0, oo]$ es *medida exterior* si cumple:
 
@@ -381,6 +381,8 @@
 
   Denotamos $cal(A)^* = {A subset X : A "es" mu^*"-medible"}$
 ]
+
+== Teoremas de Carathéodory
 
 #theorem(title: "Teorema de Carathéodory I")[
   Si $mu^*$ es una medida exterior sobre $X$ y definimos $cal(A)^*$ como antes. Entonces $cal(A)^*$ es una \ $sigma$-álgebra y $mu^*|_(cal(A)^*)$ (restricción de $mu^*$ a $cal(A)^*$) es una medida completa.
@@ -424,7 +426,7 @@
   Si $mu$ es $sigma$-finita entonces las dos extensiones coinciden, es decir, $overline(cal(A)) = cal(A)^*$.
 ]
 
-#pagebreak(weak: true)
+== Medidas de Borel
 
 #definition(title: "Medida de Borel")[
   Se dice que $mu$ es una *medida de Borel* en $RR$ si está definida sobre la $sigma$-álgebra de los conjuntos de Borel $cal(B)_RR$.
@@ -441,6 +443,8 @@
 #proposition[
   Si $mu$ es una medida de Borel finita sobre conjuntos acotados, entonces $mu$ proviene de cierta pre-medida $mu_F$ sobre $cal(B)_0$.
 ]
+
+== Medidas regulares
 
 #definition(title: "Medida regular")[
   Dado $(RR, cal(A), mu)$ espacio de medida, se dice que $mu$ es *regular* (en $RR$) si verifica:
@@ -469,6 +473,8 @@
 ]
 
 = Medidas producto y el teorema del cambio de variable
+
+== La medida de Lebesgue en $RR^n$ como modelo
 
 #definition(title: "Rectángulo")[
   Dados intervalos $J_1, J_2, ..., J_n$ de $RR$ (finitos o no), al producto cartesiano #linebreak(justify: true) $R = J_1 times J_2 times ... times J_n$ lo denominaremos *rectángulo* en $RR^n$.
@@ -506,7 +512,10 @@
   La clase $cal(L)_n$ es la $sigma$-álgebra de Lebesgue en $RR^n$ y $m_n = m = d x$ la medida de Lebesgue.
 ]
 
+== Propiedades de la $sigma$-álgebra y de la medida de Lebesgue en $RR^n$
+
 #let title = [Propiedades de la $sigma$-álgebra y de la medida de Lebesgue en $RR^n$]
+
 #property(title: title)[
   - $cal(L)_n$ contiene a los abiertos de $RR^n$ y por tanto a la $sigma$-álgebra de Borel, $cal(B)_n$. (Ver @lema-prop-med-lebesgue)
 
@@ -561,6 +570,10 @@
   $ integral f(c dot x) d m(x) = 1/abs(c)^n integral f(x) d m(x) $
 ]
 
+#pagebreak(weak: true)
+
+== Teorema del cambio de variable (I)
+
 #theorem(title: "Fórmula del cambio de variable para aplicaciones lineales")[
   Sea $T$ una aplicación $RR^n -> RR^n$ lineal y regular ($det(T) != 0$, i.e. la matriz que define a $T$ pertenece a $"GL"(n, RR)$).
   Entonces:
@@ -584,6 +597,8 @@
   $ integral_(T(D)) f(y) d m = abs(det(T)) integral_D f(T(x)) d m $
 ]
 
+== Medidas inducidas
+
 #definition(title: "Aplicación medible")[
   Dados dos espacios $X$ e $Y$ dotados de ciertas $sigma$-álgebras $cal(A)_X$ y $cal(A)_Y$ respectivamente, se dice que $phi: X -> Y$ es *medible* (con respecto a $cal(A)_X$ y $cal(A)_Y)$ si:
 
@@ -601,6 +616,8 @@
 
   $ integral_Y f(y) d mu_phi (y) = integral_X f(phi(x)) d mu(x) $
 ]
+
+== Teorema del cambio de variable (II)
 
 #definition(title: "Jacobiano")[
   Sea $Omega$ un abierto de $RR^n$ y $phi: Omega subset RR^n -> RR^n$ un difeomorfismo regular, es decir #linebreak(justify: true) $phi in C^1(RR^n)$, es inyectivo y su inversa $phi^(-1) in C^1(RR^n)$.
@@ -635,7 +652,14 @@
   $ m(phi(Q)) <= integral_Q abs(J(x)) thick d x $
 ]
 
+== Ejemplos del teorema del cambio de variable
+
+// TODO:
+POR COMPLETAR
+
 = Teorema de Fubini
+
+== Medidas producto en general
 
 #definition(title: "Rectángulo medible")[
   Dados $A in cal(A)$ y $B in cal(B)$, definimos el *rectángulo medible*:
@@ -678,6 +702,8 @@
   También se suele escribir $d mu times d nu$ en vez de $d mu times.circle d nu$, o también $d (mu times nu)$.
 ]
 
+== El Teorema de Fubini
+
 #definition[
   - Dado $E subset X times Y$ y fijado $x in X$ se define la *$x$-sección de $E$* como:
 
@@ -702,7 +728,6 @@
   $
 ]
 
-#pagebreak(weak: true)
 
 #theorem(title: "Teorema de Fubini")[
   Sea $(X, cal(A), mu)$ e $(Y, cal(B), nu)$ dos espacios de medida $sigma$-finitos.
@@ -742,6 +767,10 @@
     mu times.circle nu(E) = integral_X nu(E_x) d mu(x) = integral_Y mu(E^y) d nu(y)
   $
 ]
+
+#pagebreak(weak: true)
+
+== Clases monótonas
 
 #definition(title: "Clase monótona")[
   Se dice que $cal(C) subset cal(P) (X times Y)$ es una *clase monótona* si es cerrada por uniones crecientes y por intersecciones decrecientes, esto es:
@@ -824,7 +853,6 @@
 
     $ lim_(j->oo) mu(A_j) = sum_(j=1)^oo mu(B_j) = mu(union.big_(j=1)^oo A_j) $
 
-  #pagebreak(weak: true)
 
   2. Trabajaremos en la cola a partir de $N$.
     Para $k>=0$ definimos $C_k := A_N without A_(N+k)$.
