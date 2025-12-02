@@ -14,6 +14,17 @@
 // #set-result("noanswer") // Deletes the demos.
 // #set-qed-symbol[#math.qed] // Changes qed symbol for proofs.
 
+// Prevents theorem boxes from breaking (also definitions, lemmas, ... and so on)
+#show figure: set block(breakable: false)
+
+// Makes corollary numbering same as the rest of objects.
+#let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
+  "corollary",
+  theorion-i18n-map.at("corollary"),
+  counter: theorem-counter,
+  render: render-fn.with(fill: fuchsia.darken(10%)),
+)
+
 #show: conf.with(
   title: "Chuletario Teoría de la Integral y la Medida",
   author: "Álvaro Grande Blázquez",
@@ -111,6 +122,8 @@
 
 = Teoría general de la medida y los teoremas de convergencia
 
+== Espacios de medida
+
 #definition(title: "Sigma álgebra")[
   Dado un conjunto $X$, se dice que $cal(A) subset cal(P)(X)$ es una *$sigma$-álgebra* si verifica:
 
@@ -153,10 +166,14 @@
   $ mu(inter.big_(j=1)^oo A_j) = lim_(j->oo)mu(A_j) $
 ]
 
+== Funciones medibles Lebesgue
+
 #definition[
   Diremos que $f: X -> RR$ es *$cal(A)$-medible* si $forall a in RR$ se tiene que
   $ f^(-1)((a, oo)) = {x in X: f(x) > a} in cal(A) $
 ]
+
+#pagebreak(weak: true)
 
 #lemma[
   Dada $f: X -> RR$ $cal(A)$-medible, la familia:
@@ -187,12 +204,14 @@
   $
 ]
 
-#definition(title: "Integración de funciones simples")[
-  Para una función simple $s(x) = sum_(j=1)^n c_j chi_(A_j) (x)$, se define su integral como:
+#block(breakable: false)[
+  #definition(title: "Integración de funciones simples")[
+    Para una función simple $s(x) = sum_(j=1)^n c_j chi_(A_j) (x)$, se define su integral como:
 
-  $ integral_X s(x) d mu = sum_(j=1)^n c_j mu(A_j) $
+    $ integral_X s(x) d mu = sum_(j=1)^n c_j mu(A_j) $
 
-  siempre que o bien $mu(A_j) < oo$ para todo $j=1, 2, ..., n$, o bien los $c_j$ sean positivos, en cuyo caso no importa que los $A_j$ sean de medida finita o no.
+    siempre que o bien $mu(A_j) < oo$ para todo $j=1, 2, ..., n$, o bien los $c_j$ sean positivos, en cuyo caso no importa que los $A_j$ sean de medida finita o no.
+  ]
 ]
 
 #definition(title: "Integración de funciones medibles")[

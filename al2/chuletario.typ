@@ -14,6 +14,9 @@
 // #set-result("noanswer") // Deletes the demos.
 // #set-qed-symbol[#math.qed] // Changes qed symbol for proofs.
 
+// Prevents theorem boxes from breaking (also definitions, lemmas, ... and so on)
+#show figure: set block(breakable: false)
+
 // Makes corollary numbering same as the rest of objects.
 #let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
   "corollary",

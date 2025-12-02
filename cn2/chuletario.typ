@@ -14,6 +14,9 @@
 // #set-result("noanswer") // Deletes the demos.
 // #set-qed-symbol[#math.qed] // Changes qed symbol for proofs.
 
+// Prevents theorem boxes from breaking (also definitions, lemmas, ... and so on)
+#show figure: set block(breakable: false)
+
 // Makes corollary numbering same as the rest of objects.
 #let (corollary-counter, corollary-box, corollary, show-corollary) = make-frame(
   "corollary",
@@ -52,7 +55,9 @@
 
   Donde $l_i (x_j) = 0, thick i != j; thick l_i (x_i) = 1$ y en particular:
 
-  $ l_i (x) = ((x-x_0) ... (x-x_(i-1)) (x-x_(i+1)) ... (x - x_N))/((x_i - x_0) ... (x_i - x_(i-1)) (x_i - x_(i+1)) ... (x_i - x_N)) $
+  $
+    l_i (x) = ((x-x_0) ... (x-x_(i-1)) (x-x_(i+1)) ... (x - x_N))/((x_i - x_0) ... (x_i - x_(i-1)) (x_i - x_(i+1)) ... (x_i - x_N))
+  $
 ]
 
 #pagebreak()
@@ -63,9 +68,9 @@
   Hasta ahora hemos visto dos formas de construir el polinomio interpolador de Lagrange, por coeficientes indeterminados y la forma de Lagrange.
   Una tercera forma de realizar la construcción es la *forma de Newton*, a través de la cual nos queda el siguiente polinomio:
 
-  $ p(x) = c_0 + c_1(x-x_0) + c_2(x-x_0)(x-x_1) + ... + c_N (x-x_0)(x-x_1)...(x-x_(N-1))$
+  $p(x) = c_0 + c_1(x-x_0) + c_2(x-x_0)(x-x_1) + ... + c_N (x-x_0)(x-x_1)...(x-x_(N-1))$
 
-  Por tanto, escribimos $p(x)$ en la base 
+  Por tanto, escribimos $p(x)$ en la base
 
   $ cal(B) = {1, (x-x_0), (x-x_0)(x-x_1), ... (x-x_0)(x-x_1)...(x-x_(N-1))} $
 ]
@@ -76,15 +81,19 @@
   Al entero $N$ se le llama *orden* de la diferencia dividida.
   Así, el polinomio interpolador en forma de Newton se escribe:
 
-  $ p(x) = f[x_0] + f[x_0, x_1](x-x_0) + f[x_0, x_1, x_2](x-x_0)(x-x_1) + ... + $
+  $
+    p(x) = f[x_0] + f[x_0, x_1](x-x_0) + f[x_0, x_1, x_2](x-x_0)(x-x_1) + ... +
+  $
 
-$ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
+  $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
 ]
 
 #theorem[
   Sean $x_0, x_1, ..., x_N, thick N>=1, thick N+1$ puntos distintos dos a dos donde está definida una función $f$. Entonces:
 
-  $ f[x_0, x_1, ..., x_N] = (f[x_1, x_2, ..., x_N] - f[x_0, x_1, ..., x_(N-1)])/(x_N - x_0) $
+  $
+    f[x_0, x_1, ..., x_N] = (f[x_1, x_2, ..., x_N] - f[x_0, x_1, ..., x_(N-1)])/(x_N - x_0)
+  $
 ]<dif-div>
 
 #pagebreak()
@@ -92,18 +101,23 @@ $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
 #lemma(title: "Tabla de diferencias divididas")[
   Usando reiteradamente el @dif-div podemos construir la siguiente tabla:
 
-#table(
-  columns: 6,
-  rows: 5,
-  inset: 10pt,
-  stroke: none,
-  align: horizon,
-  $ x_0 $, $ f[x_0] $, $$, $$, $$, $$,
-  $ x_1 $, $ f[x_1] $, $ f[x_0, x_1] $, $$, $$, $$,
-  $ x_2 $, $ f[x_2] $, $ f[x_1, x_2] $, $ f[x_0, x_1, x_2] $, $$, $$,
-  $ ... $, $ ... $, $ ... $, $ ... $, $ ... $, $$,
-  $ x_N $, $ f[x_N] $, $ f[x_(N-1), x_N] $, $ f[x_(N-2), x_(N-1), x_N] $, $...$ , $ f[x_0, x_1, ..., x_N]$
-)
+  #table(
+    columns: 6,
+    rows: 5,
+    inset: 10pt,
+    stroke: none,
+    align: horizon,
+    $ x_0 $, $ f[x_0] $, $$, $$, $$, $$,
+    $ x_1 $, $ f[x_1] $, $ f[x_0, x_1] $, $$, $$, $$,
+    $ x_2 $, $ f[x_2] $, $ f[x_1, x_2] $, $ f[x_0, x_1, x_2] $, $$, $$,
+    $ ... $, $ ... $, $ ... $, $ ... $, $ ... $, $$,
+    $ x_N $,
+    $ f[x_N] $,
+    $ f[x_(N-1), x_N] $,
+    $ f[x_(N-2), x_(N-1), x_N] $,
+    $...$,
+    $f[x_0, x_1, ..., x_N]$,
+  )
 
   Observamos que una vez calculada la tabla, los elementos diagonales nos dan los coeficientes del polinomio interpolador escrito en la forma de Newton.
 ]
@@ -137,7 +151,9 @@ $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
 #corollary[
   Si además de la hipótesis anterior suponemos $abs(f^((N+1)) (t)) <= K_(N+1), thick forall t in (a, b)$, entonces:
 
-  $ abs(f(x) - p(x)) <= (abs(x-x_0) abs(x-x_1) ... abs(x-x_n))/((N+1)!) K_(N+1) $
+  $
+    abs(f(x) - p(x)) <= (abs(x-x_0) abs(x-x_1) ... abs(x-x_n))/((N+1)!) K_(N+1)
+  $
 ]<cota-lagrange>
 
 == Diferencias divididas y derivadas
@@ -153,14 +169,16 @@ $ + ... + f[x_0, x_1, ..., x_N](x-x_0)(x-x_1)...(x-x_N) $
   Si $f$ es una función con $N$ derivadas continuas en $[a, b]$ y $f^((N+1))$ existe en $(a, b)$, entonces existe $xi in I, thick I = (min(x_0, ..., x_(N+1)), max(x_0, ..., x_(N+1)))$ para el que:
 
 
-$ f[x_0, x_1, ..., x_(N+1)] = (f^((N+1)) (xi))/((N+1) !) $
+  $ f[x_0, x_1, ..., x_(N+1)] = (f^((N+1)) (xi))/((N+1) !) $
 ]
 
 #pagebreak()
 
 == Convergencia de los polinomios de interpolación de Lagrange
 
-#proposition(title: "Convergencia de los polinomios de interpolación de Lagrange")[
+#proposition(
+  title: "Convergencia de los polinomios de interpolación de Lagrange",
+)[
   Dada una función $f$ definida en un intervalo $[a, b]$, elegimos un punto $x_0^0$ e interpolamos en él por una constante $p_0$; después elegimos dos puntos distintos entre sí $x_0^1, x_1^1$ e interpolamos por una recta $p_1$.
   Continuando con este proceso, ¿será cierto que $lim_(N->oo) p_N(x) = f(x)$?
   La respuesta es, en general, *negativa*, con la conclusión de que incrementar el grado de los polinomios de interpolación en el problema de Lagrange no siempre es recomendable.
@@ -169,9 +187,9 @@ $ f[x_0, x_1, ..., x_(N+1)] = (f^((N+1)) (xi))/((N+1) !) $
 #emph-box[
   *Fenómeno de Runge*
 
-  En 1900, el matemático Runge demostró que si se interpola la función $1\/(1+x^2)$, que posee derivadas continuas en todos los órdenes, en $N + 1$ abcisas equiespaciadas en el intervalo $[-5, 5]$ y se denota por $p_N (x)$ su polinomio interpolador. 
+  En 1900, el matemático Runge demostró que si se interpola la función $1\/(1+x^2)$, que posee derivadas continuas en todos los órdenes, en $N + 1$ abcisas equiespaciadas en el intervalo $[-5, 5]$ y se denota por $p_N (x)$ su polinomio interpolador.
 
-Entonces cuando $N->oo, thick thick p_N (x)$ no converge al valor de $f(x)$ si $abs(x) > 3.6$.
+  Entonces cuando $N->oo, thick thick p_N (x)$ no converge al valor de $f(x)$ si $abs(x) > 3.6$.
 ]
 
 = Interpolación de Taylor
@@ -190,7 +208,9 @@ Entonces cuando $N->oo, thick thick p_N (x)$ no converge al valor de $f(x)$ si $
 #lemma(title: "Fórmula del polinomio de Taylor")[
   Construimos el polinomio de Taylor de grado $N$ de $f$ en $x_0$ de la siguiente manera:
 
-  $ p(x) = f(x_0) + f'(x_0) (x- x_0) + (f''(x_0)) / 2! (x-x_0)^2 + ... + (f^((N)) (x_0)) / N! (x - x_0)^N $
+  $
+    p(x) = f(x_0) + f'(x_0) (x- x_0) + (f''(x_0)) / 2! (x-x_0)^2 + ... + (f^((N)) (x_0)) / N! (x - x_0)^N
+  $
 ]
 
 == Notaciones de Landau
@@ -200,7 +220,7 @@ Entonces cuando $N->oo, thick thick p_N (x)$ no converge al valor de $f(x)$ si $
 
   - Escribimos *$f = O(g)$* cuando $x-> x_0$ si existe una constante $K > 0$ tal que para $x$ próximo a $x_0$, $f$ y $g$ están definidas y satisfacen $abs(f(x)) <= K abs(g(x))$.
 
-Las notaciones de Landau también se usan cuando $x_0 = plus.minus oo$. Si $f_1 - f_2 = o(g)$ cuando $x -> x_0$ también se escribe $f_1 = f_2 + o(g)$. 
+  Las notaciones de Landau también se usan cuando $x_0 = plus.minus oo$. Si $f_1 - f_2 = o(g)$ cuando $x -> x_0$ también se escribe $f_1 = f_2 + o(g)$.
 ]
 
 #pagebreak()
@@ -234,7 +254,7 @@ Las notaciones de Landau también se usan cuando $x_0 = plus.minus oo$. Si $f_1 
 #pagebreak()
 
 #theorem(title: "Error en el polinomio de Taylor. Forma integral")[
-Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas continuas en el intervalo $overline(I)$ del @error-lagrange. Entonces:
+  Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas continuas en el intervalo $overline(I)$ del @error-lagrange. Entonces:
 
   $ f(x) - p(x) = 1/N! integral_(x_0)^x (x - s)^N f^((N+1)) (x) thick d s $
 ]
@@ -245,10 +265,12 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
   Sean $p_0(x), p_1(x), ..., p_N (x)$ los polinomios de Taylor de grado $N$ de $f$ en $x_0$.
   Nos preguntamos si:
 
-  $ f(x) = lim_(N->oo) p_N (x) = lim_(N->oo) sum_(n=0)^N (f^((n)) (x_0)) / (n!) (x-x_0)^n $
+  $
+    f(x) = lim_(N->oo) p_N (x) = lim_(N->oo) sum_(n=0)^N (f^((n)) (x_0)) / (n!) (x-x_0)^n
+  $
   Es decir, si $f(x)$ es la suma correspondiente a la serie de Taylor:
 
-  $ f(x) = sum_(n=0)^oo (f^((n)) (x_0)) / (n!) (x - x_0)^n  $
+  $ f(x) = sum_(n=0)^oo (f^((n)) (x_0)) / (n!) (x - x_0)^n $
 
   Podemos hacer los siguientes comentarios al respecto:
 
@@ -286,7 +308,7 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
 
   $ abs(f(x) - s(x)) <= 1/8 h^2 K_2, quad x in [a, b] $
 
-  Donde $h = max_i (x_i - x_(i-1))$ (es decir, $h = $ diámetro de la partición) y $K_2$ es una cota de la derivada segunda de $f$ en $[a, b]$.
+  Donde $h = max_i (x_i - x_(i-1))$ (es decir, $h =$ diámetro de la partición) y $K_2$ es una cota de la derivada segunda de $f$ en $[a, b]$.
 ]
 
 #corollary(title: "Convergencia de la interpolación lineal a trozos")[
@@ -335,19 +357,30 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
 #definition(title: "Problema de interpolación de Hermite")[
   Dados $x_0, ..., x_r$ nodos con $0<=r<=N$, el *problema de interpolación de Hermite* se basa en encontrar un polinomio que reproduce a $f$ y sus $m_i$ primeras derivadas de forma que $sum_(i=0)^r (1 + m_i) = N + 1$. Más concretamente, buscamos $p$ de grado menor o igual que $N$ satisfaciendo:
 
-#align(center)[
-#table(
-  columns: 4,
-  rows: 4,
-  inset: 10pt,
-  stroke: none,
-  align: horizon,
-  $ p(x_0) = f(x_0), $, $ p'(x_0) = f'(x_0), $, $ ... $, $ p^((m_0)) (x_0) = f^((m_0)) (x_0), $,
-  $ p(x_1) = f(x_1), $, $ p'(x_1) = f'(x_1), $, $ ... $, $ p^((m_1)) (x_1) = f^((m_1)) (x_1), $,
-  $ ... $, $ ... $, $ ... $, $ ... $,
-  $ p(x_r) = f(x_r), $, $ p'(x_r) = f'(x_r), $, $ ... $, $ p^((m_r)) (x_r) = f^((m_r)) (x_r) $,
-)
-]
+  #align(center)[
+    #table(
+      columns: 4,
+      rows: 4,
+      inset: 10pt,
+      stroke: none,
+      align: horizon,
+      $ p(x_0) = f(x_0), $,
+      $ p'(x_0) = f'(x_0), $,
+      $ ... $,
+      $ p^((m_0)) (x_0) = f^((m_0)) (x_0), $,
+
+      $ p(x_1) = f(x_1), $,
+      $ p'(x_1) = f'(x_1), $,
+      $ ... $,
+      $ p^((m_1)) (x_1) = f^((m_1)) (x_1), $,
+
+      $ ... $, $ ... $, $ ... $, $ ... $,
+      $ p(x_r) = f(x_r), $,
+      $ p'(x_r) = f'(x_r), $,
+      $ ... $,
+      $ p^((m_r)) (x_r) = f^((m_r)) (x_r) $,
+    )
+  ]
 
   Este problema es una generalización de la interpolación de Lagrange donde $r = N$ y $m_0 = m_1 = ... = m_r = 0$.
   También es una generalización de la interpolación de Taylor, donde $r = 0$ y $m_0 = N$.
@@ -357,15 +390,17 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
   Sea la siguiente base:
 
   $
-  {1, (x-x_0), ..., (x-x_0)^(m_0), (x-x_0)^(m_0 + 1), (x-x_0)^(m_0 + 1) (x-x_1), ..., \
-  (x-x_0)^(m_0+1)(x-x_1)^(m_1), ..., (x-x_0)^(m_0 + 1) (x-x_1)^(m_1 + 1) ... (x-x_(r-1))^(m_(r-1) + 1), ..., \ 
-  (x-x_0)^(m_0+1)(x-x_1)^(m_1+1)...(x-x_(r-1))^(m_(r-1)+1)(x-x_r)^(m_r) }
+    {1, (x-x_0), ..., (x-x_0)^(m_0), (x-x_0)^(m_0 + 1), (x-x_0)^(m_0 + 1) (x-x_1), ..., \
+      (x-x_0)^(m_0+1)(x-x_1)^(m_1), ..., (x-x_0)^(m_0 + 1) (x-x_1)^(m_1 + 1) ... (x-x_(r-1))^(m_(r-1) + 1), ..., \
+      (x-x_0)^(m_0+1)(x-x_1)^(m_1+1)...(x-x_(r-1))^(m_(r-1)+1)(x-x_r)^(m_r) }
   $
 
   El polinomio interpolador de Hermite se escribe:
 
-  $ p(x) = f(x_0) + f'(x_0)(x-x_0) + ... + (f^((m_0)) (x_0)) / (m_0 !)(x-x_0)^(m_0) + \
-  + thick c_(m_0+1)(x-x_0)^(m_0+1) + c_(m_0+2)(x-x_0)^((m_0+1))(x-x_1)... $
+  $
+    p(x) = f(x_0) + f'(x_0)(x-x_0) + ... + (f^((m_0)) (x_0)) / (m_0 !)(x-x_0)^(m_0) + \
+    + thick c_(m_0+1)(x-x_0)^(m_0+1) + c_(m_0+2)(x-x_0)^((m_0+1))(x-x_1)...
+  $
 ]
 
 #theorem[
@@ -395,7 +430,9 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
 #lemma[
   Dada una función de clase $cal(C)^i$, su diferencia dividida $i$-ésima es una función continua de sus $i+1$ variables. Por eso, se verifica por ejemplo que:
 
-  $ f[x_0, x_0] = lim_(x_1->x_0) f[x_0, x_1] = lim_(x_1 -> x_0) (f(x_1) - f(x_0))/ (x_1 - x_0) = f'(x_0) $
+  $
+    f[x_0, x_0] = lim_(x_1->x_0) f[x_0, x_1] = lim_(x_1 -> x_0) (f(x_1) - f(x_0))/ (x_1 - x_0) = f'(x_0)
+  $
 ]
 
 == Interpolantes cúbicos de Hermite a trozos
@@ -416,8 +453,8 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
   Sea la siguiente base:
 
   $
-  phi.alt_i (x_j) = delta_(i, j), quad phi.alt'_i (x_j) = 0, quad quad & 0 <= i <= N, \
-  theta_i (x_j) = 0, quad theta'_i (x_j) = delta_(i, j), quad quad & 0<= i <= N
+    phi.alt_i (x_j) = delta_(i, j), quad phi.alt'_i (x_j) = 0, quad quad & 0 <= i <= N, \
+    theta_i (x_j) = 0, quad theta'_i (x_j) = delta_(i, j), quad quad & 0<= i <= N
   $
 
   El interpolante cúbico de Hermite a trozos se escribe:
@@ -433,34 +470,33 @@ Sean $x, x_0$ dos números reales distintos y sea $f$ con $N+1$ derivadas contin
 
 #theorem[
   Dada $f$ continua en $[a, b]$ y derivable en $a$ y $b$, existe un único spline cúbico $h in M_2^3 (Delta)$ tal que $h(x_i) = f(x_i), thick i=0, ..., N, thick h'(a) = f'(a), thick h'(b) = f'(b)$.
-  
+
   A este spline se le llama *interpolante completo de $f$*.
   Para calcular $h$ se debe resolver primero el sistema siguiente (@sistema-hermite) para encontrar los valores $h'(x_i)$ en los nodos interiores y después construir el spline en cada intervalo usando los valores del mismo y su derivada en los extremos del intervalo.
 ]
 
 #lemma(title: "Sistema de ecuaciones para obtención de valores del spline")[
-$
-  mat(
-  2/(x_1-x_0) + 2/(x_2-x_1), 1/(x_2-x_1), ..., ..., 0;
-  1/(x_2-x_1), 2/(x_2-x_1) + 2/(x_3-x_2), 1/(x_3-x_2) ,..., 0;
-  dots.v, dots.v, dots.v, dots.down, dots.v;
-  0, 0, 0, 1/(x_(N-1)-x_(N-2)), 2/(x_(N-1)-x_(N-2)) + 2/(x_N - x_(N-1));
-  ) 
-  mat(
-  h'(x_1);
-    h'(x_2);
-    dots.v;
-    h'(x_(N-1));
-  ) \ \ \
-
-  =
-  mat(
-    (3(h(x_2)-h(x_1)))/(x_2-x_1)^2 + (3(h(x_1)-h(x_0)))/(x_1-x_0)^2 - (h'(x_0))/(x_1-x_0);
-    (3(h(x_3) - h(x_2)))/(x_3-x_2)^2 + (3(h(x_2) - h(x_1)))/(x_2 - x_1)^2;
-    dots.v;
-    (3(h(x_N) - h(x_(N-1))))/(x_N - x_(N-1))^2 + (3(h(x_(N-1))- h(x_(N-2))))/(x_(N-1) - x_(N-2))^2 - (h'(x_N))/(x_N - x_(N-1));
-  )
-$
+  $
+    mat(
+      2/(x_1-x_0) + 2/(x_2-x_1), 1/(x_2-x_1), ..., ..., 0;
+      1/(x_2-x_1), 2/(x_2-x_1) + 2/(x_3-x_2), 1/(x_3-x_2), ..., 0;
+      dots.v, dots.v, dots.v, dots.down, dots.v;
+      0, 0, 0, 1/(x_(N-1)-x_(N-2)), 2/(x_(N-1)-x_(N-2)) + 2/(x_N - x_(N-1));
+    )
+    mat(
+      h'(x_1);
+      h'(x_2);
+      dots.v;
+      h'(x_(N-1));
+    ) \ \ \
+    =
+    mat(
+      (3(h(x_2)-h(x_1)))/(x_2-x_1)^2 + (3(h(x_1)-h(x_0)))/(x_1-x_0)^2 - (h'(x_0))/(x_1-x_0);
+      (3(h(x_3) - h(x_2)))/(x_3-x_2)^2 + (3(h(x_2) - h(x_1)))/(x_2 - x_1)^2;
+      dots.v;
+      (3(h(x_N) - h(x_(N-1))))/(x_N - x_(N-1))^2 + (3(h(x_(N-1))- h(x_(N-2))))/(x_(N-1) - x_(N-2))^2 - (h'(x_N))/(x_N - x_(N-1));
+    )
+  $
 ]<sistema-hermite>
 
 #theorem[
@@ -526,7 +562,7 @@ $
   - La base de monomios es muy mal acondicionada si se trabaja en un intervalo $[a, b]$ cuya longitud sea pequeña comparada con la magnitud de $a$ o $b$. En esas situaciones es mejor trabajar con una base de potencias escaladas $[(x-a)/(b-a)]^k$.
   - Para polinomios de grado alto, la base de anterior es también mal acondicionada.
   - La base de polinomios de Chebyshev presenta buen acondicionamiento.
-  - La base de polinomios de Lagrange basados en los ceros del polinomio de Chebyshev es (casi) la mejor acondicionada posible. 
+  - La base de polinomios de Lagrange basados en los ceros del polinomio de Chebyshev es (casi) la mejor acondicionada posible.
 ]
 
 = Polinomios ortogonales <orto-pol>
@@ -589,11 +625,11 @@ $
   Recíprocamente, definiendo lo siguiente, se genera la sucesión de polinomios ortogonales mónicos:
 
   $
-  Q_0 (x) = 1, \
-  Q_q(x) = x - a_1, \
-  a_n = ((x Q_(n-1), Q_(n-1))_w)/(Q_(n-1), Q_(n-1))_w, quad n = 1, 2, 3, ..., \
-  b_n = ((x Q_(n-1), Q_(n-2))_w)/(Q_(n-2), Q_(n-2))_w, quad n = 2, 3, ..., \
-  Q_n = (x - a_n) Q_(n-1) - b_n Q_(n-2), quad n = 2, 3, ...,
+    Q_0 (x) = 1, \
+    Q_q(x) = x - a_1, \
+    a_n = ((x Q_(n-1), Q_(n-1))_w)/(Q_(n-1), Q_(n-1))_w, quad n = 1, 2, 3, ..., \
+    b_n = ((x Q_(n-1), Q_(n-2))_w)/(Q_(n-2), Q_(n-2))_w, quad n = 2, 3, ..., \
+    Q_n = (x - a_n) Q_(n-1) - b_n Q_(n-2), quad n = 2, 3, ...,
   $
 ]<construccion-pol-orto>
 
@@ -625,7 +661,9 @@ $
 
   $ p^* (x) = sum_(j=0)^n a_n T_j(x) $
 
-  $ a_0 = 1/pi integral_(-1)^1 f (x) (d x)/sqrt(1-x^2), quad a_j = 2/pi integral_(-1)^1 f(x) T_j(x) (d x)/sqrt(1-x^2), quad n = 0, 1, 2, ... $
+  $
+    a_0 = 1/pi integral_(-1)^1 f (x) (d x)/sqrt(1-x^2), quad a_j = 2/pi integral_(-1)^1 f(x) T_j(x) (d x)/sqrt(1-x^2), quad n = 0, 1, 2, ...
+  $
 
   - *Polinomios de Legendre*.
 
@@ -651,7 +689,7 @@ $
 == Convergencia de las mejores aproximaciones polinómicas en $cal(C)[a, b]$
 
 #theorem(title: "Teorema de Weierstrass")[
-  Si $f$ es una función real continua en un intervalo compacto $[a, b]$, dado $epsilon > 0$ existe un polinomio $P$ tal que $abs(f(x) - P(x)) <= epsilon $ para cada $x$ en $[a, b]$.
+  Si $f$ es una función real continua en un intervalo compacto $[a, b]$, dado $epsilon > 0$ existe un polinomio $P$ tal que $abs(f(x) - P(x)) <= epsilon$ para cada $x$ en $[a, b]$.
 ]
 
 #definition(title: "Polinomios de Bernstein")[
@@ -702,7 +740,9 @@ $
 #definition(title: "Reglas de cuadratura")[
   Las *reglas de cuadratura* suelen estar formadas por una combinación lineal de valores nodales de la función $f$:
 
-  $ integral_a^b f(x) d x approx I_(N+1) (f) = alpha_0 f(x_0) + alpha_1 f (x_1) + ... + alpha_N f(x_N) $
+  $
+    integral_a^b f(x) d x approx I_(N+1) (f) = alpha_0 f(x_0) + alpha_1 f (x_1) + ... + alpha_N f(x_N)
+  $
 
   Fijados $N$ y los valores de $alpha_i$ y $x_i, thick i = 0, ..., N$ la expresión anterior nos da una aproximación al valor exacto de la integral.
   Los $x_i$ se llaman abcisas o *nodos* de la regla de cuadratura, suponemos que son distintos dos a dos.
@@ -711,13 +751,13 @@ $
 ]
 
 #lemma(title: "Algunas reglas de cuadratura sencillas")[
-  - Regla del rectángulo $arrow$ $ wide thick thick thick I^R (f) = (b-a) f(a)$
+  - Regla del rectángulo $arrow$ $wide thick thick thick I^R (f) = (b-a) f(a)$
 
-  - Regla del punto medio $arrow$ $ wide I^(P M) (f) = (b-a) f(c), thick thick c=(a+b)/2$
+  - Regla del punto medio $arrow$ $wide I^(P M) (f) = (b-a) f(c), thick thick c=(a+b)/2$
 
-  - Regla de los trapecios $arrow$ $ wide thick I^T (f) = (b-a)/2 f(a) + (b-a)/2 f(b)$
+  - Regla de los trapecios $arrow$ $wide thick I^T (f) = (b-a)/2 f(a) + (b-a)/2 f(b)$
 
-  - Regla de Simpson $arrow$ $ wide wide I^S (f) = (b-a)/6 f(a) + (4(b-a))/6 f(c) + (b-a)/6 f(b), thick thick c = (a+b)/2$
+  - Regla de Simpson $arrow$ $wide wide I^S (f) = (b-a)/6 f(a) + (4(b-a))/6 f(c) + (b-a)/6 f(b), thick thick c = (a+b)/2$
 ]
 
 #pagebreak(weak: true)
@@ -739,11 +779,15 @@ $
 #proposition(title: "Método interpolatorio")[
   Consiste en sustituir el integrando $f$ por el polinomio interpolador de Lagrange de grado $N$, $p$, que coincide con $f$ en los nodos $x_i, thick i = 0, ..., N$.
 
-  $ integral _a^b f(x) d x approx I_(N+1) (f) = integral_a^b p(x) d x = f(x_0) integral_a^b l_0(x) d x + ... + f(x_N) integral_a^b l_N (x) d x $
+  $
+    integral_a^b f(x) d x approx I_(N+1) (f) = integral_a^b p(x) d x = f(x_0) integral_a^b l_0(x) d x + ... + f(x_N) integral_a^b l_N (x) d x
+  $
 
   Luego:
 
-  $ I_N (f) = sum_(i=0)^N alpha_i f(x_i) "donde" alpha_i = integral_a^b l_i (x) d x $
+  $
+    I_N (f) = sum_(i=0)^N alpha_i f(x_i) "donde" alpha_i = integral_a^b l_i (x) d x
+  $
 
   La regla obtenida por este procedimiento se llama *regla interpolatoria*.
 ]
@@ -758,10 +802,10 @@ $
   Este método se basa en observar que la regla de cuadratura tiene grado de precisión $N$ si y solo si $I_(N+1) (f) = I(f)$ para $f(x) = 1, x, ..., x^N$. Imponiendo estas condiciones obtenemos el sistema:
 
   $
-  alpha_0 + alpha-1 + ... alpha_N = (b-a), \
-  alpha_0 x_0 + alpha_1 x_1 + ... + alpha_N x_N = (b^2 - a^2)/2, \
-  dots.v \
-  alpha_0 x_0^N + alpha_1 x_1^N + ... alpha_N x_N^N = (b^(N+1) - a^(N+1))/(N+1)
+    alpha_0 + alpha-1 + ... alpha_N = (b-a), \
+    alpha_0 x_0 + alpha_1 x_1 + ... + alpha_N x_N = (b^2 - a^2)/2, \
+    dots.v \
+    alpha_0 x_0^N + alpha_1 x_1^N + ... alpha_N x_N^N = (b^(N+1) - a^(N+1))/(N+1)
   $
 
   Observemos que el anterior es un sistema de $N+1$ ecuaciones con $N+1$ incógnitas, los $alpha_i$, que tiene por matriz la matriz de Vandermonde, que sabemos tiene determinante distinto de cero si y solo si los nodos son distintos dos a dos.
@@ -788,18 +832,18 @@ $
 #proposition(title: "Error en las fórmulas de cuadratura")[
   Se pueden probar las siguientes cotas de error para las fórmulas más conocidas:
 
-  - Regla del rectángulo $arrow$ Si $f in cal(C)^1 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  - Regla del rectángulo $arrow$ Si $f in cal(C)^1 [a, b]$ entonces existe $eta in [a, b]$ tal que
   $ E^R (f) = (b-a)^2/2 f'(eta) $
 
-  - Regla del punto medio $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  - Regla del punto medio $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que
 
   $ E^(P M) (f) = (b-a)^3/24 f'''(eta) $
 
-  - Regla de los trapecios $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  - Regla de los trapecios $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que
 
   $ E^(T) (f) = -(b-a)^3/12 f''(eta) $
 
-  - Regla de Simpson $arrow$ Si $f in cal(C)^4 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  - Regla de Simpson $arrow$ Si $f in cal(C)^4 [a, b]$ entonces existe $eta in [a, b]$ tal que
 
   $ E^(S) (f) = -(b-a)^5/2880 f^((4))(eta) $
 ]
@@ -817,52 +861,68 @@ $
 
 #definition(title: "Reglas de cuadratura compuestas")[
   Sea $Delta := a = x_0 < x_1 < ... < x_N = b$, podemos escribir:
-  $ integral_a^b f(x) d x = integral_(x_0)^(x_1) f(x) d x + ... + integral_(x_(N-1))^(x_N) f(x) d x $
+  $
+    integral_a^b f(x) d x = integral_(x_0)^(x_1) f(x) d x + ... + integral_(x_(N-1))^(x_N) f(x) d x
+  $
 ]
 
 #lemma(title: "Algunas reglas de cuadratura compuestas")[
   - Regla del rectángulo:
-  $ I^(R C) (f) = (x_1 - x_0) f(x_0) +(x_2 - x_1) f(x_1) + ... + (x_N - x_(N-1)) f(x_(N-1)) $
+  $
+    I^(R C) (f) = (x_1 - x_0) f(x_0) +(x_2 - x_1) f(x_1) + ... + (x_N - x_(N-1)) f(x_(N-1))
+  $
 
   - Regla del punto medio:
-  $ I^(P M C) (f) = (x_1 - x_0) f(x_(1 slash 2)) + (x_2 - x_1) f(x_(3 slash 2)) + ... + (x_N - x_(N-1)) f(x_(N-1 slash 2)) $
+  $
+    I^(P M C) (f) = (x_1 - x_0) f(x_(1 slash 2)) + (x_2 - x_1) f(x_(3 slash 2)) + ... + (x_N - x_(N-1)) f(x_(N-1 slash 2))
+  $
 
   - Regla del trapecio:
   $
-  I^(T C) (f) = (x_1 - x_0)/2 f(x_0) + (x_1 - x_0)/2 f(x_1) + (x_2 - x_1)/2 f(x_1) + (x_2 - x_1)/2 f(x_2) + ...\
-   ... + (x_N - x_(N-1))/2 f(x_(N-1)) + (x_N - x_(N-1))/2 f(x_N) = \
-  = sum_(i=1)^N (x_i-x_(i-1))/2 [f(x_(i-1)) + f(x_i))]
+    I^(T C) (f) = (x_1 - x_0)/2 f(x_0) + (x_1 - x_0)/2 f(x_1) + (x_2 - x_1)/2 f(x_1) + (x_2 - x_1)/2 f(x_2) + ...\
+    ... + (x_N - x_(N-1))/2 f(x_(N-1)) + (x_N - x_(N-1))/2 f(x_N) = \
+    = sum_(i=1)^N (x_i-x_(i-1))/2 [f(x_(i-1)) + f(x_i))]
   $
 
   - Regla de Simpson:
-  $ I^(S C) (f) = (x_1 - x_0)/6 f(x_0) + (4(x_1 - x_0))/6 f(x_(1 slash 2)) + (x_1 - x_0)/6 f(x_1) + ... \
-  ... +(x_N - x_(N-1))/6 f(x_(N-1)) + (4 (x_N - x_(N-1)))/6 f(x_(N-1 slash 2)) + (x_N - x_(N-1))/6 f(x_N) = \
-  = sum_(i=1)^N (x_i - x_(i-1))/6 [f(x_(i-1)) + 4 f((x_(i-1) + x_i)/2) + f(x_i)] $
+  $
+    I^(S C) (f) = (x_1 - x_0)/6 f(x_0) + (4(x_1 - x_0))/6 f(x_(1 slash 2)) + (x_1 - x_0)/6 f(x_1) + ... \
+    ... +(x_N - x_(N-1))/6 f(x_(N-1)) + (4 (x_N - x_(N-1)))/6 f(x_(N-1 slash 2)) + (x_N - x_(N-1))/6 f(x_N) = \
+    = sum_(i=1)^N (x_i - x_(i-1))/6 [f(x_(i-1)) + 4 f((x_(i-1) + x_i)/2) + f(x_i)]
+  $
 ]
 
 #lemma[
   Sea $g$ una función continua en $[a, b]$, $alpha_i >= 0, thick i = 1, ..., N$, no todos nulos, y $eta_i in [a, b], thick i = 1, ..., N$.
   Entonces existe $eta in [a, b]$ tal que:
 
-  $ alpha_1 g(eta_1) + alpha_2 g(eta_2) + ... + alpha_N(eta_N) = (alpha_1 + ... + alpha_N)g(eta) $
+  $
+    alpha_1 g(eta_1) + alpha_2 g(eta_2) + ... + alpha_N(eta_N) = (alpha_1 + ... + alpha_N)g(eta)
+  $
 ]<lema-error-comp>
 
 #proposition(title: "Error en las fórmulas de cuadratura compuestas")[
-  Empleando el @lema-error-comp obtenemos las siguientes cotas de error para las reglas compuestas. 
+  Empleando el @lema-error-comp obtenemos las siguientes cotas de error para las reglas compuestas.
   Sean $h = max_(1<=i<=N)(x_i - x_(i-1))$ y $K_i$ una cota para $f^((i))$ en $[a, b]$:
 
-  - Regla del rectángulo compuesta $arrow$ Si $f in cal(C)^1 [a, b]$ entonces existe $eta in [a, b]$ tal que 
-  $ abs(E^(R C) (f)) = abs(1/2[(x_1 - x_0)^2 + ... + (x_N - x_(N-1)^2)] f'(eta)) <= 1/2 h (b-a) K_1 $
+  - Regla del rectángulo compuesta $arrow$ Si $f in cal(C)^1 [a, b]$ entonces existe $eta in [a, b]$ tal que
+  $
+    abs(E^(R C) (f)) = abs(1/2[(x_1 - x_0)^2 + ... + (x_N - x_(N-1)^2)] f'(eta)) <= 1/2 h (b-a) K_1
+  $
 
-  - Regla del punto medio compuesta $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  - Regla del punto medio compuesta $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que
 
-  $ abs(E^(P M C) (f)) = abs(1/24 [(x_1 - x_0)^3 + ... + (x_N - x_(N-1))^3] f''(eta)) <= 1/24 h^2(b-a) K_2 $
+  $
+    abs(E^(P M C) (f)) = abs(1/24 [(x_1 - x_0)^3 + ... + (x_N - x_(N-1))^3] f''(eta)) <= 1/24 h^2(b-a) K_2
+  $
 
-  - Regla de los trapecios compuesta $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  - Regla de los trapecios compuesta $arrow$ Si $f in cal(C)^2 [a, b]$ entonces existe $eta in [a, b]$ tal que
 
-  $ abs(E^(T C) (f)) = abs(-1/12 [(x_1 - x_0)^3 + ... (x_N - x_(N-1))^3] f''(eta)) <= 1/12 h^2 (b-a) K_2 $
+  $
+    abs(E^(T C) (f)) = abs(-1/12 [(x_1 - x_0)^3 + ... (x_N - x_(N-1))^3] f''(eta)) <= 1/12 h^2 (b-a) K_2
+  $
 
-  - Regla de Simpson compuesta $arrow$ Si $f in cal(C)^4 [a, b]$ entonces existe $eta in [a, b]$ tal que 
+  - Regla de Simpson compuesta $arrow$ Si $f in cal(C)^4 [a, b]$ entonces existe $eta in [a, b]$ tal que
 
   $ abs(E^(S C)) <= 1/2880 h^4 (b-a) K_4 $
 ]
@@ -915,13 +975,17 @@ $
 #theorem(title: "Error en la regla de cuadratura gaussiana")[
   Si $f in cal(C)^(2N + 2) [a, b]$, entonces el error en la regla de cuadratura gaussiana de grado $2N + 1$ verifica:
 
-  $ E_(N+1) (f) = (f^((2N + 2)(eta)))/(2N + 2)! integral_a^b (x-x_0)^2 ... (x - x_N)^2 d x, quad eta in [a, b] $
+  $
+    E_(N+1) (f) = (f^((2N + 2)(eta)))/(2N + 2)! integral_a^b (x-x_0)^2 ... (x - x_N)^2 d x, quad eta in [a, b]
+  $
 ]
 
 #definition(title: "Cuadratura de Lobatto")[
   Se define la *regla de cuadratura de Lobatto* como:
 
-  $ integral_a^b f(x) d x approx alpha_0 f(a) + alpha_1 f(x_1) + ... + alpha_(N-1) f(x_(N-1)) + alpha_N f(b) $
+  $
+    integral_a^b f(x) d x approx alpha_0 f(a) + alpha_1 f(x_1) + ... + alpha_(N-1) f(x_(N-1)) + alpha_N f(b)
+  $
 
   en la que, a diferencia de la regla anterior, hemos fijado los nodos $a$ y $b$ y dejamos libres los nodos $x_1, ..., x_(N-1)$ y los pesos $alpha_i, i = 0, ..., N$.
   Como tenemos $2N$ parámetros libres esperamos tener una regla de cuadratura de grado $2N - 1$.
@@ -1000,9 +1064,11 @@ $
   Dado que $y(x_0) = y_0$, supongamos que hemos calculado $y_n$ hasta un cierto valor de $n$, #linebreak(justify: true) $0 <= n <= N - 1, thick N >= 1$.
   Entonces, en general, un *método de un paso* puede escribirse de la forma:
 
-  $ y_(n+1) = y_n + h Phi(x_n, y_n\; h), wide n = 0, 1, ..., N - 1, wide y_0 = y(x_0) $
+  $
+    y_(n+1) = y_n + h Phi(x_n, y_n\; h), wide n = 0, 1, ..., N - 1, wide y_0 = y(x_0)
+  $
 
-  donde $Phi( dot, dot, dot)$ es una función continua respecto de sus variables.
+  donde $Phi(dot, dot, dot)$ es una función continua respecto de sus variables.
 ]<def-metodo-un-paso>
 
 #lemma(title: "Algunos ejemplos de métodos de un paso")[
@@ -1044,7 +1110,9 @@ $
 
   Entonces el error se puede acotar por:
 
-  $ norm(e_n) <= T/L_Phi (e^(L_Phi(x_n - x_0)) - 1); wide n = 0, 1, ..., N, quad quad T = max_(0<=n<=N-1) norm(T_n) $
+  $
+    norm(e_n) <= T/L_Phi (e^(L_Phi(x_n - x_0)) - 1); wide n = 0, 1, ..., N, quad quad T = max_(0<=n<=N-1) norm(T_n)
+  $
 ]<thm-error-lips>
 
 #corollary(title: "Cota de error del método de Euler")[
@@ -1066,12 +1134,16 @@ $
 #theorem[
   Supongamos que la función $Phi(dot, dot\; dot)$ es continua en $D times [0, h_0], thick (D = [x_0, X] times RR^d$ y satisface la condición de consistencia y la condición de Lipschitz
 
-  $ norm(Phi(x, u\; h) - Phi(x, v\; h)) <= L_(Phi) norm(u - v) wide "en" D times [0, h_0] $
+  $
+    norm(Phi(x, u\; h) - Phi(x, v\; h)) <= L_(Phi) norm(u - v) wide "en" D times [0, h_0]
+  $
 
   Entonces las aproximaciones ${y_n}$ obtenidas de la @def-metodo-un-paso usando los puntos #linebreak(justify: true) $x_n = x_0 + n h, thick n = 1, 2, ..., N$ con valores decrecientes de $h$ convergen a la solución del problema de valores iniciales // TODO: pvi de la introducción
   , es decir
 
-  $ lim_(n->oo) y_n = y(x) " si " x_n -> x in [x_0, X_M] " cuando " h->0 " y " n->oo $
+  $
+    lim_(n->oo) y_n = y(x) " si " x_n -> x in [x_0, X_M] " cuando " h->0 " y " n->oo
+  $
 ]
 
 #definition(title: "Orden de consistencia")[
