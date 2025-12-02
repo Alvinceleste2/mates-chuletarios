@@ -984,3 +984,10 @@
 
   Es decir, los retículos de subcuerpos de $L$ que contienen a $K$ y de subgrupos de $G$ son duales (el diagrama de uno es el otro "dado la vuelta").
 ]
+
+#definition(title: "Retículo")[
+  Un *retículo* es un conjunto parcialmente ordenado tal que para cada par de elementos, existen:
+
+  - Su supremo: menor elemento mayor que ambos _(join)_
+  - Su ínfimo: mayor elemento menor que ambos _(meet)_
+]
