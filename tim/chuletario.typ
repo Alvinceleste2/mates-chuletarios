@@ -25,12 +25,16 @@
 
 = Introducción
 
+== La integral hasta 1900. La integral de Riemann
+
 #definition(title: "Integral de Riemann")[
   Sea $f: [a, b] -> RR$ acotada y sea $cal(P) = {a = x_0 < x_1 < ... < x_n = b}$ una partición del intervalo $[a, b]$.
   Sea $I_j = [x_(j-1), x_j], thick j = 1, 2, ...$ y sean también $s_j = sup_(I_j)f(x) thick "y" thick inf_(I_j)f(x)$.
   Definimos las *sumas superior e inferior*, respectivamente, como:
 
-  $ cal(U)_f (cal(P)) = sum_(j=1)^n s_j (x_j - x_(j-1)) quad ; quad cal(L)_f (cal(P)) = sum_(j=1)^n i_j (x_j - x_(j-1)) $
+  $
+    cal(U)_f (cal(P)) = sum_(j=1)^n s_j (x_j - x_(j-1)) quad ; quad cal(L)_f (cal(P)) = sum_(j=1)^n i_j (x_j - x_(j-1))
+  $
 
   Decimos entonces que $f$ es *integrable en el sentido de _Riemann_* si existen particiones que permitan aproximar las sumas anteriores de forma arbitraria.
 ]
@@ -40,47 +44,69 @@
   Lo mismo es cierto si $f$ es acotada y tiene solo un número finito de discontinuidades.
 ]
 
-#theorem(title: "de Lebesgue")[
-  Sea $f: [a, b] -> RR$ acotada. Las dos afirmaciones siguientes son equivalentes:
-
-  - $f$ es integrable en el sentido de _Riemann_.
-  - El conjunto de discontinuidades de $f$, es decir, 
-  $ cal(D)_f = {x in [a, b]: f "no es continua en x"} $
-  verifica la propiedad de que $forall epsilon > 0$ podemos encontrar un cubrimiento numerable de $cal(D)_f$ por intervalos abiertos:
-
-  $ {(a_j, b_j)_(j>=1)} quad "tal que" quad sum_(j=1)^oo (b_j - a_j) < epsilon $
-
-  Los conjuntos con esta propiedad se denominan de *medida cero*.
+#theorem(title: "Teorema Fundamental del Cálculo")[
+  Sea $f$ continua y $F(x) = integral_0^x f(x) d y$. Entonces $F$ es derivable y $F'(x) = f(x) thick forall x$.
 ]
 
-#definition(title: "Medida (exterior) de Lebesgue")[
-  Dado un conjunto $A subset RR$, se define su *"medida" (exterior) de _Lebesgue_* como:
-  $ m^*(A) = inf{sum_(k>=1) "long"(I_k), thick {I_k} "intervalos y" thick union.big_(k>=1)I_k supset A } $
+== La integral según Lebesgue
+
+#definition(title: "Medida de Lebesgue")[
+  Dado un conjunto $A subset RR$, se define su "medida" de Lebesgue como:
+
+  $
+    m(A) = inf{sum_(k>=1) "long"(I_k), " con" {I_k} "intervalos y " union.big_(k>=1) I_k supset A }
+  $
 ]
 
 #lemma[
-  Un conjunto $A subset RR$ tiene medida (exterior) de _Lebesgue_ cero si y solo si
-  $ forall epsilon > 0, quad exists {I_k} "sucesión de intervalos con" thick union.big_(k>=1)I_k supset A, thick "tal que" thick sum_(k>=1)"long"(I_k) < epsilon $
+  Un conjunto $A subset RR$ tiene medida de Lebesgue cero si y solo si
+  $
+    forall epsilon > 0, quad exists {I_k} "sucesión de intervalos con" thick union.big_(k>=1)I_k supset A, thick "tal que" thick sum_(k>=1)"long"(I_k) < epsilon
+  $
 ]
 
-#property(title: "Propiedades de la medida exterior de Lebesgue")[
-  - $m^*(emptyset) = 0$
-  - Si $A subset B$ entonces $m^*(A) <= m^*(B)$.
-  - Dada una familia numerable de subconjuntos, ${A_k}_k$, entonces 
-  $ m^*(union.big_(k>=1) A_k) <= sum_(k>=1) m^*(A_k) $
+#definition[
+  Una determinada propiedad $cal(P)$ se dice que se cumple *en casi todo punto (c.t.p.)* si el conjunto de puntos donde NO se cumple $cal(P)$ tiene medida cero.
+]
+
+#property(title: "Propiedades de la medida de Lebesgue")[
+  - $m(emptyset) = 0$
+  - Si $A subset B$ entonces $m(A) <= m(B)$.
+  - Dada una familia numerable de subconjuntos, ${A_k}_k$, entonces
+  $ m(union.big_(k>=1) A_k) <= sum_(k>=1) m(A_k) $
   - La unión numerable de conjuntos de medida cero tiene medida cero.
 ]
 
 #lemma[
-  Si $I subset RR$ es un intervalo, entonces $"med"(I) = "long(I)"$.
+  Si $I subset RR$ es un intervalo, entonces $m(I) = "long(I)"$.
+]
+
+#definition(title: "Medida exterior de Lebesgue")[
+
+  La función sobre conjuntos definida anteriormente se denomina *medida exterior* para la medida de Lebesgue y se denota por $m^*$, es decir, $forall A subset RR$:
+  $
+    m^*(A) = inf{sum_(k>=1) "long"(I_k), " con" {I_k} "intervalos y " union.big_(k>=1)I_k supset A }
+  $
+
+  Según veremos posteriormente, existe una clase de subconjuntos, que denominaremos *medibles*, sobre los cuales $m^*$ será numerablemente aditiva.
 ]
 
 #definition[
   $A subset [0, 1]$ es *medible* si $m^*(A) + m^*(cal(C)A) = 1$, con $cal(C)A = [0, 1] without A$.
 ]
 
-#theorem(title: "Teorema Fundamental del Cálculo")[
-  Sea $f$ continua y $F(x) = integral_0^x f(x) d y$. Entonces $F$ es derivable y $F'(x) = f(x) thick forall x$.
+
+#theorem(title: "de Lebesgue")[
+  Sea $f: [a, b] -> RR$ acotada. Las dos afirmaciones siguientes son equivalentes:
+
+  - $f$ es integrable en el sentido de _Riemann_.
+  - El conjunto de discontinuidades de $f$, es decir,
+  $ cal(D)_f = {x in [a, b]: f "no es continua en x"} $
+  verifica la propiedad de que $forall epsilon > 0$ podemos encontrar un cubrimiento numerable de $cal(D)_f$ por intervalos abiertos:
+
+  $ {(a_j, b_j)_(j>=1)} quad "tal que" quad sum_(j=1)^oo (b_j - a_j) < epsilon $
+
+  Los conjuntos con esta propiedad se denominan de *medida cero*.
 ]
 
 = Teoría general de la medida y los teoremas de convergencia
@@ -128,8 +154,8 @@
 ]
 
 #definition[
-  Diremos que $f: X -> RR$ es *$cal(A)$-medible* si $forall a in RR$ se tiene que 
-  $ f^(-1)((a, oo)) = {x in X: f(x) > a} in cal(A) $ 
+  Diremos que $f: X -> RR$ es *$cal(A)$-medible* si $forall a in RR$ se tiene que
+  $ f^(-1)((a, oo)) = {x in X: f(x) > a} in cal(A) $
 ]
 
 #lemma[
@@ -156,7 +182,9 @@
 #definition(title: "Función simple")[
   Dado un espacio de medida $(X, cal(A), mu)$, se dice que $s: X -> RR$ es una *función simple* si se puede escribir como una combinación lineal de funciones características de conjuntos de $cal(A)$. Es decir:
 
-  $ s(x) = sum_(j=1)^n c_j chi_(A_j) (x), quad "con" c_j in RR, thick A_j in cal(A), thick j = 1, 2, 3, ..., n $
+  $
+    s(x) = sum_(j=1)^n c_j chi_(A_j) (x), quad "con" c_j in RR, thick A_j in cal(A), thick j = 1, 2, 3, ..., n
+  $
 ]
 
 #definition(title: "Integración de funciones simples")[
@@ -170,7 +198,9 @@
 #definition(title: "Integración de funciones medibles")[
   Para una función medible $f$, con $f(x) >= 0 thick forall x$, se define su integral como sigue:
 
-  $ integral_X f(x) d mu = sup{integral_X s(x) d mu : 0 <= s(x) <= f(x), thick s(x) "simple"} $
+  $
+    integral_X f(x) d mu = sup{integral_X s(x) d mu : 0 <= s(x) <= f(x), thick s(x) "simple"}
+  $
 ]
 
 #note-box()[
@@ -194,13 +224,17 @@
 #theorem(title: "Teorema de la convergencia monótona")[
   Si ${f_j}_(j=1)^oo$ es una sucesión monótona creciente de funciones medibles positivas $(0 <= f_1 <= ... <= f_n <= f_(n+1) <= ...)$ y sea $f(x) = lim_(n->oo) f_n (x)$. Entonces se tiene:
 
-  $ integral_X (lim_(n->oo) f_n (x)) d mu = integral_X f(x) d mu = lim_(n->oo) (integral_X f_n (x) d mu) $
+  $
+    integral_X (lim_(n->oo) f_n (x)) d mu = integral_X f(x) d mu = lim_(n->oo) (integral_X f_n (x) d mu)
+  $
 ]
 
 #corollary(title: "Convergencia monótona para series")[
   Sea ${g_n (x)}_(n=1)^oo$ una sucesión de funciones medibles y positivas. Entonces:
 
-  $ integral_X (sum_(n=1)^oo g_n (x)) d mu = sum_(n=1)^oo (integral_X g_n (x) d mu) $
+  $
+    integral_X (sum_(n=1)^oo g_n (x)) d mu = sum_(n=1)^oo (integral_X g_n (x) d mu)
+  $
 ]
 
 #lemma[
@@ -210,7 +244,7 @@
 ]
 
 #proposition(title: "Desigualdad de Chebyshev")[
-  Si $f$ es medible y $a>0$, se tiene: 
+  Si $f$ es medible y $a>0$, se tiene:
 
   $ mu ({x in X: abs(f(x)) >= a}) <= 1/a integral_X abs(f(y)) d mu(y) $
 ]
@@ -224,7 +258,9 @@
 #lemma(title: "Fatou")[
   Dada una sucesión de funciones medibles y positivas ${f_n}$, se tiene:
 
-  $ integral_X (liminf_(n->oo) thick (f_n (x))) d mu <= liminf_(n->oo) thick (integral_X f_n (x) d mu) $
+  $
+    integral_X (liminf_(n->oo) thick (f_n (x))) d mu <= liminf_(n->oo) thick (integral_X f_n (x) d mu)
+  $
 ]
 
 #definition[
@@ -240,23 +276,31 @@
 
   En particular,
 
-  $ integral_X (lim_(n->oo) f_n (x)) thick d mu = integral_X f(x) thick d mu = lim_(n->oo) (integral_X f_n (x) thick d mu) $
+  $
+    integral_X (lim_(n->oo) f_n (x)) thick d mu = integral_X f(x) thick d mu = lim_(n->oo) (integral_X f_n (x) thick d mu)
+  $
 ]
 
 #corollary[
   Si ${f_k}_(k=1)^oo$ son medibles y $sum_(k=1)^oo (integral abs(f_k (x)) thick d mu) < oo$, entonces la serie $f(x) = sum_(k=1)^oo f_k (x)$ converge en _c.t.p._ y
 
-  $ integral_X (sum_(k=1)^oo f_k (x)) thick d mu = sum_(k=1)^oo (integral_X f_k (x) thick d mu) $
+  $
+    integral_X (sum_(k=1)^oo f_k (x)) thick d mu = sum_(k=1)^oo (integral_X f_k (x) thick d mu)
+  $
 ]
 
 #lemma[
-  $ integral_X abs(f(x)) thick d mu(x) = integral_0^oo mu({x in X : abs(f(x)) > t}) thick d t $
+  $
+    integral_X abs(f(x)) thick d mu(x) = integral_0^oo mu({x in X : abs(f(x)) > t}) thick d t
+  $
 ]
 
 #definition[
   Dado un espacio de medida $(X, cal(A), mu)$ se define la clase de funciones "integrables" como:
 
-  $ L^1(d mu) = {f : X -> CC "tal que" f "es medible y" integral_X abs(f) d mu < oo} $
+  $
+    L^1(d mu) = {f : X -> CC "tal que" f "es medible y" integral_X abs(f) d mu < oo}
+  $
 ]
 
 #pagebreak(weak: true)
@@ -290,13 +334,13 @@
   Sea $(X, cal(A), mu)$ con $mu$ completa, entonces:
 
   - Si $f = g$ en _c.t.p._ y $f$ es medible, entonces $g$ es medible.
-  - Si las $f_n$ son medibles $forall n$ y $ thick f_n -> f thick$ para _c.t.p._, entonces $f$ es medible.
+  - Si las $f_n$ son medibles $forall n$ y $thick f_n -> f thick$ para _c.t.p._, entonces $f$ es medible.
 ]
 
 #pagebreak(weak: true)
 
 #definition(title: "Medida exterior")[
-  Se dice que $mu^* : cal(P)(X) ->  [0, oo]$ es *medida exterior* si cumple:
+  Se dice que $mu^* : cal(P)(X) -> [0, oo]$ es *medida exterior* si cumple:
 
   - $mu^*(emptyset) = 0$
   - Si $A subset B, quad mu^*(A) <= mu^*(B)$
@@ -308,7 +352,7 @@
   Dada una álgebra $cal(B)_0 subset cal(P)(X)$, se dice que $mu_0 : cal(B)_0 -> [0, oo]$ es una *pre-medida* si verifica:
 
   - $mu_0(emptyset) = 0$
-  - Si $B_i in cal(B)_0$ son disjuntos y $ thick union.big.plus_(i=1)^oo B_i in cal(B)_0$, entonces $mu_0(union.big.plus_(i=1)^oo B_i) = sum_(i=1)^oo mu_0(B_i)$
+  - Si $B_i in cal(B)_0$ son disjuntos y $thick union.big.plus_(i=1)^oo B_i in cal(B)_0$, entonces $mu_0(union.big.plus_(i=1)^oo B_i) = sum_(i=1)^oo mu_0(B_i)$
 ]
 
 #definition(title: "Conjuntos medibles para una medida exterior")[
@@ -327,7 +371,7 @@
   Sea $mu_0$ una pre-medida sobre $B_0$ y definamos una medida exterior $mu^*$ y la clase $cal(A)^*$ de los \ $mu$-medibles como antes. Entonces:
 
   - $cal(A)^*$ es una $sigma$-álgebra que contiene a $B_0$
-  - $mu = mu^*|_(cal(A)^*)$ es una medida completa que extiende a $mu_0$ 
+  - $mu = mu^*|_(cal(A)^*)$ es una medida completa que extiende a $mu_0$
 ]<thm:caratheodory2>
 
 #definition(title: "Medida de Lebesgue")[
@@ -358,7 +402,7 @@
 ]
 
 #lemma[
-  Si $mu$ es $sigma$-finita entonces las dos extensiones coinciden, es decir, $ overline(cal(A)) = cal(A)^*$.
+  Si $mu$ es $sigma$-finita entonces las dos extensiones coinciden, es decir, $overline(cal(A)) = cal(A)^*$.
 ]
 
 #pagebreak(weak: true)
@@ -394,7 +438,7 @@
 
 #theorem(title: "Invarianza por traslaciones y dilataciones")[
   Dado $E subset RR$, definimos para $x_0 in RR, thick r > 0; thick x_0 + E = {x_0 + y: y in E} thick "y" thick r dot E = {r dot y : y in E}$. Entonces si $E in cal(L)$ se tiene:
-  
+
   - $x_0 + E in cal(A), thick thick r dot E in cal(A)$
   - $m(x_0 + E) = m(E), thick thick m(r dot E) = r dot m(E)$
 ]
@@ -452,8 +496,8 @@
   - La medida de Lebesgue en $RR^n$ es regular, es decir:
 
   $
-  m(A) = inf{m(U) : A subset U, thick U "abierto"} \
-  m(A) = sup{m(K) : K subset A, thick K "compacto"}
+    m(A) = inf{m(U) : A subset U, thick U "abierto"} \
+    m(A) = sup{m(K) : K subset A, thick K "compacto"}
   $
 
   - La medida de Lebesgue en $RR^n$ es invariante por traslaciones.
@@ -472,7 +516,7 @@
 
   - Todos los cubos de $Delta_k$ tienen el mismo lado, de longitud $2^(-k)$.
 
-  - Sean $R, Q$ dos cubos en $Delta$. Si $circle(Q) inter circle(R) = emptyset$, entonces o bien $Q subset R$ o bien $R subset Q$. 
+  - Sean $R, Q$ dos cubos en $Delta$. Si $circle(Q) inter circle(R) = emptyset$, entonces o bien $Q subset R$ o bien $R subset Q$.
 
   - Cada $Q in Delta_k$ se puede escribir como unión de $2^n$ cubos de $Delta_(k+1)$ con interiores disjuntos.
 ]
@@ -544,12 +588,12 @@
   Si $phi = (phi_1, ..., phi_n)$ son sus funciones coordenadas, entonces su diferencial en el punto $x, thick D_(phi)(x)$ es una aplicación lineal dada por la matriz jacobiana:
 
   $
-  A_x = mat(
-    (partial phi_1)/(partial x_1)(x), (partial phi_1)/(partial x_2)(x), ... , (partial phi_1)/(partial x_n)(x);
-    (partial phi_2)/(partial x_1)(x), (partial phi_2)/(partial x_2)(x), ... , (partial phi_2)/(partial x_n)(x);
-    dots.v, dots.v, dots.down, dots.v;
-    (partial phi_n)/(partial x_1)(x), (partial phi_n)/(partial x_2)(x), ... , (partial phi_n)/(partial x_n)(x);
-  ) 
+    A_x = mat(
+      (partial phi_1)/(partial x_1)(x), (partial phi_1)/(partial x_2)(x), ..., (partial phi_1)/(partial x_n)(x);
+      (partial phi_2)/(partial x_1)(x), (partial phi_2)/(partial x_2)(x), ..., (partial phi_2)/(partial x_n)(x);
+      dots.v, dots.v, dots.down, dots.v;
+      (partial phi_n)/(partial x_1)(x), (partial phi_n)/(partial x_2)(x), ..., (partial phi_n)/(partial x_n)(x);
+    )
   $
 
   Se denomina *jacobiano* de $phi$ en $x$ al determinante de esta matriz:
@@ -561,12 +605,14 @@
   Sea $phi: Omega subset RR^n -> RR^n$ un difeomorfismo regular $C^1$ sobre el abierto $Omega$ y sea $f: phi(Omega) -> RR$ medible (Lebesgue).
   Si $f>=0$ o $f in L^1(d x)$. Entonces:
 
-  $ integral_(phi(Omega)) f(y) d y = integral_Omega (f compose phi(x)) dot abs(J(x)) thick d x $
+  $
+    integral_(phi(Omega)) f(y) d y = integral_Omega (f compose phi(x)) dot abs(J(x)) thick d x
+  $
 ]
 
 #lemma[
   Si $Q$ es un cubo de $Omega$ entonces:
-  
+
   $ m(phi(Q)) <= integral_Q abs(J(x)) thick d x $
 ]
 
@@ -624,16 +670,16 @@
 
   - Para una función $f: X times Y -> RR$ se define la *x-sección de $f$*, fijado $x in X$, como:
 
-  $ 
-  f_x: &Y -> RR \
-  &y -> f_x (y) = f(x, y)
+  $
+    f_x: & Y -> RR \
+         & y -> f_x (y) = f(x, y)
   $
 
   - Análogamente, se define la *y-sección de $f$*, fijado $y in Y$, como:
 
-  $ 
-  f^y: &X -> RR \
-  &x -> f^y (x) = f(x, y)
+  $
+    f^y: & X -> RR \
+         & x -> f^y (x) = f(x, y)
   $
 ]
 
@@ -648,7 +694,9 @@
 
   son medibles y además se tiene:
 
-  $ integral_(X times Y) f(x, y) d(mu times nu) = integral_X (integral_Y f(x, y) d nu(y)) d mu(x) = integral_Y (integral_X f(x, y) d mu(x)) d nu(y) $
+  $
+    integral_(X times Y) f(x, y) d(mu times nu) = integral_X (integral_Y f(x, y) d nu(y)) d mu(x) = integral_Y (integral_X f(x, y) d mu(x)) d nu(y)
+  $
 
   - Si $f: X times Y -> RR$ es integrable, es decir, $f in L^1(d(mu times nu))$, entonces:
 
@@ -659,7 +707,9 @@
 
     Además se cumple:
 
-    $ integral_(X times Y) f(x,y) d(mu times nu) = integral_X (integral_Y f(x, y) d nu(y)) d mu(x) = integral_Y (integral_X f(x, y) d mu(x)) d nu(y) $
+    $
+      integral_(X times Y) f(x,y) d(mu times nu) = integral_X (integral_Y f(x, y) d nu(y)) d mu(x) = integral_Y (integral_X f(x, y) d mu(x)) d nu(y)
+    $
 ]
 
 #proposition[
@@ -669,15 +719,17 @@
 
   son medibles en $X$ e $Y$ respectivamente y además se tiene:
 
-  $ mu times.circle nu(E) = integral_X nu(E_x) d mu(x) = integral_Y mu(E^y) d nu(y) $
+  $
+    mu times.circle nu(E) = integral_X nu(E_x) d mu(x) = integral_Y mu(E^y) d nu(y)
+  $
 ]
 
 #definition(title: "Clase monótona")[
   Se dice que $cal(C) subset cal(P) (X times Y)$ es una *clase monótona* si es cerrada por uniones crecientes y por intersecciones decrecientes, esto es:
 
   $
-  E_1 subset E_2 subset ... subset E_m subset ... in cal(C) => union.big_(m>=1) E_m in cal(C) \
-  E_1 supset E_2 supset ... supset E_m supset ... in cal(C) => inter.big_(m>=1) E_m in cal(C)
+    E_1 subset E_2 subset ... subset E_m subset ... in cal(C) => union.big_(m>=1) E_m in cal(C) \
+    E_1 supset E_2 supset ... supset E_m supset ... in cal(C) => inter.big_(m>=1) E_m in cal(C)
   $
 ]
 
@@ -700,15 +752,17 @@
   Por la definición de límite superior tenemos:
 
   $
-  mu(limsup A_n) = mu lr(size: #3em, (lim_(n->oo) lr(size: #2em, (inter.big_(n)^oo underbrace(union.big_(j=n)^oo A_j, arrow.br thick G_n \ G_1 supset G_2 supset ...))))) underbrace(= , T.C.M. \ (mu(G_n) < oo)) lim_(n->oo) (mu(union.big_(j=n)^oo A_j)) \ 
-  <= lim_(n->oo) (sum_(j=n)^oo mu(A_j)) = 0 quad ("Criterio de Cauchy") 
+    mu(limsup A_n) = mu lr(size: #3em, (lim_(n->oo) lr(size: #2em, (inter.big_(n)^oo underbrace(union.big_(j=n)^oo A_j, arrow.br thick G_n \ G_1 supset G_2 supset ...))))) underbrace(=, T.C.M. \ (mu(G_n) < oo)) lim_(n->oo) (mu(union.big_(j=n)^oo A_j)) \
+    <= lim_(n->oo) (sum_(j=n)^oo mu(A_j)) = 0 quad ("Criterio de Cauchy")
   $
 ]
 
 #lemma(title: "Lema de Fatou")[
   Dada una sucesión de funciones medibles y positivas, ${f_n}$, se tiene:
 
-  $ integral_X (liminf_(n->oo) (f_n (x))) d mu <= liminf_(n->oo) (integral_X f_n (x) d mu) $
+  $
+    integral_X (liminf_(n->oo) (f_n (x))) d mu <= liminf_(n->oo) (integral_X f_n (x) d mu)
+  $
 ]
 
 #proof[
@@ -718,7 +772,9 @@
   Además $g_n <= f_n forall n$.
   Por tanto:
 
-  $ integral_X (liminf_(n->oo) (f_n (x))) d mu = integral_X lim_(n->oo) g_n (x) d mu underbrace(=, T.C.M.) lim_(n->oo) integral_X g_n (x) d mu <= liminf_(n->oo) (integral_X f_n (x) d mu) $
+  $
+    integral_X (liminf_(n->oo) (f_n (x))) d mu = integral_X lim_(n->oo) g_n (x) d mu underbrace(=, T.C.M.) lim_(n->oo) integral_X g_n (x) d mu <= liminf_(n->oo) (integral_X f_n (x) d mu)
+  $
 ]
 
 #theorem(title: "Teorema de la convergencia monótona para conjuntos")[
@@ -744,7 +800,7 @@
     Ahora, para cada $n$ la unión finita de los primeros $B_j$ es:
 
     $ union.big_(j=1)^n B_j = A_n quad => quad mu(A_n) = sum_(j=1)^n mu(B_j) $
-  
+
     Al tomar $n->oo$ las sumas parciales convergen a $sum_(j=1)^oo mu(B_j)$. Por tanto:
 
     $ lim_(j->oo) mu(A_j) = sum_(j=1)^oo mu(B_j) = mu(union.big_(j=1)^oo A_j) $
@@ -764,12 +820,16 @@
     Pero para cada $k$ tenemos que: $mu(C_k) = mu (A_N) - mu(A_(N+k))$, porque $C_k$ y $A_(N+k)$ son disjuntos y su unión es $A_N$, y $mu(A_N) < oo$ garantiza que restas como esta son válidas.
     Entonces:
 
-    $ mu(A_N without inter.big_(j=N)^oo A_j) = lim_(k->oo) (mu(A_N) - mu(A_(N+k))) = mu(A_N) - lim_(k->oo) mu(A_(N+k)) $
+    $
+      mu(A_N without inter.big_(j=N)^oo A_j) = lim_(k->oo) (mu(A_N) - mu(A_(N+k))) = mu(A_N) - lim_(k->oo) mu(A_(N+k))
+    $
 
-    Reordenando obtenemos: $ mu(inter.big_(j=N)^oo A_j) = lim_(k->oo) mu(A_(N+k))$. Como los $A_n$ son decrecientes, $lim_(n->oo) mu(A_n)$ existe y coincide con el límite de la subsucesión $mu(A_(N+k))$.
+    Reordenando obtenemos: $mu(inter.big_(j=N)^oo A_j) = lim_(k->oo) mu(A_(N+k))$. Como los $A_n$ son decrecientes, $lim_(n->oo) mu(A_n)$ existe y coincide con el límite de la subsucesión $mu(A_(N+k))$.
     Finalmente:
 
-    $ inter.big_(j=1)^oo A_j = inter.big_(j=N)^oo A_j wide => wide mu(inter.big_(j=1)^oo A_j) = lim_(j->oo) mu(A_j) $
+    $
+      inter.big_(j=1)^oo A_j = inter.big_(j=N)^oo A_j wide => wide mu(inter.big_(j=1)^oo A_j) = lim_(j->oo) mu(A_j)
+    $
 ]
 
 #v(-2pt)
@@ -777,18 +837,24 @@
 #theorem(title: "Teorema de la Convergencia Dominada")[
   En $(X, cal(A), mu)$ espacio de medida, si la sucesión de funciones medibles ${f_n (x)}_(n=1)^oo$ converge puntualmente a una función $f(x)$ y además $abs(f_n (x)) <= F(x) thick forall n, thick forall x$ con $F$ medible, positiva y tal que $integral_X F(x) thick d mu < oo$, entonces $f(x)$ es integrable y se tiene:
 
-  $ quad quad lim_(n->oo) integral_X abs(f_n (x) - f(x)) thick d mu = 0 quad quad (1) $
+  $
+    quad quad lim_(n->oo) integral_X abs(f_n (x) - f(x)) thick d mu = 0 quad quad (1)
+  $
 
   En particular,
 
-  $ quad quad integral_X (lim_(n->oo) f_n (x)) thick d mu = integral_X f(x) thick d mu = lim_(n->oo) (integral_X f_n (x) thick d mu) quad quad (2) $
+  $
+    quad quad integral_X (lim_(n->oo) f_n (x)) thick d mu = integral_X f(x) thick d mu = lim_(n->oo) (integral_X f_n (x) thick d mu) quad quad (2)
+  $
 ]
 
 #proof[
   El que $f$ sea integrable es inmediato porque $lim_(n->oo) f_n (x) = f(x)$ implica $abs(f(x)) <= F(x), thick forall x$ también y $F$ es integrable (finita).
   Veamos también que $(1) => (2)$:
 
-  $ abs(integral_X f_n (x) d mu - integral_X f(x) d mu) = abs(integral_X (f_n (x) - f(x)) d mu) <= integral_X abs(f_n (x) - f(x)) d mu ->_(n arrow oo) 0 => (2) $
+  $
+    abs(integral_X f_n (x) d mu - integral_X f(x) d mu) = abs(integral_X (f_n (x) - f(x)) d mu) <= integral_X abs(f_n (x) - f(x)) d mu ->_(n arrow oo) 0 => (2)
+  $
 
   Luego solo necesitamos probar $(1)$.
   Veamos que es una consecuencia del lema de Fatou:
@@ -797,11 +863,11 @@
   Por Fatou deducimos:
 
   $
-  integral_X 2F(x) d mu <= liminf_(n->oo) integral_X h_n d mu = liminf_(n->oo)(integral_X 2 F(x) d mu - integral_X abs(f_n (x) - f(x)) d mu) = \
-  = integral_X 2 F(x) d mu - limsup_(n->oo) integral_X abs(f_n (x) - f(x)) d mu
+    integral_X 2F(x) d mu <= liminf_(n->oo) integral_X h_n d mu = liminf_(n->oo)(integral_X 2 F(x) d mu - integral_X abs(f_n (x) - f(x)) d mu) = \
+    = integral_X 2 F(x) d mu - limsup_(n->oo) integral_X abs(f_n (x) - f(x)) d mu
   $
 
-  Despejando queda: 
+  Despejando queda:
 
   $ limsup_(n->oo) integral_X abs(f_n (x) - f(x)) d mu <= 0 $
 
