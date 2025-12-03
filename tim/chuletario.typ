@@ -785,6 +785,96 @@ POR COMPLETAR
   Si $Pi_0$ es una álgebra y $cal(C)$ es una clase monótona con $Pi_0 subset cal(C)$, entonces la mínima $sigma$-álgebra que contiene a $Pi_0$, $sigma(Pi_0)$, está contenida en $cal(C)$.
 ]
 
+= Medidas y derivadas
+
+== Derivación dentro del signo integral
+
+#theorem[
+  Sean $(X, cal(M), mu)$ un espacio de medida y $f: X times [a, b] -> RR$.
+  Supongamos que $f^t in L^1 (d mu)$ para todo $t$ y definamos:
+
+  $ F(t) = integral_X f^t (x) d mu(x) = integral_X f(x, t) d mu(x) $
+
+  - Si $f_x$ es continua en $t_0$ para todo $x$ y existe $g in L^1(d mu)$ tal que $abs(f^t (x)) <= g(x)$ para todo $x$ y para todo $t$, entonces $F$ es continua en $t_0$.
+
+  - Si existe $(partial f)/(partial t)$ para todo $t$ y existe $g in L^1 (d mu)$ tal que $abs((partial f)/(partial t)) <= g(x)$ para todo $t$ y para todo $x$, entonces existe $F'(t)$ y se tiene:
+
+  $
+    F' (t) = partial/(partial t) (integral_X f(x, t) d mu(x)) = integral_X (partial f(x, t))/(partial t) d mu(x)
+  $
+]
+
+== El teorema de Radon-Nikodym-Lebesgue
+
+#definition(title: "Medida con signo")[
+  Dada una $sigma$-álgebra $cal(M)$, decimos que la función $nu: cal(M) -> [-oo, oo]$ es una *medida con signo* si verifica:
+
+  + $nu(emptyset) = 0$
+  + $nu(A) < oo " o " nu(A) > -oo " para todo" thick A in cal(M)$
+  + $nu(union.big.plus A_j) = sum_j nu(A_j) " para toda colección disjunta" thick {A_j} subset cal(M)$
+]
+
+#definition[
+  Sea $nu$ una medida con signo $cal(M)$.
+  Se dice que $A in cal(M)$ es un conjunto:
+
+  $
+    cases(
+      "positivo" & "si" nu(A inter E) & >= 0 "para todo" E in cal(M),
+      "nulo" & "si" nu(A inter E) & = 0 "para todo" E in cal(M),
+      "negativo" & "si" nu(A inter E) & <= 0 "para todo" E in cal(M)
+    )
+  $
+]
+
+#theorem(title: "Teorema de descomposición de Hahn y Jordan")[
+  - *Hahn*. Si $nu$ es una medida con signo sobre la $sigma$-álgebra $cal(M) subset cal(P) (X)$, existen conjuntos $P, N in cal(M)$ con $X = P union N$ y $P inter N = emptyset$ tales que $P$ es un conjunto positivo para $nu$ y $N$ es negativo para $nu$.
+
+  - *Jordan*. Si definimos $nu^+ (A) = nu(A inter P), thick v^- (A) = - nu(A inter N)$, entonces $v^+$ y $v^-$ son medidas positivas y $v = v^+ - v^-$.
+]
+
+#definition(title: "Variación positiva, negativa y total")[
+  Llamamos a $v^+$ y $v^-$ *variación positiva y negativa* (respectivamente) de $nu$.
+  Si definimos la medida $abs(nu) = nu^+ + nu^-$, es decir, $abs(nu) (A) = nu^+ (A) + nu^-(A)$ para todo $A in cal(M)$, entonces $abs(nu)$ se denomina la *variación total* de $nu$.
+]
+
+#definition(title: "Medidas mutuamente singulares")[
+  Dos medidas $lambda$ y $mu$ se dicen que son *mutuamente singulares* (escribiremos $lambda tack.t mu$ para denotarlo) si existe una descomposición $X = E union F, thick E inter F = emptyset$ tal que $E$ es un conjunto nulo para $mu$ y $F$ es nulo para $lambda$.
+  Informalmente, diremos que $lambda$ "vive" en $E$ y que $mu$ "vive" en $F$.
+]
+
+#definition(title: "Medidas absolutamente continuas")[
+  Dada $mu$ medida (positiva) y $nu$ meduda con signo definidas sobre la misma $sigma$-álgebra $cal(M)$, se dice que $nu$ es *absolutamente continua* con respecto a $mu$ $(nu << mu)$ si dado $A in cal(M)$ con $mu(A) = 0$, se tiene $nu(A) = 0$.
+]
+
+#proposition[
+  Si $mu$ y $nu$ son medidas en $cal(M)$, $nu << mu$ y $nu$ es finita, entonces para todo $epsilon > 0$ existe $delta > 0$ tal que $E in cal(M), thick mu(E) < delta => nu(E) < epsilon$.
+]
+
+#corollary[
+  Sean $mu$ una medida (positiva) y $nu$ una medida con signo finita definidas sobre la misma $sigma$-álgebra $cal(M)$.
+  Entonces $nu << mu$ si y solo si para todo $epsilon > 0$ existe $delta > 0$ tal que $A in cal(M), thick mu(A) < delta => abs(nu(A)) <= abs(nu) (A) < epsilon$.
+]
+
+#lemma[
+  Si $nu$ y $mu$ son medidas finitas en $cal(M)$, entonces o bien $v tack.t mu$, o bien existen $epsilon > 0$ y $E in cal(M)$ tales que $mu(E) > 0$ y $nu(A) >= epsilon mu(A)$ para todo $A subset E$ (es decir, $E$ es un conjunto positivo para $d nu - epsilon d mu$).
+]
+
+#theorem(title: "Teorema de Radon-Nikodym-Lebesgue")[
+  Sea $mu$ una medida $sigma$-finita y $nu$ una medida con signo, finita y ambas definidas sobre una $sigma$-álgebra $cal(M) subset cal(P)(X)$.
+  Entonce $nu$ se puede descomponer como $nu = lambda + rho$, $lambda$ y $rho$ son medidas finitas con signo $lambda tack.t mu$ y $rho << mu$.
+  Además, existe $f_0 in L^1 (d mu)$ tal que $d rho = f_0 d mu$, de forma que $d nu = d lambda + f_0 d mu$.
+]<th-radon-nikodym-lebesgue>
+
+#definition(title: "Derivada de Radon-Nikodym")[
+  La función anterior $f_0$ se denomina *derivada de Radon-Nikodym* de $nu$ respecto a $mu$ y se denota $f_0 = (d nu)/(d mu)$.
+  La descomposición $nu = lambda + rho$ se conoce como descomposición de Lebesgue de $nu$ respecto de $mu$.
+]
+
+#corollary[
+  En las hipótesis del Teorema de Radon-Nikodym-Lebesgue (@th-radon-nikodym-lebesgue), si $nu << mu$, entonces $lambda equiv 0$.
+]
+
 #counter(heading).update(0)
 #set heading(numbering: "A.1.")
 #set-theorion-numbering("A.1.")
