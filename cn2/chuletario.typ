@@ -1163,3 +1163,122 @@
   Calcular $y_(n+1)$ a partir de $y_n$ requiere la solución de un sistema que será en general no lineal.
   Esta complicación adicional se traduce en un aumento del coste computacional.
 ]
+
+= Métodos Runge-Kutta
+
+== Introducción
+
+El método de Euler solo tiene orden uno pero es muy simple y fácil de implementar.
+Además es barate (su coste computacional es pequeño) dado que para obtener $y_(n+1)$ a partir de $y_n$ solo se requiere una evaluación de $f$ en $(x_n, y_n)$.
+El objetivo de los métodos Runge-Kutta que vamos a estudiar en esta lección es alcanzar una mayor precisión a costa de incrementar el coste computacional del método, dado que tendremos que evaluar $f$ en puntos intermedios entre $(x_n, y(x_n))$ y $(x_(n+1), y(x_(n+1)))$.
+
+== Métodos Runge-Kutta
+
+#definition(title: "Métodos de Runge-Kutta")[
+  Consideramos por ejemplo la familia de métodos:
+
+  $
+    y_(n+1) & = y_n + h(a k_1 + b k_2) \
+        k_1 & = f(x_n, y_n) \
+        k_2 & = f(x_n + alpha h, y_n + beta h k_1)
+  $
+
+  donde $a, b, alpha thick "y" thick beta$ son parámetros a determinar.
+  Por simplicidad, suponemos que $f$ es una función escalar.
+
+  El método anterior se puede escribir en la forma general que vimos para los métodos de un paso:
+  $
+    y_(n+1) = y_n + h Phi(x_n, y_n\; h), quad n = 0, 1, ..., N-1, quad y_0 = y(x_0) \
+    Phi(x_n, y_n\; h) = a f(x_n, y_n) + b f(x_n + alpha h, y_n + beta h f(x_n, y_n))
+  $
+
+  La condición de consistencia $Phi(x, y\; 0) equiv f(x, y)$ nos indica que esta familia de métodos es consistente si y solo si $a + b = 1$.
+  El resto de parámetros se pueden buscar tratando de maximizar el orden de precisión del método.
+]
+
+#lemma[
+  El error de truncación del método queda:
+
+  $
+    T_n = h^2 ((1/6 - alpha/4) (f_(x x) + f_(y y) f^2) + (1/3 - alpha/2) f_(x y) + 1/6 (f_x f_y + f_y^2 f)) + O(h^3)
+  $
+]
+
+== Algunos ejemplos de métodos Runge-Kutta
+
+#lemma(title: "Método de Euler modificado")[
+  En este caso tomamos $alpha=1/2$ para obtener:
+
+  $ y_(n+1) = y_n + h f(x_n + 1/2 h, y_n + 1/2 h f(x_n, y_n)) $
+]
+
+#lemma(title: "Método de Euler mejorado")[
+  Tomando $alpha = 1$ obtenemos:
+
+  $ y_(n+1) = y_n + h f(x_n + 1/2h, y_n + 1/2 h f(x_n, y_n)) $
+]
+
+#corollary[
+  Para estos dos métodos es fácil comprobar que el error de truncación es:
+
+  - Euler modificado $arrow T_n = 1/6 h^2 [f_y (f_x + f_y f) + 1/4(f_(x x) + 2 f_(x y) f + f_(y y) f^2)] + O(h^3)$
+
+  - Euler mejorado $arrow T_n = 1/6 h^2 [f_y (f_x + f_y f) - 1/2(f_(x x) + 2 f_(x y) f + f_(y y) f^2)] + O(h^3)$
+]
+
+#lemma(title: "Método Runge-Kutta clásico")[
+  Uno de los métodos más usados se conoce como *método de Runge-Kutta clásico* de orden cuatro:
+
+  $
+    y_(n+1) & = y_n + 1/6 h (k_1 + 2 k_2 + 2 k_3 + k_4), \
+        k_1 & = f(x_n, y_n), \
+        k_2 & = f(x_n + 1/2 h, y_n + 1/2 h k_1), \
+        k_3 & = f(x_n + 1/2 h, y_n + 1/2 h k_2), \
+        k_4 & = f(x_n + h, y_n + h k_3)
+  $
+]
+
+#lemma(title: "Método de Heun")[
+  $
+    y_(n+1) & = y_n + h/4 (k_1 + 3 k_3), \
+        k_1 & = f(x_n, y_n), \
+        k_2 & = f(x_n + h/3, y_n + h/3 k_1), \
+        k_3 & = f(x_n + 2/3 h_n, y_n + 2/3 h_n k_2), \
+  $
+]
+
+#lemma(title: "Regla de los 3/8")[
+  $
+    y_(n+1) & = y_n + (h_n)/8 (k_1 + 3 k_2 + 3 k_3 + k_4), \
+        k_1 & = f(x_n, y_n), \
+        k_2 & = f(x_n + h/3, y_n + h/3 k_1), \
+        k_3 & = f(x_n + 2/3 h, y_n + h/3 (3 k_2 - k_1)), \
+        k_4 & = f(x_n + h_n, y_n + h(k_1 - k_2 + k_3)).
+  $
+]
+
+#let title = [Métodos Runge-Kutta explícitos de $s$ etapas]
+
+#definition(title: title)[
+  Se definen los *métodos Runge-Kutta explícitos de $s$ etapas* como aquellos de la forma:
+  $
+    y_(n+1) & = y_n + h_n (b_1 k_1 + ... + b_s k_s), \
+    k_1 & = f(x_n, y_n), \
+    k_2 & = f(x_n + c_2 h_n, y_n + h_n a_(2 1) k_1), \
+    k_3 & = f(x_n + c_3 h_n, y_n + h_n (a_(3 1) k_1 + a_(3 2) k_2)), \
+    &dots.v \
+    k_s &= f(x_n + c_s h_n, y_n + h_n (a_(s 1) k_1 + ... + a_(s, s-1) k_(s-1)))
+  $
+
+  Así por ejemplo, el método de Euler mejorado es de $s = 2$ etapas, el de Heun de tres etapas y el método de Runge-Kutta clásico y la regla de los $3/8$ son de cuatro etapas.
+  El método de Euler es de una etapa.
+]
+
+#lemma[
+  Salvo alguna excepción de poca importancia práctica, todos los métodos Runge-Kutta satisfacen que:
+
+  $ sum_j a_(i j) = c_i, quad i = 1, 2, ..., s $
+
+  Supondremos que esta propiedad se cumple en todos los casos.
+]
+
